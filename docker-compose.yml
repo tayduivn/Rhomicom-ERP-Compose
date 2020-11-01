@@ -1,7 +1,7 @@
-version: "3.8"
+version: "3.3"
 services:
   nginx:
-    image: rho-erp-base:v1.0
+    image: rhomicom/rho-erp-base:v1.0
     container_name: rho-nginx
     depends_on:
       - redis
@@ -74,7 +74,7 @@ services:
       - MYSQL_ROOT_PASSWORD=Password1
       - MYSQL_DATABASE=demo_flexcodesdk
   rhoapi:
-    image: rho-erp-api:v1.0
+    image: rhomicom/rho-erp-api:v1.0
     restart: always
     container_name: rho-api
     ports:

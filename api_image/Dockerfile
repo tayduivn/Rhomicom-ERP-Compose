@@ -47,7 +47,7 @@ RUN adduser -u 2020 -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx
 
 COPY docker-entrypoint.sh /usr/local/bin/
 # Application specific run commands 
-# RUN npm install -g pm2
+RUN npm install -g nodemon
 
 ADD ./code /code
 

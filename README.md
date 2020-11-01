@@ -42,7 +42,9 @@ Completed or Working Modules
 9. Self-Service
 10. e-Voting
 11. Chat Rooms/Forums
-12. Visit https://wiki.rhomicom.com/ for more info
+12. Banking & Microfinance Module
+13. Vault Management Module
+14. Visit https://wiki.rhomicom.com/ for more info
 
 Typical Target institutions/organisations
 =========================================

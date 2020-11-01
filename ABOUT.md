@@ -34,9 +34,6 @@
 - Customizable Reports
 - Chat Rooms/Forums/Circulars/Announcements
 ## 6. Sample Online Apps
-- https://portal.yilostargh.com/  
-- https://portal.ympghana.com/  
-- https://portal.thelesedighana.org/  
 - https://portal.rhomicom.com/
 ## 7. RHOMICOM ERP WEB STRUCTURE
 - #### PHP EXECUTION PATH

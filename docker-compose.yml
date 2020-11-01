@@ -1,0 +1,75 @@
+version: "3.8"
+services:
+  nginx:
+    image: rho-erp-base:v1.0
+    container_name: rho-nginx
+    depends_on:
+      - redis
+      - pgdb
+      - mysqldb
+      - rhoapi
+    ports:
+      - 8000:8080
+      #- 443:443
+    tty: true
+    #tmpfs: /var/cache
+    restart: always
+    volumes:
+      - ./src/RHO_ERP_WEB:/usr/share/nginx/html
+      - ./db/adbs:/opt/apache/adbs
+      #- ../conf/static/test:/usr/share/nginx/html/test
+      #- ./ means current directory
+      #- ../ means move one level up
+    #command: /bin/sh /tmp/docker-entrypoint.sh
+  redis:
+    image: redis:6.0.8-alpine3.12
+    restart: unless-stopped
+    container_name: rho-redis
+    #environment:
+    #- REDIS_PASSWORD=${REDIS_PASSWORD}
+    command: redis-server --appendonly yes
+  pgdb:
+    image: postgres:13.0-alpine
+    restart: always
+    container_name: rho-pgdb
+    volumes:
+      - ./db/initdb/pgdb:/docker-entrypoint-initdb.d
+      #Uncomment 2nd Volume for persistent Data
+      #NB: Not uncommenting might cause data loss when docker-compose down is run
+      #- ./db/db_data/pgdb:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: rho_erp_db
+      POSTGRES_PASSWORD: Password1
+      PGDATA: /var/lib/postgresql/data/pgdata
+  adminer:
+    #tragus/webmin
+    image: adminer
+    restart: always
+    container_name: rho-administrator
+    ports:
+      - 8090:8080
+  mysqldb:
+    image: mysql:latest
+    restart: always
+    container_name: rho-mysqldb
+    volumes:
+      - ./db/initdb/mysqldb:/docker-entrypoint-initdb.d
+      #Uncomment 2nd Volume for persistent Data
+      #NB: Not uncommenting might cause data loss when docker-compose down is run
+      #- ./db/db_data/mysqldb:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=Password1
+      - MYSQL_DATABASE=demo_flexcodesdk
+  rhoapi:
+    image: rho-erp-api:v1.0
+    restart: always
+    container_name: rho-api
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src/RHO_ERP_WEB:/usr/share/nginx/html
+      - ./db/adbs:/opt/apache/adbs
+      - ./api_image/code:/code
+    #command: npm prod-start
+volumes:
+  site:

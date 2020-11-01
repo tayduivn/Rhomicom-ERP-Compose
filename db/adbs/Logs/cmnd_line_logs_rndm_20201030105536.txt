@@ -1,0 +1,6 @@
+
+/usr/share/nginx/html
+
+/opt/apache/adbs/bin
+
+/usr/share/nginx/html

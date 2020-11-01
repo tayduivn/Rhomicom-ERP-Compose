@@ -26,6 +26,7 @@ Rhomicom Enterprise Resource Planning System is a complete ERP system proudly st
 The company behind this project is Rhomicom Systems Tech. Ltd.(http://rhomicom.com)
 The software can be used to manage both backend and front-end operations of all kinds of institutions and organisations.
 The sample is currently hosted on https://portal.rhomicom.com
+Help can be found on https://wiki.rhomicom.com
 
 Various Modules being worked on are
 =======================================

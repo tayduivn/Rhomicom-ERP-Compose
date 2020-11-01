@@ -47,9 +47,13 @@ RUN adduser -u 2020 -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx
 
 COPY docker-entrypoint.sh /usr/local/bin/
 # Application specific run commands 
-RUN npm install -g nodemon
-
+#RUN npm install -g nodemon
+#RUN npm install -g @babel/node
 ADD ./code /code
+
+WORKDIR /code
+#RUN pm2 ecosystem
+RUN npm install
 
 RUN chown -R nginx.nginx /usr/share/nginx/html && \
   chown -R nginx.nginx /opt/apache/adbs && \
@@ -58,11 +62,6 @@ RUN chown -R nginx.nginx /usr/share/nginx/html && \
 USER nginx
 
 EXPOSE 3000
-
-WORKDIR /code
-#RUN pm2 ecosystem
-RUN npm install
-
 #CMD ["pm2", "start", "/code/ecosystem.config.js"]
 #ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["/bin/sh","/usr/local/bin/docker-entrypoint.sh"]

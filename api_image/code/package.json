@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "APIs for the Rhomicom ERP Application",
   "main": "index.js",
-  "scripts": 
-  {
+  "scripts": {
     "startdev": "nodemon -L ./index.js --exec babel-node -e js",
     "start": "nodemon ./index.js --exec babel-node -e js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,10 +18,15 @@
     "express-validator": "^6.6.1",
     "http-errors": "^1.8.0",
     "mongodb": "^3.6.2",
-    "mongoose": "^5.10.9",
-    "nodemon": "^2.0.4"
+    "mongoose": "^5.10.9"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/node": "^7.0.0",
+    "nodemon": "^1.18.4",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1"

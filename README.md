@@ -69,7 +69,7 @@ Technologies/Tools Used (Credits/Acknowledgements)
 5. PostgreSQL Database 9.3
 
 # TOOLS/TECHNOLOGIES (CREDITS/ACKNOWLEDGEMENTS)
-- **Platforms:** Docker, Alpine Linux, Nginx, ModPageSpeed
+- **Platforms:** Gitlab/Github, Docker, Alpine Linux, Nginx, ModPageSpeed
 - **Languages:** Java, PHP, Bootstrap, jQuery, Node, ExpressJS,
 - **Database:** Postgres, MySQL
 - **IDE:** vscode

@@ -75,7 +75,7 @@ Technologies/Tools Used
 - **Languages:** Java, PHP, Bootstrap, jQuery, Node, ExpressJS,
 - **Database:** PostgreSQL, MySQL, Adminer
 - **IDE:** vscode
-- **Openbridge Inc:** https://github.com/openbridge/nginx
+- **Openbridge, Inc.:** https://github.com/openbridge/nginx
 
 # COMMERCIAL SUPPORT AVAILABLE
 - **URL:** ...coming soon...

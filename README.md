@@ -29,7 +29,7 @@ The software can be used to manage both backend and front-end operations of all 
 The sample is currently hosted on https://portal.rhomicom.com
 Help can be found on https://wiki.rhomicom.com
 
-Various Modules being worked on are
+Completed or Working Modules
 =======================================
 1. Accounting
 2. Person Data
@@ -38,11 +38,11 @@ Various Modules being worked on are
 5. Visits/Appointments
 6. Events Management
 7. Facility Rentals/Hospitality Management
-8. Projects Management
-9. Learning/Performance Management System
-10. Self-Service
-11. e-Voting
-12. Chat Rooms/Forums
+8. Learning/Performance Management System
+9. Self-Service
+10. e-Voting
+11. Chat Rooms/Forums
+12. Visit https://wiki.rhomicom.com/ for more info
 
 Typical Target institutions/organisations
 =========================================
@@ -83,7 +83,8 @@ Technologies/Tools Used
 
 
 # TODO
-
+1. Projects Management Module
+2. Help Desk Module
 
 # Issues
 

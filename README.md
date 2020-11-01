@@ -68,5 +68,8 @@ Technologies/Tools Used (Credits/Acknowledgements)
 4. TIBCO JasperSoft Studio 6.2.0
 5. PostgreSQL Database 9.3
 
-# CREDITS/ACKNOWLEDGEMENTS
-- Docker, Bootstrap, jQuery, Postgres, MySQL, Alpine Linux, Nginx, Node, ExpressJS, PageSpeed
+# TOOLS/TECHNOLOGIES (CREDITS/ACKNOWLEDGEMENTS)
+- **Platforms:** Docker, Alpine Linux, Nginx, ModPageSpeed
+- **Languages:** Java, PHP, Bootstrap, jQuery, Node, ExpressJS,
+- **Database:** Postgres, MySQL
+- **IDE:** vscode

@@ -4,7 +4,8 @@
 3. Run
 - docker-compose -p RHO-ERP-SET-1 up -d --remove-orphans  
 4. Open http://localhost:8090 to import sample DB
-- NB: Sample DB Can be downloaded from ...coming soon...
+- NB: Sample DB Can be downloaded from 
+https://gitlab.rhomicom.com:8443/admin2/rhomicom-public-stuff/-/blob/master/2_sample_database.sql
 5. Open http://localhost:8000 to run application
 6. To tearn everything down Run  
 - docker-compose -p RHO-ERP-SET-1 down  
@@ -61,7 +62,7 @@ Hardware Requirements
 =====================
 Same hardware requirements for above Sofware requirements
 
-Technologies/Tools Used (Credits/Acknowledgements)
+Technologies/Tools Used 
 ==================================================
 1. Java 1.8-(Netbeans 8.1)
 2. PHP 5.6 or later
@@ -69,8 +70,31 @@ Technologies/Tools Used (Credits/Acknowledgements)
 4. TIBCO JasperSoft Studio 6.2.0
 5. PostgreSQL Database 9.3
 
-# TOOLS/TECHNOLOGIES (CREDITS/ACKNOWLEDGEMENTS)
+# (CREDITS/ACKNOWLEDGEMENTS)
 - **Platforms:** Gitlab/Github, Docker, Alpine Linux, Nginx, ModPageSpeed
 - **Languages:** Java, PHP, Bootstrap, jQuery, Node, ExpressJS,
-- **Database:** PostgreSQL, MySQL
+- **Database:** PostgreSQL, MySQL, Adminer
 - **IDE:** vscode
+- **Openbridge Inc:** https://github.com/openbridge/nginx
+
+# COMMERCIAL SUPPORT AVAILABLE
+- **URL:** ...coming soon...
+- **Contact:** support@rhomicom.com
+
+
+# TODO
+
+
+# Issues
+
+If you have any problems with or questions about this image, please contact us through a GitHub issue.
+
+# Contributing
+
+You are invited to contribute new features, fixes, or updates, large or small; we are always thrilled to receive pull requests, and do our best to process them as fast as we can.
+
+Before you start to code, we recommend discussing your plans through a GitHub issue, especially for more ambitious contributions. This gives other contributors a chance to point you in the right direction, give you feedback on your design, and help you find out if someone else is working on the same thing.
+
+# License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

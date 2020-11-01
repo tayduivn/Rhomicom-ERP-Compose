@@ -29,7 +29,7 @@ services:
     #- REDIS_PASSWORD=${REDIS_PASSWORD}
     command: redis-server --appendonly yes
   pgdb:
-    image: postgres:13.0-alpine
+    image: postgres:12.4-alpine #postgres:13.0-alpine
     restart: always
     container_name: rho-pgdb
     volumes:
@@ -41,13 +41,26 @@ services:
       POSTGRES_DB: rho_erp_db
       POSTGRES_PASSWORD: Password1
       PGDATA: /var/lib/postgresql/data/pgdata
+  #tragus/webmin
+  #Choose Between Adminer, pgAdmin or Webmin
+  #Comment/Uncomment out as desired
   adminer:
-    #tragus/webmin
     image: adminer
     restart: always
     container_name: rho-administrator
     ports:
       - 8090:8080
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    container_name: rho-pgadmin
+    ports:
+      - 8091:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=info@rhomicom.com
+      - PGADMIN_DEFAULT_PASSWORD=Password1
+    volumes:
+      - ./db/initdb:/var/lib/pgadmin/storage
   mysqldb:
     image: mysql:latest
     restart: always

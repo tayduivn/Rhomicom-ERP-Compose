@@ -7,6 +7,7 @@ db/adbs/bin/log_files/*.rho
 db/adbs/bin/log_files/adt_trail/*.rho
 db/adbs/bin/log_files/prcs_logs/*.rho
 db/initdb/pgdb/2_sample_database.sql
+db/initdb/info_rhomicom.com
 conf/psol/psol.tar.gz
 src/RHO_ERP_WEB/dwnlds/amcharts_2100/samples/*.html
 src/RHO_ERP_WEB/dwnlds/amcharts_2100/samples/*.pdf

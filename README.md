@@ -71,5 +71,5 @@ Technologies/Tools Used (Credits/Acknowledgements)
 # TOOLS/TECHNOLOGIES (CREDITS/ACKNOWLEDGEMENTS)
 - **Platforms:** Gitlab/Github, Docker, Alpine Linux, Nginx, ModPageSpeed
 - **Languages:** Java, PHP, Bootstrap, jQuery, Node, ExpressJS,
-- **Database:** Postgres, MySQL
+- **Database:** PostgreSQL, MySQL
 - **IDE:** vscode

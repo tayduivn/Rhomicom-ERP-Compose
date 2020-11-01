@@ -67,3 +67,6 @@ Technologies/Tools Used (Credits/Acknowledgements)
 3. HTML/CSS/javascript (Bootstrap3.3.6, Datatables Plugin, Bootstrap Dialog, SummerNote,jQuery 1.11.3, fontawesome 4)
 4. TIBCO JasperSoft Studio 6.2.0
 5. PostgreSQL Database 9.3
+
+# CREDITS/ACKNOWLEDGEMENTS
+- Docker, Bootstrap, jQuery, Postgres, MySQL, Alpine Linux, Nginx, Node, ExpressJS, PageSpeed

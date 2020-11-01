@@ -11,7 +11,7 @@ https://gitlab.rhomicom.com:8443/admin2/rhomicom-public-stuff/-/blob/master/2_sa
 - docker-compose -p RHO-ERP-SET-1 down  
 
 # TO BUILD IMAGES
-1. Download psol.tar.gz file from ...coming soon... and place in conf/psol/psol.tar.gz
+1. Download psol.tar.gz file from https://github.com/openbridge/nginx/tree/master/psol and place in conf/psol/psol.tar.gz
 2. Navigate to Dockerfile Folder 
 3. In the api_image folder Run 
 - docker build -t rho-erp-api:v1.0 .

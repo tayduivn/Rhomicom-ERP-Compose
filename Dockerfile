@@ -321,7 +321,7 @@ RUN apk add --no-cache --update --upgrade --repository http://dl-cdn.alpinelinux
   php-cli php-common php-zip php-gd \ 
   php-xml php-pear php-bcmath php-json php-pdo php-mysqlnd php-pgsql \ 
   php-mbstring  php-soap php-sockets php7-pecl-redis php7-pecl-mcrypt \
-  php7-json php7-ctype
+  php7-json php7-ctype php7-dom
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/community" >> /etc/apk/repositories
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/main" >> /etc/apk/repositories

@@ -7,7 +7,6 @@ db/adbs/bin/log_files/*.rho
 db/adbs/bin/log_files/adt_trail/*.rho
 db/adbs/bin/log_files/prcs_logs/*.rho
 db/adbs/Rpts/*.pdf
-db/adbs/Logs/*.txt
 db/adbs/Rpts/*.xls
 db/adbs/Rpts/*.html*
 db/adbs/Rpts/amcharts_2100/samples/*.html*

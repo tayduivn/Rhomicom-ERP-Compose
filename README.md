@@ -80,9 +80,9 @@ Technologies/Tools Used
 
 # (CREDITS/ACKNOWLEDGEMENTS)
 - **Platforms:** Gitlab/Github, Docker, Alpine Linux, Nginx, ModPageSpeed
-- **Languages:** Java, PHP, Bootstrap, jQuery, Node, ExpressJS,
+- **Languages:** Java, PHP, Bootstrap, jQuery, Node, ExpressJS, AMCharts
 - **Database:** PostgreSQL, MySQL, Adminer
-- **IDE:** vscode
+- **IDE:** vscode, TIBCO JasperSoft Studio/Library 6.2.0
 - **Openbridge, Inc.:** https://github.com/openbridge/nginx
 
 # COMMERCIAL SUPPORT AVAILABLE

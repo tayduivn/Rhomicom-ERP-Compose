@@ -1333,7 +1333,14 @@ function generateReportRun($rptID, $slctdParams, $alrtID)
         logSessionErrs(str_replace($db_pwd, "***************", $cmd));
         //return -1;
         $logfilenm = $ftp_base_db_fldr . "/Logs/cmnd_line_logs_" . $rptRunID . "_" . getDB_Date_timeYYMDHMS() . ".txt";
-        execInBackground($cmd, $logfilenm);
+        $rslt = rhoPOSTToAPI(
+            'http://rho-api:3000/startJavaRunner',
+            array(
+                'rnnrPrcsFile' => $rnnrPrcsFile,
+                'strArgs' => $strArgs
+            )
+        );
+        //sexecInBackground($cmd, $logfilenm);
     } else {
         echo "Invalid Parameters";
     }

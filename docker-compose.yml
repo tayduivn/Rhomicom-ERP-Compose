@@ -41,7 +41,6 @@ services:
       POSTGRES_DB: rho_erp_db
       POSTGRES_PASSWORD: Password1
       PGDATA: /var/lib/postgresql/data/pgdata
-  #tragus/webmin
   #Choose Between Adminer, pgAdmin or Webmin
   #Comment/Uncomment out as desired
   adminer:
@@ -60,7 +59,15 @@ services:
       - PGADMIN_DEFAULT_EMAIL=info@rhomicom.com
       - PGADMIN_DEFAULT_PASSWORD=Password1
     volumes:
-      - ./db/initdb:/var/lib/pgadmin/storage
+      - ./db/pgadmin:/var/lib/pgadmin
+  #webmin:
+  #  image: tragus/webmin
+  #  restart: always
+  #  container_name: rho-webmin
+  #  ports:
+  #    - 8092:80
+    #volumes:
+    #  - ./db/webmin:/etc/webmin
   mysqldb:
     image: mysql:latest
     restart: always

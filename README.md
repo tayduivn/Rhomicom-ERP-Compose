@@ -13,7 +13,7 @@ https://gitlab.rhomicom.com:8443/admin2/rhomicom-public-stuff/-/blob/master/2_sa
 6. Open http://localhost:8090 to access db via adminer
 7. Open http://localhost:8091 to access db via pgadmin
 8. Open http://localhost:8000 to run application
-9. To tearn everything down Run  
+9. To tear everything down Run  
 - docker-compose -p RHO-ERP-SET-1 down  
 
 # TO BUILD IMAGES

@@ -254,14 +254,25 @@ file_put_contents($file, $html, FILE_APPEND);
   $exitErrMsg = execInBackground($cmd); */
 
 //$cmd = "bash wkhtmltopdf.sh " . $fullPemDest . " " . $fullPemDest1;
-$cmd = $browserPDFCmd . " --headless --no-sandbox --disable-gpu --print-to-pdf=\"$fullPemDest1\" " . $fullPemDest;
-logSsnErrs($cmd);
-$exitErrMsg = shellExecInBackground($ftp_base_db_fldr . "/bin", $cmd);
-$waitCntr = 0;
+//$cmd = $browserPDFCmd . " --headless --no-sandbox --disable-gpu --print-to-pdf=\"$fullPemDest1\" " . $fullPemDest;
+//logSsnErrs($cmd);
+//$exitErrMsg = shellExecInBackground($ftp_base_db_fldr . "/bin", $cmd);
+ 
+$rslt = rhoPOSTToAPI(
+    $rhoAPIUrl . '/getChromePDF',
+    array(
+        'browserPDFCmd' => $browserPDFCmd,
+        'pdfPath' => $fullPemDest1,
+        'htmPath' => $fullPemDest
+    )
+);
+$exitErrMsg = $rslt;
+
+/*$waitCntr = 0;
 while (!file_exists($fullPemDest1) && $waitCntr < 5) {
     $waitCntr++;
     sleep(2);
-}
+}*/
 if (file_exists($fullPemDest1)) {
     $exitErrMsg = "Success:" . $exitErrMsg;
 }

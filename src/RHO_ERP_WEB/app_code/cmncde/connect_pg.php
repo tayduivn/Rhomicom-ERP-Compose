@@ -104,6 +104,7 @@ $base_folder = "";
 $page_title = "";
 $homepgfile = "home.php";
 $browserPDFCmd = "google-chrome"; //chromium-browser
+$rhoAPIUrl = "http://rho-api:3000";
 $app_url = "";
 $flxcde_url = "";
 $admin_email = "";
@@ -239,6 +240,7 @@ if (file_exists($superAdminConfigFilePath)) {
     $aboutRho = $obj->aboutRho;
     $homepgfile = isset($obj->homepgfile) ? $obj->homepgfile : "home.php";
     $browserPDFCmd = isset($obj->browserPDFCmd) ? $obj->browserPDFCmd : $browserPDFCmd;
+    $rhoAPIUrl = isset($obj->rhoAPIUrl) ? $obj->rhoAPIUrl : $rhoAPIUrl;
     $putInMntnceMode = isset($obj->putInMntnceMode) ? $obj->putInMntnceMode : "NO";
     $smplTokenWord = decrypt($obj->smplTokenWord, $smplTokenWordRhoKey);
     $abt_portal = $obj->abt_portal;

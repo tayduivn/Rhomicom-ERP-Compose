@@ -893,7 +893,7 @@ font-weight:bold;
         //$cmd = $browserPDFCmd . " --headless --no-sandbox --disable-gpu --print-to-pdf=\"$fullPemDest1\" " . $fullPemDest;
                 
         $rslt = rhoPOSTToAPI(
-            'http://rho-api:3000/getChromePDF',
+            $rhoAPIUrl . '/getChromePDF',
             array(
                 'browserPDFCmd' => $browserPDFCmd,
                 'pdfPath' => $fullPemDest1,

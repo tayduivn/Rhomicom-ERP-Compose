@@ -115,6 +115,7 @@ if (1 === 1) {
         $abt_portal = isset($_POST['abt_portal']) ? cleanInputData($_POST['abt_portal']) : $abt_portal;
         $homepgfile= isset($_POST['homepgfile']) ? cleanInputData($_POST['homepgfile']) : $homepgfile;
         $browserPDFCmd= isset($_POST['browserPDFCmd']) ? cleanInputData($_POST['browserPDFCmd']) : $browserPDFCmd;
+        $rhoAPIUrl= isset($_POST['rhoAPIUrl']) ? cleanInputData($_POST['rhoAPIUrl']) : $rhoAPIUrl;
         $putInMntnceMode = isset($_POST['putInMntnceMode']) ? cleanInputData($_POST['putInMntnceMode']) : "NO";
 
         $cnfg_arr_content['page_title'] = $page_title;
@@ -177,6 +178,7 @@ if (1 === 1) {
         $cnfg_arr_content['abt_portal'] = $abt_portal;
         $cnfg_arr_content['homepgfile'] = $homepgfile;
         $cnfg_arr_content['browserPDFCmd'] = $browserPDFCmd;
+        $cnfg_arr_content['rhoAPIUrl'] = $rhoAPIUrl;
         $cnfg_arr_content['putInMntnceMode'] = $putInMntnceMode;
         try {
             file_put_contents($superAdminConfigFilePath, json_encode($cnfg_arr_content));
@@ -731,6 +733,12 @@ if (1 === 1) {
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="fa fa-gear fa-fw fa-border"></i>&nbsp;PDF Command (E.g. google-chrome,chromium-browser,chromium)</span>
                                                             <input class="form-control" type="text" id="browserPDFCmd" name="browserPDFCmd" value="<?php echo $browserPDFCmd; ?>"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-gear fa-fw fa-border"></i>&nbsp;Rhomicom APIs URL</span>
+                                                            <input class="form-control" type="text" id="rhoAPIUrl" name="rhoAPIUrl" value="<?php echo $rhoAPIUrl; ?>"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">

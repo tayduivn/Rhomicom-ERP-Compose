@@ -1261,6 +1261,7 @@ function generateReportRun($rptID, $slctdParams, $alrtID)
     global $database;
     global $app_url;
     global $lgn_num;
+    global $rhoAPIUrl;
     $db_usr = "postgres";
     $db_pwd = $postgre_db_pwd;
     $rptRunID = -1;
@@ -1334,7 +1335,7 @@ function generateReportRun($rptID, $slctdParams, $alrtID)
         //return -1;
         $logfilenm = $ftp_base_db_fldr . "/Logs/cmnd_line_logs_" . $rptRunID . "_" . getDB_Date_timeYYMDHMS() . ".txt";
         $rslt = rhoPOSTToAPI(
-            'http://rho-api:3000/startJavaRunner',
+            $rhoAPIUrl . '/startJavaRunner',
             array(
                 'rnnrPrcsFile' => $rnnrPrcsFile,
                 'strArgs' => $strArgs

@@ -1,6 +1,8 @@
 # TO SETUP RHOMICOM ERP PROJECT
 1. Install Docker
 2. Download ERP Project from Github
+- NB on linux you may have to run 
+- chmod -R 777 Rhomicom-ERP-Project as root
 3. cd  to api_image/code and run
 - npm install
 4. cd to db/initdb/pgdb and download sample db file into it if needed

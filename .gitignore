@@ -9,6 +9,7 @@ db/adbs/bin/log_files/prcs_logs/*.rho
 db/adbs/Rpts/*.pdf
 db/adbs/Rpts/*.xls
 db/adbs/Rpts/*.html*
+db/adbs/Logs/*.txt
 db/adbs/Rpts/amcharts_2100/samples/*.html*
 db/initdb/pgdb/2_sample_database.sql
 db/initdb/info_rhomicom.com

@@ -1,19 +1,23 @@
 # TO SETUP RHOMICOM ERP PROJECT
 1. Install Docker
 2. Download ERP Project from Github
-- NB on linux you may have to run 
-- chmod -R 777 Rhomicom-ERP-Project as root
+ - NB on linux you may have to run 
+ - chmod -R 777 Rhomicom-ERP-Project as root
 3. cd  to api_image/code and run
-- npm install
+ - npm install
 4. cd to db/initdb/pgdb and download sample db file into it if needed
-- NB: Sample DB Can be downloaded from 
+ - NB: Sample DB Can be downloaded from 
 https://gitlab.rhomicom.com:8443/admin2/rhomicom-public-stuff/-/blob/master/2_sample_database.sql
-5. cd back to main Rhomicom-ERP-Project folder and Run
-- docker-compose -p RHO-ERP-SET-1 up -d --remove-orphans  
-6. Open http://localhost:8090 to access db via adminer
-7. Open http://localhost:8091 to access db via pgadmin
-8. Open http://localhost:8000 to run application
-9. To tear everything down Run  
+5. Alternatively sample DB can be restored after running containers via terminal
+ - docker exec -it rho-pgadmin sh
+ - cd /var/lib/pgadmin/storage/info_rhomicom.com
+ - psql -h rho-pgdb -p 5432 -U postgres -v -d rho_erp_db < 2_sample_database.sql
+6. cd back to main Rhomicom-ERP-Project folder and Run
+ - docker-compose -p RHO-ERP-SET-1 up -d --remove-orphans  
+7. Open http://localhost:8090 to access db via adminer
+8. Open http://localhost:8091 to access db via pgadmin
+9. Open http://localhost:8000 to run application
+10. To tear everything down Run  
 - docker-compose -p RHO-ERP-SET-1 down  
 
 # TO BUILD IMAGES

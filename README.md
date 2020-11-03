@@ -36,10 +36,10 @@ https://gitlab.rhomicom.com:8443/admin2/rhomicom-public-stuff/-/blob/master/2_sa
     - username:admin pwd: admin [Empty DB]
 2. http://localhost:8000//index.php?cp=2
     - pwd: Password1
-2. http://localhost:8090
-    - host: rho-mysqldb username: root pwd: Password1
-    - host: rho-pgdb username: postgres pwd: Password1
-3. http://localhost:8091
+3. http://localhost:8090
+    - Server: rho-mysqldb username: root pwd: Password1
+    - Server: rho-pgdb username: postgres pwd: Password1
+4. http://localhost:8091
     - username: info@rhomicom.com pwd: Password1
 
 # Rhomicom-ERP-Web

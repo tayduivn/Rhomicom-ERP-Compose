@@ -32,13 +32,16 @@ https://gitlab.rhomicom.com:8443/admin2/rhomicom-public-stuff/-/blob/master/2_sa
 
 # DEFAULT PASSWORDS
 1. http://localhost:8000
+    - username:admin pwd: Ghana124 [Sample DB]
+    - username:admin pwd: admin [Empty DB]
+2. http://localhost:8000//index.php?cp=2
     - pwd: Password1
 2. http://localhost:8090
     - host: rho-mysqldb username: root pwd: Password1
     - host: rho-pgdb username: postgres pwd: Password1
 3. http://localhost:8091
     - username: info@rhomicom.com pwd: Password1
-    
+
 # Rhomicom-ERP-Web
 Rhomicom Enterprise Resource Planning System (Web Version)
 

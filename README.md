@@ -30,6 +30,15 @@ https://gitlab.rhomicom.com:8443/admin2/rhomicom-public-stuff/-/blob/master/2_sa
 - docker build -t rho-erp-base:v1.0 .
 - docker run -dp 8000:8080 --name rho-erp-base-1 rho-erp-base:v1.0
 
+# DEFAULT PASSWORDS
+1. http://localhost:8000
+    - pwd: Password1
+2. http://localhost:8090
+    - host: rho-mysqldb username: root pwd: Password1
+    - host: rho-pgdb username: postgres pwd: Password1
+3. http://localhost:8091
+    - username: info@rhomicom.com pwd: Password1
+    
 # Rhomicom-ERP-Web
 Rhomicom Enterprise Resource Planning System (Web Version)
 

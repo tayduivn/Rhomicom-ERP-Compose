@@ -3747,20 +3747,24 @@ function sendEMail(
         $smtpClnt = "";
         $fromEmlNm = "";
         $fromPswd = "";
+        $fromPswdOrig = "";
         $errMsg = "";
         $portNo = 0;
         $inhouse_smtp_ip = "";
         while ($row = loc_db_fetch_array($selDtSt)) {
             $smtpClnt = $row[0]; //gethostbyname();
             $fromEmlNm = $row[1];
+            $fromPswdOrig = $row[2];
             $fromPswd = decrypt($row[2], $smplTokenWord);
             $portNo = $row[3];
             $inhouse_smtp_ip = $row[4];
         }
-        //echo $smtpClnt."<br/>";
-        //echo $fromEmlNm."<br/>";
-        //echo $fromPswd."<br/>";
-        //echo $portNo."<br/>";
+        /*$errMsg .= $smtpClnt . "!!<br/>";
+        $errMsg .= $fromEmlNm . "!!<br/>";
+        $errMsg .= strlen($fromPswd) . "!!--$fromPswdOrig--||--$smplTokenWord--||<br/>";
+        $errMsg .= $portNo . "!!<br/>";
+        echo $errMsg;
+        $port = 1/0;*/
         //error_reporting(E_USER_ERROR);"ssl://" . 
         $smtpServer = $smtpClnt;   //smtp.gmail.com ip address of the mail server.  This can also be the local domain name
         $port = $portNo;      // should be 25 by default, but needs to be whichever port the mail server will be using for smtp 

@@ -219,7 +219,7 @@ function savePsblValsForm()
         $('#modal-7').modal('show', {backdrop: 'static'});
         return false;
     }
-    lnkArgs = lnkArgs + "&slctdPsblVals=" + slctdPsblVals.slice(0, -1);
+    lnkArgs = lnkArgs + "&slctdPsblVals=" +encodeURIComponent(slctdPsblVals.slice(0, -1));
     doAjax(lnkArgs, 'myFormsModal', 'ShowDialog', 'System Alert!', 'myFormsModalTitle', 'myFormsModalBody');
 }
 

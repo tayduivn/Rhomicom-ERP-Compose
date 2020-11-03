@@ -269,7 +269,7 @@ if (file_exists($superAdminConfigFilePath)) {
     $pemDest = 'dwnlds/pem/';
     $ftp_base_db_fldr = "/home/apache/" . $db_folder;
     $softwareLincenseCode = "Rhomicom Systems T3ch. Ltd. ERP/B@nk!nG SYSTEM Web-Based Solution WebConfig p@SswOrD!";
-    $superAdminConfigPswd = "Rhomicom Systems T3ch. Ltd. ERP/B@nk!nG SYSTEM Web-Based Solution WebConfig p@SswOrD!";
+    $superAdminConfigPswd = "Password1";
     $db_pwd = 'Password1';
     $db_usr = "postgres";
     $postgre_db_pwd = 'Password1';

@@ -112,10 +112,12 @@ if ($lgn_num > 0 && $canview === true) {
             $inptValListID = isset($_POST['lovDetLovID']) ? cleanInputData($_POST['lovDetLovID']) : -1;
             $slctdPsblVals = isset($_POST['slctdPsblVals']) ? cleanInputData($_POST['slctdPsblVals']) : '';
             if (trim($slctdPsblVals, "|~") != "") {
-                //Save Persons
+                //Save Possuble Values
                 $variousRows = explode("|", trim($slctdPsblVals, "|"));
                 for ($z = 0; $z < count($variousRows); $z++) {
                     $crntRow = explode("~", $variousRows[$z]);
+                    //print_r($variousRows[$z]);
+                    //echo "COUNT::".count($crntRow)."<br/>";
                     if (count($crntRow) == 5) {
                         $inptPssblLovValID = (int) (cleanInputData1($crntRow[0]));
                         $pssblVal = cleanInputData1($crntRow[1]);

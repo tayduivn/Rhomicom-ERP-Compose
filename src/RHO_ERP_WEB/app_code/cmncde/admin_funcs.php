@@ -312,6 +312,7 @@ $pssblVals = array(
     "90", "Configured System Type 9", "Association Management System",
     "90", "Configured System Type 10", "NGO Management System",
     "90", "Application Instance SHORT CODE", "RHOMICOM_MAIN_ERP_APP_1",
+    "90", "Rho Email/SMS API Base URL", "http://rho-nginx:8080/",
     "94", "Default Facility Type", "Room/Hall",
     "94", "Default Rental Calc Method", "Days",
     "94", "Default Check-In Calc Method", "Nights",

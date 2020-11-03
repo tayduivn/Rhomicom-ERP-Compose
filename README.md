@@ -51,7 +51,7 @@ The software can be used to manage both backend and front-end operations of all 
 The sample is currently hosted on https://portal.rhomicom.com
 Help can be found on https://wiki.rhomicom.com
 
-Completed or Working Modules
+Completed or Activated Modules
 =======================================
 1. Accounting
 2. Person Data
@@ -75,6 +75,17 @@ Typical Target institutions/organisations
 3. Associations/Churches/Professional Bodies
 4. Construction Firms
 5. Academic Institutions
+
+System Features
+=========================================
+- Email/SMS Alerts  
+- Import/Export to Excel  
+- Responsive Design (Able to work on any Computer,Tablet, Phone)  
+- Online Capable (Can be accessed anywhere in the world)  
+- Summary Dashboards  
+- Customizable Interfaces   
+- Customizable Reports
+- Chat Rooms/Forums/Circulars/Announcements
 
 Sofware Requirements
 =======================

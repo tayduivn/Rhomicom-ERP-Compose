@@ -34,7 +34,7 @@ https://gitlab.rhomicom.com:8443/admin2/rhomicom-public-stuff/-/blob/master/2_sa
 1. http://localhost:8000
     - username:admin pwd: Ghana124 [Sample DB]
     - username:admin pwd: admin [Empty DB]
-2. http://localhost:8000//index.php?cp=2
+2. http://localhost:8000/index.php?cp=2
     - pwd: Password1
 3. http://localhost:8090
     - Server: rho-mysqldb username: root pwd: Password1

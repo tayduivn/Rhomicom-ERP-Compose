@@ -12,6 +12,9 @@ https://gitlab.rhomicom.com:8443/admin2/rhomicom-public-stuff/-/blob/master/2_sa
  - docker exec -it rho-pgadmin sh
  - cd /var/lib/pgadmin/storage/info_rhomicom.com
  - psql -h rho-pgdb -p 5432 -U postgres -v -d rho_erp_db < 2_sample_database.sql
+ OR
+ Direct full restore of the sample backup file located at [db/initdb/pgdb](https://github.com/rhomicom-systems-tech-gh/Rhomicom-ERP-Project/tree/main/db/initdb/pgdb/2_sample_database.backup)
+ from the pgadmin front-end interface
 6. cd back to main Rhomicom-ERP-Project folder and Run
  - docker-compose -p RHO-ERP-SET-1 up -d --remove-orphans  
 7. Open http://localhost:8090 to access db via adminer

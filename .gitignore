@@ -6,6 +6,7 @@ db/adbs/bin/*.bat
 db/adbs/bin/log_files/*.rho
 db/adbs/bin/log_files/adt_trail/*.rho
 db/adbs/bin/log_files/prcs_logs/*.rho
+db/adbs/DB_Backups/*.backup
 db/adbs/Rpts/*.pdf
 db/adbs/Rpts/*.xls
 db/adbs/Rpts/*.html*
@@ -20,3 +21,6 @@ src/RHO_ERP_WEB/dwnlds/amcharts_2100/samples/*.html
 src/RHO_ERP_WEB/dwnlds/amcharts_2100/samples/*.pdf
 src/RHO_ERP_WEB/dwnlds/tmp/*.png
 src/RHO_ERP_WEB/dwnlds/tmp/*.jpg
+src/RHO_ERP_WEB/dwnlds/tmp/*.pdf
+src/RHO_ERP_WEB/dwnlds/tmp/*.html
+src/RHO_ERP_WEB/dwnlds/tmp/*.jrxml

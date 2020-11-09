@@ -38,6 +38,8 @@ RUN apk --no-cache add msttcorefonts-installer fontconfig && \
   update-ms-fonts && \
   fc-cache -f
 
+RUN apk add --no-cache postgresql-client
+
 ENV CHROME_BIN=/usr/bin/chromium-browser
 ENV CHROME_PATH=/usr/lib/chromium/
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1

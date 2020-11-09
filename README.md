@@ -6,7 +6,7 @@
 3. cd  to api_image/code and run
  - npm install
 4. cd to db/initdb/pgdb and download sample db file into it if needed
- - NB: Sample DB Can be downloaded from 
+ - NB: Sample DB can be downloaded from 
 https://gitlab.rhomicom.com:8443/admin2/rhomicom-public-stuff/-/blob/master/2_sample_database.sql
 5. Alternatively sample DB can be restored after running containers via terminal
  - docker exec -it rho-pgadmin sh
@@ -136,5 +136,16 @@ You are invited to contribute new features, fixes, or updates, large or small; w
 Before you start to code, we recommend discussing your plans through a GitHub issue, especially for more ambitious contributions. This gives other contributors a chance to point you in the right direction, give you feedback on your design, and help you find out if someone else is working on the same thing.
 
 # License
-
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+
+# DOCKER PUSH 
+docker login
+docker build -t rhomicom/rho-erp-api:v1.0 .
+docker tag rho-erp-api:v1.0 rhomicom/rho-erp-api:v1.0
+docker push rhomicom/rho-erp-api:v1.0
+     
+docker build -t rhomicom/rho-erp-base:v1.0 .
+docker tag rho-erp-base:v1.0 rhomicom/rho-erp-base:v1.0
+docker push rhomicom/rho-erp-base:v1.0
+

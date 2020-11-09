@@ -61,7 +61,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL=info@rhomicom.com
       - PGADMIN_DEFAULT_PASSWORD=Password1
     volumes:
-      - ./db/pgadmin:/var/lib/pgadmin
+      - ./db/pgadmin:/var/lib/pgadmin/storage
   #webmin:
   #  image: tragus/webmin
   #  restart: always

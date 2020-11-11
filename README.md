@@ -9,6 +9,7 @@
  - NB: Sample DB can be downloaded from 
 https://gitlab.rhomicom.com:8443/admin2/rhomicom-public-stuff/-/blob/master/2_sample_database.sql
 5. Alternatively sample DB can be restored after running containers via terminal
+ - First Login to the [pgAdmin interface](http://localhost:8091) to view Databases available
  - docker exec -it rho-pgadmin sh
  - cd /var/lib/pgadmin/storage/info_rhomicom.com
  - psql -h rho-pgdb -p 5432 -U postgres -v -d rho_erp_db < 2_sample_database.sql  

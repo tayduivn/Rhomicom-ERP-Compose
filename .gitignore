@@ -24,3 +24,4 @@ src/RHO_ERP_WEB/dwnlds/tmp/*.jpg
 src/RHO_ERP_WEB/dwnlds/tmp/*.pdf
 src/RHO_ERP_WEB/dwnlds/tmp/*.html
 src/RHO_ERP_WEB/dwnlds/tmp/*.jrxml
+db/adbs/*.rhocnfg

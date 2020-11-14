@@ -344,7 +344,8 @@ RUN install -g nginx -o nginx -d /var/cache/ngx_pagespeed && \
   ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY conf/static /usr/share/nginx/html
-COPY conf/nginx_conf /etc/nginx
+COPY conf/nginx_conf/nginx.conf /etc/nginx/nginx.conf
+COPY conf/nginx_conf/conf.d /etc/nginx/conf.d
 
 # Configure PHP-FPM
 RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" ${php_conf} \

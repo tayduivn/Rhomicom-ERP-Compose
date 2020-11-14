@@ -17,6 +17,8 @@ services:
     volumes:
       - ./src/RHO_ERP_WEB:/usr/share/nginx/html
       - ./db/adbs:/opt/apache/adbs
+      - ./conf/rho-php.ini:/etc/php7/php.ini
+      - ./conf/rho-www.conf:/etc/php7/php-fpm.d/www.conf
       #- ../conf/static/test:/usr/share/nginx/html/test
       #- ./ means current directory
       #- ../ means move one level up
@@ -52,7 +54,7 @@ services:
     volumes:
       - ./conf/adminer/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:4.28
     restart: always
     container_name: rho-pgadmin
     ports:
@@ -68,8 +70,8 @@ services:
   #  container_name: rho-webmin
   #  ports:
   #    - 8092:80
-    #volumes:
-    #  - ./db/webmin:/etc/webmin
+  #volumes:
+  #  - ./db/webmin:/etc/webmin
   mysqldb:
     image: mysql:latest
     restart: always
@@ -86,8 +88,7 @@ services:
     image: rhomicom/rho-erp-api:v1.0
     restart: always
     container_name: rho-api
-    ports:
-      - 3000:3000
+    #ports: - 3000:3000
     volumes:
       - ./src/RHO_ERP_WEB:/usr/share/nginx/html
       - ./db/adbs:/opt/apache/adbs

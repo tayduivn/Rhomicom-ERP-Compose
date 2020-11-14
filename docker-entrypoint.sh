@@ -5,8 +5,8 @@ RESP=`echo -e '*1\r\n$4\r\nPING\r\n' | nc rho-redis 6379`
 echo "$RESP"
 if [ "$RESP" = "+PONG" ]; then 
 echo "$RESP"
-sed -i -e "s|session.save_handler\s*=\s*files|session.save_handler = redis|g" /etc/php7/php.ini
-sed -i -e "s|;session.save_path\s*=\s*""/tmp""|session.save_path = tcp://rho-redis:6379|g" /etc/php7/php.ini
+#sed -i -e "s|session.save_handler\s*=\s*files|session.save_handler = redis|g" /etc/php7/php.ini
+#sed -i -e "s|;session.save_path\s*=\s*""/tmp""|session.save_path = tcp://rho-redis:6379|g" /etc/php7/php.ini
 echo "$RESP"
 fi
 

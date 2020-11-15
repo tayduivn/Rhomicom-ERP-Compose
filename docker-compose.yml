@@ -67,14 +67,6 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=Password1
     volumes:
       - ./db/pgadmin:/var/lib/pgadmin/storage
-  #webmin:
-  #  image: tragus/webmin
-  #  restart: always
-  #  container_name: rho-webmin
-  #  ports:
-  #    - 8092:80
-  #volumes:
-  #  - ./db/webmin:/etc/webmin
   mysqldb:
     image: mysql:latest
     restart: always

@@ -4,7 +4,7 @@
  - NB on linux you may have to run 
  - chmod -R 777 Rhomicom-ERP-Project as root
 3. cd  to api_image/code and run
- - npm install
+ - npm install OR download https://github.com/rhomicom-systems-tech-gh/Rhomicom-DB-Scripts/raw/master/node_modules.zip and unzip into api_image/code folder
 4. cd to db/initdb/pgdb and download sample db file into it if needed
  - NB: Sample DB can be downloaded from 
 https://gitlab.rhomicom.com:8443/admin2/rhomicom-public-stuff/-/blob/master/2_sample_database.sql

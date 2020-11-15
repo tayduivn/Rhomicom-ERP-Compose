@@ -1,0 +1,26 @@
+@02-Nov-2020 09:10:24
+UPDATE rpt.rpt_reports SET report_name = ''Expiring Items Report'', report_desc = ''Expiring Items Report'', rpt_sql_query = ''SELECT distinct a.itm_id "m", a.consgmt_id "Consignment No.", 
+ a.subinv_id "n", (select w.subinv_name from inv.inv_itm_subinventories w where w.subinv_id=a.subinv_id) "Store ",
+ b.item_code "Item Code      ", b.item_desc "Description                    ", 
+ a.cost_price "Unit Cost Price ", COALESCE(inv.get_csgmt_lst_tot_bls(a.consgmt_id),0) "QTY    ", 
+ a.cost_price*COALESCE(inv.get_csgmt_lst_tot_bls(a.consgmt_id),0) "Total Cost    ",
+ to_char(to_timestamp(a.expiry_date,''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Date of Expiry  ", 
+ extract(''''years'''' from age(CASE WHEN a.expiry_date IS NULL or expiry_date='''''''' THEN 
+ to_timestamp(''''4000-12-31 23:59:59'''',''''YYYY-MM-DD HH24:MI:SS'''') ELSE 
+ to_timestamp(expiry_date || '''' 00:00:00'''',''''YYYY-MM-DD HH24:MI:SS'''') END, now())) || '''' yr(s) ''''
+ || extract(''''months'''' from age(CASE WHEN a.expiry_date IS NULL or expiry_date='''''''' THEN 
+ to_timestamp(''''4000-12-31 23:59:59'''',''''YYYY-MM-DD HH24:MI:SS'''') ELSE 
+ to_timestamp(expiry_date || '''' 00:00:00'''',''''YYYY-MM-DD HH24:MI:SS'''') END, now())) || '''' mon(s) ''''
+ || extract(''''days'''' from age(CASE WHEN a.expiry_date IS NULL or expiry_date='''''''' THEN 
+ to_timestamp(''''4000-12-31 23:59:59'''',''''YYYY-MM-DD HH24:MI:SS'''') ELSE 
+ to_timestamp(expiry_date || '''' 00:00:00'''',''''YYYY-MM-DD HH24:MI:SS'''') END, now())) || '''' day(s)'''' "Time to Expire ",
+ a.expiry_date "q"
+ FROM inv.inv_consgmt_rcpt_det a, inv.inv_itm_list b
+ WHERE a.itm_id=b.item_id and b.org_id={:orgID} and (b.enabled_flag=''''1'''' or b.enabled_flag IS NULL)
+ and age(CASE WHEN a.expiry_date IS NULL or expiry_date='''''''' THEN 
+ to_timestamp(''''4000-12-31 23:59:59'''',''''YYYY-MM-DD HH24:MI:SS'''') ELSE 
+ to_timestamp(expiry_date || '''' 00:00:00'''',''''YYYY-MM-DD HH24:MI:SS'''') END, now()) 
+ between interval ''''{:days1} Day'''' and interval ''''{:days2} Day'''' 
+ and COALESCE(inv.get_csgmt_lst_tot_bls(a.consgmt_id),0)>0
+ ORDER BY a.expiry_date, b.item_desc, a.consgmt_id'', owner_module = ''Stores And Inventory Manager'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:24'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''1'', cols_to_sum = ''8'', cols_to_average = '''', cols_to_no_frmt = ''6,7,8'', output_type = ''HTML'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 29)
+-------------------------Next Msg:-------------------------

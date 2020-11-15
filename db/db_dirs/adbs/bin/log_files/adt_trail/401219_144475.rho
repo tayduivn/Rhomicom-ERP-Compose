@@ -1,0 +1,20 @@
+@02-Nov-2020 09:10:05
+UPDATE rpt.rpt_reports SET report_name = ''Non-Performing Loans By BoG Sector - Summary'', report_desc = ''CR-Non-Performing Loans By BoG Sector - Summary'', rpt_sql_query = ''SELECT row_number() over (order by 1 DESC) as "No.", tbl2.sector_desc "LOAN SECTOR", tbl2.principal_amount "PRINCIPAL DISBURSED", tbl2.prncpl_nonprfmng "PRINCIPAL DELINQUENT", tbl2.intrst_nonprfmng "INTEREST DELINQUENT",   (tbl2.prncpl_nonprfmng + tbl2.intrst_nonprfmng) "TOTAL", tbl2.cust_count "NO. OF CUSTOMERS",
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param Period" FROM 
+(SELECT tbl.sector_desc, sum(principal_amount) principal_amount, sum(tbl.prncpl_nonprfmng) prncpl_nonprfmng, sum(tbl.intrst_nonprfmng) intrst_nonprfmng, count(tbl.*) cust_count
+FROM
+(SELECT COALESCE(d.sector_desc,''''***NO SECTOR***'''') sector_desc, round(coalesce(b.principal_amount,0),2) principal_amount, round((mcf.get_loan_ttl_principal_bal_as_at(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)))),2) prncpl_nonprfmng, 
+round((mcf.get_loan_ttl_interest_bal_as_at(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)))),2) intrst_nonprfmng, c.loan_rqst_id
+FROM mcf.mcf_loan_disbursement_hdr a LEFT OUTER JOIN mcf.mcf_loan_disbursement_det b ON a.disbmnt_hdr_id = b.disbmnt_hdr_id
+LEFT OUTER JOIN mcf.mcf_loan_request c ON b.loan_rqst_id = c.loan_rqst_id
+LEFT OUTER JOIN mcf.mcf_loan_sectors_major d ON c.sector_clsfctn_major_id = d.major_sector_id
+WHERE 1 = 1
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND CASE WHEN segment8_dataload != '''''''' THEN to_timestamp(segment8_dataload,''''YYYY-MM-DD'''') ELSE to_timestamp(a.disbmnt_date,''''YYYY-MM-DD'''') END
+<= to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD'''')
+AND mcf.get_loan_dflt_age(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))) >= 90 
+order by 1)tbl
+GROUP BY tbl.sector_desc
+order by 1)tbl2
+order by 1'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:05'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''195.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 195)
+-------------------------Next Msg:-------------------------

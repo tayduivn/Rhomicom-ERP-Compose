@@ -1,0 +1,21 @@
+@02-Nov-2020 09:10:07
+UPDATE rpt.rpt_reports SET report_name = ''Schedule G - Borrowings'', report_desc = ''BOG-Schedule G - Borrowings'', rpt_sql_query = ''SELECT
+    row_number()
+    OVER (
+      ORDER BY a.accnt_num ) rownumbr,
+  accnt_num account_number,
+  accnt_name accnt_name,
+  (CASE WHEN a.is_prnt_accnt = ''''0'''' AND a.has_sub_ledgers = ''''0''''
+    THEN
+      accb.get_ltst_accnt_bals(a.accnt_id, ''''{:p_as_at_date}'''', ''''net_amount'''')
+              ELSE
+                accb.get_ltst_prnt_accnt_bals(a.accnt_id, ''''{:p_as_at_date}'''', ''''net_amount'''')
+              END),
+  to_char(to_timestamp(''''{:p_as_at_date}'''',''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') p_as_at_date
+  FROM accb.accb_chart_of_accnts a
+  WHERE a.accnt_id IN (SELECT z.account_id
+                       FROM accb.accb_account_clsfctns z
+                       WHERE lower(z.maj_rpt_ctgry) = lower(''''Borrowings ( Schedule G)'''')) 
+ and a.is_prnt_accnt = ''''0'''' AND a.has_sub_ledgers = ''''0''''
+ ORDER BY a.accnt_num'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:07'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''177.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 177)
+-------------------------Next Msg:-------------------------

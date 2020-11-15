@@ -1,0 +1,35 @@
+Successfully Started Thread One
+Program ID:2
+Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: -1 Running on:  /  / Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: -1 Running on:  /  / 
+Run ID: 2439
+Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: -1 Running on:  /  / 
+Run ID: 2439
+
+Run ID3: 2439 Report ID:150
+Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: -1 Running on:  /  / 
+Run ID: 2439
+
+Run ID3: 2439 Report ID:150
+157
+Linux
+[732507d1639c, 02-42-AC-1A-00-04, 172.26.0.4]
+PID: 157 Running on: 732507d1639c / 02-42-AC-1A-00-04 / 172.26.0.4Successfully Connected to Database
+false
+Successfully Connected to Database
+false
+
+Run ID4: 2439 Report ID:150
+Successfully Connected to Database
+false
+
+Run ID4: 2439 Report ID:150
+
+Run ID: 2439 Report ID:150

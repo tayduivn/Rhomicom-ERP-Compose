@@ -1,0 +1,37 @@
+@02-Nov-2020 09:10:08
+UPDATE rpt.rpt_reports SET report_name = ''Trial Balance-Landscape'', report_desc = ''ACC-Trial Balance-Landscape'', rpt_sql_query = ''SELECT
+  tbl1.gnrl_data1::INTEGER rownumbr,
+  (CASE WHEN ''''{:p_pad_acnts}'''' ilike ''''Yes'''' THEN tbl1.gnrl_data14||tbl1.gnrl_data2
+ELSE tbl1.gnrl_data2 END) account_number,
+  tbl1.gnrl_data3 accnt_name,
+  tbl1.gnrl_data4::NUMERIC debit_balance,
+  tbl1.gnrl_data5::NUMERIC credit_balance,
+  tbl1.gnrl_data6::NUMERIC net_balance,
+  tbl1.gnrl_data7 as_at_date,
+  tbl1.gnrl_data8::INTEGER accnt_id,
+  tbl1.gnrl_data9 is_prnt_accnt,
+  to_char(to_timestamp(''''{:p_as_at_date}'''',''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') p_as_at_date,
+  tbl1.gnrl_data10::NUMERIC debit_balsm,
+  tbl1.gnrl_data11::NUMERIC credit_balsm,
+  tbl1.gnrl_data12 depth,
+  tbl1.gnrl_data13 path,
+  tbl1.gnrl_data14 lftpaddng
+ FROM rpt.rpt_gnrl_data_storage tbl1
+ WHERE tbl1.rpt_run_id={:rptRunID} 
+ ORDER BY tbl1.gnrl_data1::INTEGER'', owner_module = ''Accounting'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:08'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = ''0'', cols_to_count = ''NO'', cols_to_sum = ''2'', cols_to_average = '''', cols_to_no_frmt = ''2,5'', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''165.jrxml'', pre_rpt_sql_query=''select accb.populate_trial_bals(
+{:rptRunID},
+''''{:p_use_net_pos}'''',
+''''{:p_as_at_date}'''',
+{:p_max_acnt_level},
+{:p_sgmnt1_val},
+{:p_sgmnt2_val},
+{:p_sgmnt3_val},
+{:p_sgmnt4_val},
+{:p_sgmnt5_val},
+{:p_sgmnt6_val},
+{:p_sgmnt7_val},
+{:p_sgmnt8_val},
+{:p_sgmnt9_val},
+{:p_sgmnt10_val},
+{:usrID}, to_char(now(),''''YYYY-MM-DD HH24:MI:SS''''), {:orgID}, {:msgID});'', pst_rpt_sql_query='''' WHERE (report_id = 165)
+-------------------------Next Msg:-------------------------

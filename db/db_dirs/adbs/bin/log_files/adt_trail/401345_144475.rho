@@ -1,0 +1,16 @@
+@02-Nov-2020 09:10:20
+UPDATE rpt.rpt_reports SET report_name = ''Data Integrity Corrections'', report_desc = ''Data Integrity Corrections'', rpt_sql_query = ''/*UPDATE inv.inv_itm_list 
+  SET orgnl_selling_price = round(selling_price::numeric/(1.185),6)
+  Where tax_code_id=1 and selling_price = orgnl_selling_price and selling_price<>0;
+
+UPDATE inv.itm_uoms 
+  SET price_less_tax = round(selling_price::numeric/(1.185),6)
+  Where item_id IN (Select a.item_id
+   from inv.itm_uoms b, inv.inv_itm_list a 
+   Where a.item_id = b.item_id and a.tax_code_id=1
+  and b.selling_price = b.price_less_tax and b.selling_price<>0);
+
+UPDATE scm.scm_sales_invc_det 
+ SET orgnl_selling_price = round(unit_selling_price::numeric/(1.185),6) 
+  WHERE tax_code_id=1 and unit_selling_price = orgnl_selling_price;*/'', owner_module = ''System Administration'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:20'', rpt_or_sys_prcs = ''Database Function'', cols_to_group = '''', cols_to_count = ''NO'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''None'', portrait_lndscp = ''None'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Customised Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 65)
+-------------------------Next Msg:-------------------------

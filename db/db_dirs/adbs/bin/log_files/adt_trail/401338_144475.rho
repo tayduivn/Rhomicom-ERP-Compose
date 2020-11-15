@@ -1,0 +1,13 @@
+@02-Nov-2020 09:10:19
+UPDATE rpt.rpt_reports SET report_name = ''Graduate Membership Gender Distribution (Chart)'', report_desc = ''Coorperate Membership Distribution (Chart)'', rpt_sql_query = ''select gender || '''' ('''' || count(1) || '''')'''', count(1), gender 
+FROM prs.prsn_names_nos pnn 
+left outer join pasn.prsn_prsntyps ppt
+  on pnn.person_id = ppt.person_id
+left outer join pasn.prsn_grades pg on pnn.person_id = pg.person_id   
+where ppt.prsn_type IN (''''Registered Member'''',''''Registered Member.Staff'''') 
+ AND coalesce(pg.valid_start_date, to_char((select now()),''''YYYY-MM-DD'''')) is not null and ( pg.valid_end_date is null OR (now()
+    between to_timestamp(pg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS''''))) 
+  and (select grade_code_name from org.org_grades og where og.grade_id = pg.grade_id ) IN (''''Graduate Member (GM)'''')  
+group by 3;'', owner_module = ''Basic Person Data'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:19'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = ''800400'', cols_to_count = ''0,1'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PIE CHART'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 72)
+-------------------------Next Msg:-------------------------

@@ -1,0 +1,45 @@
+@02-Nov-2020 09:10:00
+UPDATE rpt.rpt_reports SET report_name = ''Aging Analysis Report by Product - Summary'', report_desc = ''BOG-Aging Analysis Report by Product - Summary'', rpt_sql_query = ''SELECT row_number() over (order by 1) as "No.", tbl3.* FROM ( SELECT tbl2.bank_branch, trim(tbl2.loan_product) loan_product, tbl2.classification, (tbl2.prvsn_percentage * 100)||''''%'''' prvsn_percentage,  
+ SUM(tbl2.principal_amount) ttl_principal_amount,  SUM(tbl2.ttl_amnt_outsndng) ttl_outstanding, round(SUM(tbl2.prvsn_amount),2) ttl_prvsn_amount,
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param Period", 
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_start_date}'''',''''''''), ''''1901-01-01''''),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param Start Date", 
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_end_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param End Date",
+''''All Branches'''' "Selected Branch",
+''''All Classifications'''' "Loan Classification"
+FROM (SELECT tbl1.gnrl_data2::BIGINT loan_rqst_id, tbl1.gnrl_data4 loan_product, 
+tbl1.gnrl_data5::NUMERIC principal_amount, tbl1.gnrl_data6::NUMERIC ttl_amnt_outsndng, 
+CASE WHEN  tbl1.gnrl_data7::NUMERIC = 0  THEN (0.01 * tbl1.gnrl_data6::NUMERIC)
+WHEN  tbl1.gnrl_data7::NUMERIC BETWEEN 1 AND 30 THEN (0.05 * tbl1.gnrl_data6::NUMERIC)
+WHEN  tbl1.gnrl_data7::NUMERIC BETWEEN 31 AND 60  THEN (0.2 * tbl1.gnrl_data6::NUMERIC)
+WHEN  tbl1.gnrl_data7::NUMERIC BETWEEN 61 AND 90  THEN (0.4 * tbl1.gnrl_data6::NUMERIC)
+WHEN tbl1.gnrl_data7::NUMERIC BETWEEN 91 AND 120  THEN (0.6 * tbl1.gnrl_data6::NUMERIC)
+WHEN  tbl1.gnrl_data7::NUMERIC BETWEEN 121 AND 150 THEN (0.8 * tbl1.gnrl_data6::NUMERIC)
+WHEN tbl1.gnrl_data7::NUMERIC >= 151 THEN (1 * tbl1.gnrl_data5::NUMERIC)
+END prvsn_amount,  
+tbl1.gnrl_data7::NUMERIC dflt_age_in_days,
+CASE WHEN  tbl1.gnrl_data7::NUMERIC = 0  THEN ''''Current Loans''''
+WHEN  tbl1.gnrl_data7::NUMERIC BETWEEN 1 AND 30 THEN ''''Up to 30 days''''
+WHEN  tbl1.gnrl_data7::NUMERIC BETWEEN 31 AND 60 THEN ''''31 days and less than 61 days''''
+WHEN  tbl1.gnrl_data7::NUMERIC BETWEEN 61 AND 90  THEN ''''61 days and less than 91 days''''
+WHEN tbl1.gnrl_data7::NUMERIC BETWEEN 91 AND 120  THEN ''''91 days and less than 121 days''''
+WHEN  tbl1.gnrl_data7::NUMERIC BETWEEN 121 AND 150 THEN ''''121 days and less than 151 days''''
+WHEN tbl1.gnrl_data7::NUMERIC >= 151 THEN ''''151 days and above''''
+END classification,
+CASE WHEN  tbl1.gnrl_data7::NUMERIC = 0  THEN 0.01
+WHEN  tbl1.gnrl_data7::NUMERIC BETWEEN 1 AND 30 THEN 0.05
+WHEN  tbl1.gnrl_data7::NUMERIC BETWEEN 31 AND 60  THEN 0.2
+WHEN  tbl1.gnrl_data7::NUMERIC BETWEEN 61 AND 90  THEN 0.4
+WHEN tbl1.gnrl_data7::NUMERIC BETWEEN 91 AND 120  THEN 0.6
+WHEN  tbl1.gnrl_data7::NUMERIC BETWEEN 121 AND 150 THEN 0.8
+WHEN tbl1.gnrl_data7::NUMERIC >= 151 THEN 1
+END prvsn_percentage,
+tbl1.gnrl_data8 bank_branch
+FROM rpt.rpt_gnrl_data_storage tbl1
+ WHERE tbl1.rpt_run_id = {:rptRunID}
+ AND 1 = 1 
+AND tbl1.gnrl_data7::NUMERIC >= 0 AND tbl1.gnrl_data6::NUMERIC > 0)tbl2
+GROUP BY tbl2.loan_product, tbl2.classification, tbl2.prvsn_percentage, tbl2.bank_branch
+ORDER BY tbl2.bank_branch ASC, tbl2.Loan_Product ASC, tbl2.prvsn_percentage ASC)tbl3'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:00'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''256.jrxml'', pre_rpt_sql_query=''SELECT mcf.populate_loan_aging_nd_balance_data({:rptRunID},
+''''{:p_as_at_date}'''',''''{:p_start_date}'''',''''{:p_end_date}'''',
+{:usrID}, to_char(now(),''''YYYY-MM-DD HH24:MI:SS''''), {:orgID}, {:msgID});'', pst_rpt_sql_query='''' WHERE (report_id = 256)
+-------------------------Next Msg:-------------------------

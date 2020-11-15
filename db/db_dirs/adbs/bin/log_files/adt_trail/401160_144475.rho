@@ -1,0 +1,49 @@
+@02-Nov-2020 09:10:00
+UPDATE rpt.rpt_reports SET report_name = ''Welfare Loan Application Letter'', report_desc = ''Welfare Loan Application Letter'', rpt_sql_query = ''SELECT
+	a.pay_request_id,
+	a.RQSTD_FOR_PERSON_ID,
+	REPLACE(prs.get_prsn_surname (a.RQSTD_FOR_PERSON_ID) || '''' ('''' || prs.get_prsn_loc_id (a.RQSTD_FOR_PERSON_ID) || '''')'''', '''' ()'''', '''''''') fullnm,
+	a.request_type,
+	a.item_type_id,
+	b.item_type_name,
+	a.local_clsfctn,
+	a.REQUEST_REASON,
+	to_char(to_timestamp(a.creation_date, ''''YYYY-MM-DD HH24:MI:SS''''), ''''DD-Mon-YYYY HH24:MI:SS'''') rqst_sbmt_date,
+	round(a.PRNCPL_AMOUNT, 2) PRNCPL_AMOUNT,
+	a.MNTHLY_DEDUC,
+	a.INTRST_RATE,
+	a.intrst_period_type,
+	a.REPAY_PERIOD,
+	a.repay_period_type,
+	round(((a.MNTHLY_DEDUC * a.REPAY_PERIOD) - a.PRNCPL_AMOUNT), 2) ttl_intrst,
+	a.net_loan_amount net_credit_amnt,
+	a.REQUEST_STATUS is_pstd,
+	a.HAS_AGREED,
+	a.IS_PROCESSED,
+	''''THE EXECUTIVES'''' P_LETTER_TO,
+	CASE WHEN a.request_type = ''''SETTLEMENT'''' THEN
+		''''WELFARE LOAN SETTLEMENT REQUEST''''
+	ELSE
+		''''WELFARE LOAN APPLICATION''''
+	END P_SUBJECT,
+	TO_CHAR(now(), ''''DD-MON-YYYY'''') P_LTR_DATE,
+	CASE WHEN a.request_type = ''''SETTLEMENT'''' THEN
+		''''Kindly find below the details of my request for your consideration. '''' || ''''I agree that my BOG Account be debited with the Net amount stated below to fulfill this request. ''''
+	ELSE
+		''''Kindly find below the details of my request for your consideration. '''' || ''''I agree that my BOG Account be debited as per the terms and conditions of this loan. ''''
+	END P_LTR_BODY,
+	CASE WHEN a.request_type = ''''SETTLEMENT'''' THEN
+		''''Net Amount to Debit''''
+	ELSE
+		''''Net Amount to Credit''''
+	END P_NET_LABEL,
+	''''_____________________________'''' P_SIGN_1_NM,
+	''''_____________________'''' P_SIGN_1_POST,
+	''''_____________________________'''' P_SIGN_2_NM,
+	''''_____________________'''' P_SIGN_2_POST
+FROM
+	pay.pay_loan_pymnt_rqsts a,
+	pay.loan_pymnt_invstmnt_typs b
+WHERE (a.item_type_id = b.item_type_id
+	AND a.pay_request_id = {:pay_rqst_id});'', owner_module = ''Internal Payments'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:00'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = ''4,5,6,7,8,9'', cols_to_average = '''', cols_to_no_frmt = ''4,5,6,7,8,9'', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name=''354.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 259)
+-------------------------Next Msg:-------------------------

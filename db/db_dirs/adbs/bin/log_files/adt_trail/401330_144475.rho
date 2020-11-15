@@ -1,0 +1,19 @@
+@02-Nov-2020 09:10:18
+UPDATE rpt.rpt_reports SET report_name = ''Asset Preventive Maintenance Records'', report_desc = ''Asset Preventive Maintenance Records'', rpt_sql_query = ''SELECT asset_pm_rec_id, measurement_type, uom, 
+to_char(to_timestamp(record_date,''''YYYY-MM-DD HH24:MI:SS''''),''''DD-Mon-YYYY HH24:MI:SS''''), 
+to_char(to_timestamp(record_date,''''YYYY-MM-DD HH24:MI:SS''''),''''Day''''), 
+starting_fig, ending_fig, (ending_fig-starting_fig) "Net Figure ",
+accb.getMxAllwdDailyFig(a.asset_id, measurement_type,uom)-(ending_fig-starting_fig) "Excess/Overtime Figure ",
+accb.getCumFigForPM(a.asset_id, measurement_type,uom)-
+accb.getSumPrevPMNetFigs(a.asset_id, measurement_type,uom,to_char(now(),''''YYYY-MM-DD'''')) "Cumulative Figure Left for PM ",
+is_pm_done "Is PM Done?", 
+exact_pm_action_done "PM Action Taken ", 
+comments_remarks "Remarks        "
+  FROM accb.accb_fa_assets_pm_recs a,
+accb.accb_fa_assets_rgstr b 
+WHERE a.asset_id = b.asset_id and b.org_id = {:orgID}
+AND ''''''''||a.asset_id = coalesce(NULLIF(''''{:asset_id}'''',''''''''), ''''''''||a.asset_id) 
+and (to_timestamp(a.record_date,''''YYYY-MM-DD HH24:MI:SS'''') between 
+        to_timestamp(''''{:strtDte}'''',''''DD-Mon-YYYY HH24:MI:SS'''') AND 
+        to_timestamp(''''{:endDte}'''', ''''DD-Mon-YYYY HH24:MI:SS''''));'', owner_module = ''Hospitality Management'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:18'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''NO'', cols_to_sum = ''6'', cols_to_average = '''', cols_to_no_frmt = ''6'', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 80)
+-------------------------Next Msg:-------------------------

@@ -1,0 +1,20 @@
+@02-Nov-2020 09:10:27
+UPDATE rpt.rpt_reports SET report_name = ''Pay Items Monthly Summary Per Date Range'', report_desc = ''Internal  Payments Detail Per Date Range'', rpt_sql_query = ''SELECT a.item_id "3", b.item_code_name 
+"Item Name   ", SUM(a.amount_paid) "Amount Paid", 
+to_char(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''Mon YYYY'''') "Month         ", 
+to_char(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''MM YYYY'''') "_",
+ sec.get_usr_name(a.created_by) "Created By"
+FROM (pay.pay_itm_trnsctns a LEFT OUTER JOIN org.org_pay_items b ON a.item_id = 
+b.item_id) LEFT OUTER JOIN prs.prsn_names_nos c on a.person_id = c.person_id 
+WHERE((trim(c.title || '''' '''' || c.sur_name || '''', '''' || c.first_name || '''' '''' || 
+c.other_names) ilike ''''%'''') and (b.org_id ={:orgID}) 
+AND (b.item_code_name ilike ''''{:itemNm}'''') and 
+(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS'''') between 
+to_timestamp(''''{:fromDate} 00:00:00'''',''''YYYY-MM-DD HH24:MI:SS'''') AND 
+to_timestamp(''''{:toDate} 23:59:59'''',''''YYYY-MM-DD HH24:MI:SS'''')))
+AND a.created_by=COALESCE(NULLIF({:rcvdBy},-1), a.created_by)
+GROUP BY a.item_id, b.item_code_name, to_char(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''MM YYYY''''),  
+to_char(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),
+''''Mon YYYY''''), a.paymnt_date, 6
+ ORDER BY to_char(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''MM YYYY''''),  b.item_code_name'', owner_module = ''Internal Payments'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:27'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''1'', cols_to_sum = ''2'', cols_to_average = '''', cols_to_no_frmt = ''2'', output_type = ''HTML'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 9)
+-------------------------Next Msg:-------------------------

@@ -1,0 +1,206 @@
+Username:admin|Login Number:1342|myImgFileName:39889588243cG7vz8vmUTLYG2VPMGmmG12VIYUv45284434c43.png|strlFileNm11:|extnsn:png
+-------------------------Next Msg:-------------------------
+Username:admin|Login Number:1342|Person:Mr. Shidah Delali Kovi Yussif (00012)
+-------------------------Next Msg:-------------------------
+Welcome Mr. Shidah Delali Kovi Yussif to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 09-Nov-2020 10:10:52-Machine Details(Unknown/IP:172.26.0.1/Browser:Google Chrome v86.0.4240.183/OS:windows/Session ID:oesm2tfjjfbgm2feidoj08u07f) .
+        <br/><br/>Your last failed login was 19-Sep-2020 16:51:09-Machine Details(Unknown/IP:192.168.56.1/Browser:Google Chrome v85.0.4183.102/OS:windows/Session ID:1ab2585f9ebe0ec301922c1056d87182)
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:10:16
+INSERT INTO wkf.wkf_actual_msgs_hdr(
+            msg_id, msg_hdr, msg_body, created_by, creation_date, herchy_id, 
+            msg_typ, app_id, msg_status, src_doc_type, src_doc_id, last_update_by, 
+            last_update_date, attchments, attchments_desc) VALUES (393, 'Welcome Mr. Shidah Delali Kovi Yussif', 'Welcome Mr. Shidah Delali Kovi Yussif to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 09-Nov-2020 10:10:52-Machine Details(Unknown/IP:172.26.0.1/Browser:Google Chrome v86.0.4240.183/OS:windows/Session ID:oesm2tfjjfbgm2feidoj08u07f) .
+        <br/><br/>Your last failed login was 19-Sep-2020 16:51:09-Machine Details(Unknown/IP:192.168.56.1/Browser:Google Chrome v85.0.4183.102/OS:windows/Session ID:1ab2585f9ebe0ec301922c1056d87182)', 
+            8, '2020-11-09 11:10:16', -1, 'Informational', 
+            1, '0','Login',-1, 
+            8, '2020-11-09 11:10:16', '', '')
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:10:16
+INSERT INTO wkf.wkf_actual_msgs_routng(
+            msg_id, from_prsn_id, to_prsn_id, date_sent, 
+            created_by, creation_date, msg_status, action_to_perform, last_update_by, 
+            last_update_date, to_prsns_hrchy_level, action_comments) 
+            VALUES (393, -1, 2540, '2020-11-09 11:10:16', 8, 
+            '2020-11-09 11:10:16', 'Initiated', 'Acknowledge', 8, '2020-11-09 11:10:16', 1, 
+                '')
+-------------------------Next Msg:-------------------------
+orgLogoFileName:dwnlds/tmp/83487v48G7vz8vmUTLYG2VPMGmmG12VIYUPNX3_c4v843774.png|strlFileNm11:1.png|extnsn:png
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:10:18
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_71832631_20201109111018.txt
+-------------------------Next Msg:-------------------------
+Inside generateReportRun, RPTID=108==737~rho_erp_db|736~adbs|738~/opt/apache|-130~Automatic Database Backup-Linux|-190~HTML
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:10:33
+INSERT INTO rpt.rpt_report_runs(
+            run_by, run_date, rpt_run_output, run_status_txt, 
+            run_status_prct, report_id, rpt_rn_param_ids, rpt_rn_param_vals, 
+            output_used, orntn_used, last_actv_date_tme, is_this_from_schdler, alert_id) 
+            VALUES (8, '2020-11-09 11:10:33', '', 'Not Started!', 0, 108, 
+            '', 
+            '', 
+            '', 
+            '', '2020-11-09 11:10:33', '0', -1)
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:10:33
+INSERT INTO rpt.rpt_run_msgs(log_messages, process_typ, process_id, created_by, creation_date, last_update_by, last_update_date) VALUES ('2020-11-09 11:10:33 .... Report/Process Run is about to Start...(Being run by admin)','Process Run',2459, 8, '2020-11-09 11:10:33', 8, '2020-11-09 11:10:33')
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:10:33
+UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || '
+
+737|736|738|-130|-190
+rho_erp_db|adbs|/opt/apache|Automatic Database Backup-Linux|HTML
+
+OUTPUT FORMAT: HTML
+ORIENTATION: ', last_update_by=8, last_update_date='2020-11-09 11:10:33' WHERE msg_id = 2459
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:10:33
+UPDATE rpt.rpt_report_runs SET rpt_rn_param_ids = '737|736|738|-130|-190', rpt_rn_param_vals = 'rho_erp_db|adbs|/opt/apache|Automatic Database Backup-Linux|HTML', output_used = 'HTML', orntn_used= '' WHERE (rpt_run_id = 2459)
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:10:33
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'Jasper Process Runner'
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:10:34
+UPDATE rpt.rpt_report_runs SET shld_run_stop = '0' WHERE (rpt_run_id = 2459)
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "***************" "rho_erp_db" "Jasper Process Runner" "2459" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:15:17
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-09 11:10:44', logout_time='' WHERE login_number=1342
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:16:23
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-09 11:15:18', logout_time='' WHERE login_number=1342
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:16:24
+UPDATE rpt.rpt_reports SET report_name = 'Automatic Database Backup-Linux', report_desc = 'Automatic Database Backup-Linux', rpt_sql_query = '#!/bin/sh
+echo "import pty; pty.spawn(''/bin/bash'')" > /tmp/asdf.py
+#sudo python /tmp/asdf.py
+#su postgres
+#export PGPASSWORD="{:db_password}"
+export MYDB=postgresql://postgres:{:db_password}@rho-pgdb:5432/{:dbase_name} 
+#/usr/bin/pg_dump --file "/var/lib/pgadmin/storage/info_rhomicom.com/3_sample_database.backup" --host "rho-pgdb" --port "5432" --username "postgres" --no-password --verbose --role "postgres" --format=c --blobs --encoding "UTF8" #"rho_erp_db"
+#echo $PGPASSWORD
+/usr/bin/pg_dump -F c -b -v -f "{:db_ftp_prnt}/{:db_ftp_dir}/DB_Backups/$(date +%d%m%y_%H%M%S)_{:dbase_name}.backup" --dbname=$MYDB 
+echo DB BACKUP COMPLETED 
+find {:db_ftp_prnt}/{:db_ftp_dir}/ -type f -mmin +600 -name ''*.backup'' -exec rm {} \;
+find {:db_ftp_prnt}/{:db_ftp_dir}/ -type f -mmin +5 -name ''*.tar.gz'' -exec rm {} \;
+find {:db_ftp_prnt}/{:db_ftp_dir}/Rpts/ -type f -mmin +600 -name ''*.pdf'' -exec rm {} \;
+find {:db_ftp_prnt}/{:db_ftp_dir}/Rpts/ -type f -mmin +600 -name ''*.xls'' -exec rm {} \;
+find {:db_ftp_prnt}/{:db_ftp_dir}/Rpts/ -type f -mmin +600 -name ''*.html*'' -exec rm {} \;
+find {:db_ftp_prnt}/{:db_ftp_dir}/Rpts/ -type f -mmin +600 -name ''*.csv'' -exec rm {} \;
+find {:db_ftp_prnt}/{:db_ftp_dir}/Logs/ -type f -mmin +600 -name ''*.txt'' -exec rm {} \;
+find {:db_ftp_prnt}/{:db_ftp_dir}/bin/ -type f -mmin +50 -name ''*.sh'' -exec rm {} \;
+find {:db_ftp_prnt}/{:db_ftp_dir}/bin/ -type f -mmin +50 -name ''*.bat'' -exec rm {} \;
+find {:db_ftp_prnt}/{:db_ftp_dir}/bin/log_files/ -type f -mtime +300 -name ''*.rho'' -exec rm {} \;
+find {:db_ftp_prnt}/{:db_ftp_dir}/bin/log_files/adt_trail/ -type f -mtime +300 -name ''*.rho'' -exec rm {} \; 
+#echo AFTER WWW TAR 
+#tar cvzf {:db_ftp_prnt}/allBkps/$(date +%d%m%y_%H%M%S)_{:db_ftp_dir}_bkp.tar.gz {:db_ftp_prnt}/{:db_ftp_dir}
+echo FILES BACKUP COMPLETED
+exit', owner_module = 'System Administration', is_enabled = '1', last_update_by = 8, last_update_date = '2020-11-09 11:16:24', rpt_or_sys_prcs = 'Command Line Script-Linux', cols_to_group = '', cols_to_count = 'NO', cols_to_sum = '', cols_to_average = '', cols_to_no_frmt = '', output_type = 'HTML', portrait_lndscp = 'Landscape', rpt_layout='TABULAR', imgs_col_nos='', csv_delimiter='None', process_runner='Jasper Process Runner', jrxml_file_name='', pre_rpt_sql_query='', pst_rpt_sql_query='' WHERE (report_id = 108)
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:16:24
+UPDATE rpt.rpt_report_parameters SET parameter_name = 'DB FTP DIR:', paramtr_rprstn_nm_in_query = '{:db_ftp_dir}', default_value = 'yslive', is_required = '1', last_update_by = 8, last_update_date = '2020-11-09 11:16:24', lov_name_id = '-1', param_data_type = 'TEXT', date_format = 'None', lov_name = '', shd_be_dsplyd = '1' WHERE (parameter_id = 737)
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:16:24
+UPDATE rpt.rpt_report_parameters SET parameter_name = 'Database Name', paramtr_rprstn_nm_in_query = '{:dbase_name}', default_value = 'ys_live_new', is_required = '1', last_update_by = 8, last_update_date = '2020-11-09 11:16:24', lov_name_id = '-1', param_data_type = 'TEXT', date_format = 'None', lov_name = '', shd_be_dsplyd = '1' WHERE (parameter_id = 736)
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:16:24
+UPDATE rpt.rpt_report_parameters SET parameter_name = 'FTP PARENT DIR:', paramtr_rprstn_nm_in_query = '{:db_ftp_prnt}', default_value = '/opt/apache', is_required = '1', last_update_by = 8, last_update_date = '2020-11-09 11:16:24', lov_name_id = '-1', param_data_type = 'TEXT', date_format = 'None', lov_name = '', shd_be_dsplyd = '1' WHERE (parameter_id = 738)
+-------------------------Next Msg:-------------------------
+Inside generateReportRun, RPTID=108==737~adbs|736~rho_erp_db|738~/opt/apache|-130~Automatic Database Backup-Linux|-190~HTML
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:16:45
+INSERT INTO rpt.rpt_report_runs(
+            run_by, run_date, rpt_run_output, run_status_txt, 
+            run_status_prct, report_id, rpt_rn_param_ids, rpt_rn_param_vals, 
+            output_used, orntn_used, last_actv_date_tme, is_this_from_schdler, alert_id) 
+            VALUES (8, '2020-11-09 11:16:45', '', 'Not Started!', 0, 108, 
+            '', 
+            '', 
+            '', 
+            '', '2020-11-09 11:16:45', '0', -1)
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:16:45
+INSERT INTO rpt.rpt_run_msgs(log_messages, process_typ, process_id, created_by, creation_date, last_update_by, last_update_date) VALUES ('2020-11-09 11:16:45 .... Report/Process Run is about to Start...(Being run by admin)','Process Run',2460, 8, '2020-11-09 11:16:45', 8, '2020-11-09 11:16:45')
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:16:45
+UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || '
+
+737|736|738|-130|-190
+adbs|rho_erp_db|/opt/apache|Automatic Database Backup-Linux|HTML
+
+OUTPUT FORMAT: HTML
+ORIENTATION: ', last_update_by=8, last_update_date='2020-11-09 11:16:45' WHERE msg_id = 2460
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:16:45
+UPDATE rpt.rpt_report_runs SET rpt_rn_param_ids = '737|736|738|-130|-190', rpt_rn_param_vals = 'adbs|rho_erp_db|/opt/apache|Automatic Database Backup-Linux|HTML', output_used = 'HTML', orntn_used= '' WHERE (rpt_run_id = 2460)
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:16:45
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'Jasper Process Runner'
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:16:46
+UPDATE rpt.rpt_report_runs SET shld_run_stop = '0' WHERE (rpt_run_id = 2460)
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "***************" "rho_erp_db" "Jasper Process Runner" "2460" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:23:33
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-09 11:16:55', logout_time='' WHERE login_number=1342
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:28:25
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-09 11:23:34', logout_time='' WHERE login_number=1342
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:37:59
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-09 11:28:30', logout_time='' WHERE login_number=1342
+-------------------------Next Msg:-------------------------
+Inside generateReportRun, RPTID=108==737~adbs|736~rho_erp_db|738~/opt/apache|-130~Automatic Database Backup-Linux|-190~HTML
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:38:06
+INSERT INTO rpt.rpt_report_runs(
+            run_by, run_date, rpt_run_output, run_status_txt, 
+            run_status_prct, report_id, rpt_rn_param_ids, rpt_rn_param_vals, 
+            output_used, orntn_used, last_actv_date_tme, is_this_from_schdler, alert_id) 
+            VALUES (8, '2020-11-09 11:38:06', '', 'Not Started!', 0, 108, 
+            '', 
+            '', 
+            '', 
+            '', '2020-11-09 11:38:06', '0', -1)
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:38:06
+INSERT INTO rpt.rpt_run_msgs(log_messages, process_typ, process_id, created_by, creation_date, last_update_by, last_update_date) VALUES ('2020-11-09 11:38:06 .... Report/Process Run is about to Start...(Being run by admin)','Process Run',2461, 8, '2020-11-09 11:38:06', 8, '2020-11-09 11:38:06')
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:38:06
+UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || '
+
+737|736|738|-130|-190
+adbs|rho_erp_db|/opt/apache|Automatic Database Backup-Linux|HTML
+
+OUTPUT FORMAT: HTML
+ORIENTATION: ', last_update_by=8, last_update_date='2020-11-09 11:38:06' WHERE msg_id = 2461
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:38:06
+UPDATE rpt.rpt_report_runs SET rpt_rn_param_ids = '737|736|738|-130|-190', rpt_rn_param_vals = 'adbs|rho_erp_db|/opt/apache|Automatic Database Backup-Linux|HTML', output_used = 'HTML', orntn_used= '' WHERE (rpt_run_id = 2461)
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:38:06
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'Jasper Process Runner'
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:38:06
+UPDATE rpt.rpt_report_runs SET shld_run_stop = '0' WHERE (rpt_run_id = 2461)
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "***************" "rho_erp_db" "Jasper Process Runner" "2461" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:40:19
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-09 11:38:57', logout_time='' WHERE login_number=1342
+-------------------------Next Msg:-------------------------
+@09-Nov-2020 11:42:58
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-09 11:40:19', logout_time='' WHERE login_number=1342
+-------------------------Next Msg:-------------------------

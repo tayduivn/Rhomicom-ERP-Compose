@@ -1,0 +1,9 @@
+@02-Nov-2020 09:01:27
+UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || ''
+
+686|687|688|689|690|691|692|693|694|695|-130|-190
+||||||||||Person Basic Data|PDF
+
+OUTPUT FORMAT: PDF
+ORIENTATION: '', last_update_by=130, last_update_date=''2020-11-02 09:01:27'' WHERE msg_id = 156554
+-------------------------Next Msg:-------------------------

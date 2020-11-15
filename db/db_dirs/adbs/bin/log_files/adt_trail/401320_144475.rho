@@ -1,0 +1,22 @@
+@02-Nov-2020 09:10:17
+UPDATE rpt.rpt_reports SET report_name = ''Payables Invoice'', report_desc = ''Payables Invoice'', rpt_sql_query = ''SELECT b.pybls_invc_hdr_id,
+to_char(to_timestamp(b.pybls_invc_date,''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') invc_date,
+b.pybls_invc_number,
+b.pybls_invc_type,
+b.comments_desc, 
+scm.get_cstmr_splr_name(b.supplier_id) customer_name, 
+        COALESCE(f.site_name,'''' '''') site_name, COALESCE(f.billing_address,'''' '''') billing_address, 
+        COALESCE(f.ship_to_address,'''' '''') ship_to_address,
+         b.payment_terms,
+a.pybls_smmry_id, 
+a.pybls_smmry_desc,
+CASE WHEN substr(a.pybls_smmry_type,1,1) IN (''''3'''',''''5'''') 
+THEN -1 * a.pybls_smmry_amnt ELSE a.pybls_smmry_amnt END amnt, 
+a.code_id_behind, a.pybls_smmry_type, a.auto_calc,
+	    gst.get_pssbl_val(b.invc_curr_id) curr   
+FROM accb.accb_pybls_amnt_smmrys a, accb.accb_pybls_invc_hdr b 
+      LEFT OUTER JOIN scm.scm_cstmr_suplr_sites f  ON (b.supplier_site_id =f.cust_sup_site_id)
+WHERE((a.src_pybls_hdr_id ={:invoice_id}  and b.pybls_invc_hdr_id=a.src_pybls_hdr_id) 
+ and (substr(a.pybls_smmry_type,1,1) NOT IN (''''6'''',''''7'''',''''8''''))
+) ORDER BY a.pybls_smmry_type'', owner_module = ''Accounting'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:16'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''NO'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''90.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 90)
+-------------------------Next Msg:-------------------------

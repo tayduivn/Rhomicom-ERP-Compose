@@ -1,0 +1,139 @@
+@02-Nov-2020 09:10:14
+UPDATE rpt.rpt_reports SET report_name = ''Top 200 Dues Debtors Individuals-Last 2 Years'', report_desc = ''Top 200 Dues Debtors Individuals-Last 2 Years'', rpt_sql_query = ''select row_number() over (order by round(SUM(tbl2.amnt),2) DESC, tbl2.id_no ASC) "No.", 
+COALESCE(NULLIF(tbl2.fullnm||'''' (''''||tbl2.id_no||'''')'''',''''''''),''''Unknown Person'''') "Name of Member                                ",
+round((select coalesce(pay.get_ltst_blsitm_bals(pnn.person_id,org.get_payitm_id(b.item_code_name),to_char(now(),''''YYYY-MM-DD'''')),0)
+  FROM prs.prsn_names_nos pnn 
+  LEFT OUTER JOIN pasn.prsn_grades pg on pnn.person_id = pg.person_id
+  LEFT OUTER JOIN pasn.prsn_divs_groups pdg on (pnn.person_id = pdg.person_id and (now()
+    between to_timestamp(pdg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pdg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS'''')) 
+  AND org.get_div_type(pdg.div_id)=''''Technical Division'''')
+  LEFT OUTER JOIN pasn.prsn_bnfts_cntrbtns f ON (pnn.person_id = f.person_id 
+  and (now() between to_timestamp(f.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') AND to_timestamp(f.valid_end_date,''''YYYY-MM-DD HH24:MI:SS''''))) 
+  LEFT OUTER JOIN org.org_pay_items b ON (b.item_id = f.item_id)
+  LEFT OUTER JOIN prs.prsn_extra_data ped ON (ped.person_id = pnn.person_id)
+  where (coalesce(pg.valid_start_date, to_char((select now()),''''YYYY-MM-DD'''')) is not null and ( pg.valid_end_date is null OR (now() between to_timestamp(pg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS'''')))
+   and (b.org_id = 1)  
+  AND (b.item_code_name ilike ''''%'''' || to_char(now(),''''YYYY'''') || ''''%'''' and b.item_code_name ilike ''''Annual%Dues%'''')
+  AND pnn.person_id = tbl2.person_id
+  AND (b.item_maj_type=''''Balance Item'''') 
+  AND b.local_classfctn ilike ''''%Membership Balance Item'''')), 2) "Annual Dues (Current Year)",
+round((select coalesce(pay.get_ltst_blsitm_bals(pnn.person_id,org.get_payitm_id(b.item_code_name),to_char(now(),''''YYYY-MM-DD'''')),0)
+  FROM prs.prsn_names_nos pnn 
+  LEFT OUTER JOIN pasn.prsn_grades pg on pnn.person_id = pg.person_id
+  LEFT OUTER JOIN pasn.prsn_divs_groups pdg on (pnn.person_id = pdg.person_id and (now()
+    between to_timestamp(pdg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pdg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS'''')) AND org.get_div_type(pdg.div_id)=''''Technical Division'''')
+  LEFT OUTER JOIN pasn.prsn_bnfts_cntrbtns f ON (pnn.person_id = f.person_id 
+  and (now() between to_timestamp(f.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') AND to_timestamp(f.valid_end_date,''''YYYY-MM-DD HH24:MI:SS''''))) 
+  LEFT OUTER JOIN org.org_pay_items b ON (b.item_id = f.item_id)
+  LEFT OUTER JOIN prs.prsn_extra_data ped ON (ped.person_id = pnn.person_id)
+  where (coalesce(pg.valid_start_date, to_char((select now()),''''YYYY-MM-DD'''')) is not null and ( pg.valid_end_date is null OR (now()
+    between to_timestamp(pg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS'''')))
+   and (b.org_id = 1)  
+  AND (b.item_code_name ilike ''''%'''' || to_char((now() - interval ''''1 year''''),''''YYYY'''')||''''%'''' and b.item_code_name ilike ''''Annual%Dues%'''')
+  AND pnn.person_id = tbl2.person_id
+  AND (b.item_maj_type=''''Balance Item'''') AND b.local_classfctn ilike ''''%Membership Balance Item'''')) , 2) "Annual Dues (Previous Year)",
+round((select coalesce(pay.get_ltst_blsitm_bals(pnn.person_id,org.get_payitm_id(b.item_code_name),to_char(now(),''''YYYY-MM-DD'''')),0)
+  FROM prs.prsn_names_nos pnn 
+  LEFT OUTER JOIN pasn.prsn_grades pg on pnn.person_id = pg.person_id
+  LEFT OUTER JOIN pasn.prsn_divs_groups pdg on (pnn.person_id = pdg.person_id and (now()
+    between to_timestamp(pdg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pdg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS'''')) AND org.get_div_type(pdg.div_id)=''''Technical Division'''')
+  LEFT OUTER JOIN pasn.prsn_bnfts_cntrbtns f ON (pnn.person_id = f.person_id 
+  and (now() between to_timestamp(f.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') AND to_timestamp(f.valid_end_date,''''YYYY-MM-DD HH24:MI:SS''''))) 
+  LEFT OUTER JOIN org.org_pay_items b ON (b.item_id = f.item_id)
+  LEFT OUTER JOIN prs.prsn_extra_data ped ON (ped.person_id = pnn.person_id)
+  where (coalesce(pg.valid_start_date, to_char((select now()),''''YYYY-MM-DD'''')) is not null and ( pg.valid_end_date is null OR (now()
+    between to_timestamp(pg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS'''')))
+   and (b.org_id = 1)  
+  AND (b.item_code_name ilike ''''%'''' || to_char((now()-interval ''''2 year''''),''''YYYY'''')||''''%'''' and b.item_code_name ilike ''''Annual%Dues%'''')
+  AND pnn.person_id = tbl2.person_id
+  AND (b.item_maj_type=''''Balance Item'''') AND b.local_classfctn ilike ''''%Membership Balance Item'''')),2) "Annual Dues (Previous Year 2)", round(SUM(tbl2.amnt), 2) "Total Amount Owing ", 
+tbl2.id_no m1,
+tbl2.person_id m2
+FROM (Select 
+ tbl1.id_no, 
+ tbl1.fullnm,
+ tbl1.item_code_name,
+ SUM(tbl1.amnt) amnt,
+ 600 " ",
+ tbl1.Grade,
+ tbl1.Division,
+ tbl1.cmpny,
+tbl1.person_id
+ from (select distinct pnn.local_id_no id_no, 
+ pnn.title||'''' ''''||pnn.first_name||'''' ''''||pnn.other_names||'''' ''''||pnn.sur_name fullnm, 
+ org.get_grade_name(pg.grade_id) Grade, 
+ org.get_div_name(pdg.div_id) Division, 
+       b.item_code_name,
+       coalesce(pay.get_ltst_blsitm_bals(pnn.person_id,org.get_payitm_id(b.item_code_name),to_char(now(),''''YYYY-MM-DD'''')),0) amnt, b.pay_run_priority, scm.get_cstmr_splr_name(pnn.lnkd_firm_org_id) cmpny, pnn.person_id
+  FROM prs.prsn_names_nos pnn 
+  LEFT OUTER JOIN pasn.prsn_grades pg on pnn.person_id = pg.person_id
+  LEFT OUTER JOIN pasn.prsn_divs_groups pdg on (pnn.person_id = pdg.person_id and (now()
+    between to_timestamp(pdg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pdg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS'''')) AND org.get_div_type(pdg.div_id)=''''Technical Division'''')
+  LEFT OUTER JOIN pasn.prsn_bnfts_cntrbtns f ON (pnn.person_id = f.person_id 
+  and (now() between to_timestamp(f.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') AND to_timestamp(f.valid_end_date,''''YYYY-MM-DD HH24:MI:SS''''))) 
+  LEFT OUTER JOIN org.org_pay_items b ON (b.item_id = f.item_id)
+  LEFT OUTER JOIN prs.prsn_extra_data ped ON (ped.person_id = pnn.person_id)
+  where (coalesce(pg.valid_start_date, to_char((select now()),''''YYYY-MM-DD'''')) is not null and ( pg.valid_end_date is null OR (now()
+    between to_timestamp(pg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS'''')))
+   and (b.org_id = 1)  
+  AND (b.item_code_name ilike ''''%'''' || to_char(now(),''''YYYY'''')||''''%'''' and b.item_code_name ilike ''''Annual%Dues%'''')
+  /*AND coalesce(pay.get_ltst_blsitm_bals(pnn.person_id,org.get_payitm_id(b.item_code_name),to_char(now(),''''YYYY-MM-DD'''')),0)>0*/
+  AND (b.item_maj_type=''''Balance Item'''') AND b.local_classfctn ilike ''''%Membership Balance Item'''')
+  UNION
+  select distinct pnn.local_id_no, 
+  pnn.title||'''' ''''||pnn.first_name||'''' ''''||pnn.other_names||'''' ''''||pnn.sur_name as "Full Name                                                ", 
+  org.get_grade_name(pg.grade_id) Grade, 
+ org.get_div_name(pdg.div_id) Division,
+       ''''Annual Dues Arreas(''''||to_char((now()-interval ''''1 year''''),''''YYYY'''')||'''')''''  "Pay Item                ", 
+       SUM(coalesce(pay.get_ltst_blsitm_bals(pnn.person_id,org.get_payitm_id(b.item_code_name),to_char(now(),''''YYYY-MM-DD'''')),0)) "Amount  ",
+       MAX(b.pay_run_priority) " ", scm.get_cstmr_splr_name(pnn.lnkd_firm_org_id) cmpny, pnn.person_id
+  FROM prs.prsn_names_nos pnn 
+  left outer join pasn.prsn_grades pg on pnn.person_id = pg.person_id 
+  LEFT OUTER JOIN pasn.prsn_divs_groups pdg on (pnn.person_id = pdg.person_id and (now()
+    between to_timestamp(pdg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pdg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS'''')) AND org.get_div_type(pdg.div_id)=''''Technical Division'''')
+  LEFT OUTER JOIN pasn.prsn_bnfts_cntrbtns f ON (pnn.person_id = f.person_id and (now() between to_timestamp(f.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') AND to_timestamp(f.valid_end_date,''''YYYY-MM-DD HH24:MI:SS''''))) 
+       LEFT OUTER JOIN org.org_pay_items b ON (b.item_id = f.item_id)
+       LEFT OUTER JOIN prs.prsn_extra_data ped ON (ped.person_id = pnn.person_id)
+  where (coalesce(pg.valid_start_date, to_char((select now()),''''YYYY-MM-DD'''')) is not null and (pg.valid_end_date is null OR (now()
+    between to_timestamp(pg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS''''))) and (b.org_id = 1)  
+  AND (b.item_code_name ilike ''''%'''' || to_char((now()-interval ''''1 year''''),''''YYYY'''')||''''%'''' and b.item_code_name ilike ''''Annual%Dues%'''')
+  /*AND coalesce(pay.get_ltst_blsitm_bals(pnn.person_id,org.get_payitm_id(b.item_code_name),to_char(now(),''''YYYY-MM-DD'''')),0)>0*/
+  AND (b.item_maj_type=''''Balance Item'''') AND b.local_classfctn ilike ''''%Membership Balance Item'''')
+  GROUP BY 1,2,3,4,5,8,9
+UNION
+  select distinct pnn.local_id_no, 
+  pnn.title||'''' ''''||pnn.first_name||'''' ''''||pnn.other_names||'''' ''''||pnn.sur_name as "Full Name                                                ", 
+  org.get_grade_name(pg.grade_id) Grade, 
+ org.get_div_name(pdg.div_id) Division,
+       ''''Annual Dues Arreas(''''||to_char((now()-interval ''''2 year''''),''''YYYY'''')||'''')''''  "Pay Item                ", 
+       SUM(coalesce(pay.get_ltst_blsitm_bals(pnn.person_id,org.get_payitm_id(b.item_code_name),to_char(now(),''''YYYY-MM-DD'''')),0)) "Amount  ",
+       MAX(b.pay_run_priority) " ", scm.get_cstmr_splr_name(pnn.lnkd_firm_org_id) cmpny, pnn.person_id
+  FROM prs.prsn_names_nos pnn 
+  left outer join pasn.prsn_grades pg on pnn.person_id = pg.person_id 
+  LEFT OUTER JOIN pasn.prsn_divs_groups pdg on (pnn.person_id = pdg.person_id and (now()
+    between to_timestamp(pdg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pdg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS'''')) AND org.get_div_type(pdg.div_id)=''''Technical Division'''')
+  LEFT OUTER JOIN pasn.prsn_bnfts_cntrbtns f ON (pnn.person_id = f.person_id and (now() between to_timestamp(f.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') AND to_timestamp(f.valid_end_date,''''YYYY-MM-DD HH24:MI:SS''''))) 
+       LEFT OUTER JOIN org.org_pay_items b ON (b.item_id = f.item_id)
+       LEFT OUTER JOIN prs.prsn_extra_data ped ON (ped.person_id = pnn.person_id)
+  where (coalesce(pg.valid_start_date, to_char((select now()),''''YYYY-MM-DD'''')) is not null and (pg.valid_end_date is null OR (now()
+    between to_timestamp(pg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS''''))) and (b.org_id = 1)  
+  AND (b.item_code_name ilike ''''%'''' || to_char((now()-interval ''''2 year''''),''''YYYY'''')||''''%'''' and b.item_code_name ilike ''''Annual%Dues%'''')
+  /*AND coalesce(pay.get_ltst_blsitm_bals(pnn.person_id,org.get_payitm_id(b.item_code_name),to_char(now(),''''YYYY-MM-DD'''')),0)>0*/
+  AND (b.item_maj_type=''''Balance Item'''') AND b.local_classfctn ilike ''''%Membership Balance Item'''')
+  GROUP BY 1,2,3,4,5,8,9) tbl1
+WHERE COALESCE(NULLIF(tbl1.cmpny,''''''''),''''Unknown Company'''')=''''Unknown Company''''
+ GROUP BY 1,2,3,5,6,7,8,9) tbl2 group by 2,7,8 
+ order by round(SUM(tbl2.amnt),2) DESC, tbl2.id_no ASC LIMIT 200 OFFSET 0'', owner_module = ''Basic Person Data'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:14'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = ''1100600'', cols_to_count = ''1'', cols_to_sum = ''2'', cols_to_average = '''', cols_to_no_frmt = ''2'', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 108)
+-------------------------Next Msg:-------------------------

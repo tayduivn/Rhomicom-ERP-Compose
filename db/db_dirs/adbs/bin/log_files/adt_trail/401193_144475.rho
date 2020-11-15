@@ -1,0 +1,12 @@
+@02-Nov-2020 09:10:03
+UPDATE rpt.rpt_reports SET report_name = ''Profit & Loss Pie Chart'', report_desc = ''Profit & Loss'', rpt_sql_query = ''SELECT a.accnt_id "_", a.accnt_num "Account No.    ", a.accnt_name "Account Name.    ", 
+CASE WHEN a.accnt_type = ''''R'''' THEN accb.get_prd_usr_trns_sum(a.accnt_id, ''''{:fromDate} 00:00:00'''',
+ ''''{:toDate} 23:59:59'''') ELSE -1*accb.get_prd_usr_trns_sum(a.accnt_id, ''''{:fromDate} 00:00:00'''', 
+''''{:toDate} 23:59:59'''') END "Amount   ", CASE WHEN a.accnt_type = ''''R'''' THEN 
+accb.prnt_usr_trns_sum_rcsv(a.accnt_id, ''''{:fromDate} 00:00:00'''', ''''{:toDate} 23:59:59'''')  
+ELSE -1*accb.prnt_usr_trns_sum_rcsv(a.accnt_id, ''''{:fromDate} 00:00:00'''', ''''{:toDate} 23:59:59'''') END 
+"TOTALS ", a.is_prnt_accnt "_" FROM accb.accb_chart_of_accnts a WHERE ((a.org_id = {:orgID}) 
+and (a.is_prnt_accnt=''''0'''' and accb.get_prd_usr_trns_sum(a.accnt_id, ''''{:fromDate} 00:00:00'''', ''''{:toDate} 
+23:59:59'''') IS NOT NULL) and (a.accnt_type = ''''R'''' or a.accnt_type = ''''EX'''')) 
+ORDER BY accb.get_prd_usr_trns_sum(a.accnt_id, ''''{:fromDate} 00:00:00'''', ''''{:toDate} 23:59:59'''') DESC LIMIT 5 OFFSET 0'', owner_module = ''Accounting'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:03'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = ''1100,300'', cols_to_count = ''2,3'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PIE CHART'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 224)
+-------------------------Next Msg:-------------------------

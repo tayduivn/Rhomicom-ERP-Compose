@@ -1,0 +1,24 @@
+@02-Nov-2020 09:10:06
+UPDATE rpt.rpt_reports SET report_name = ''20 Largest Exposures - MF7B'', report_desc = ''BOG-20 Largest Exposures - MF7B'', rpt_sql_query = ''SELECT row_number() over (order by 5 DESC) as "No.", tbl1.*
+FROM (SELECT CASE WHEN c.cust_type = ''''Group'''' THEN  mcf.get_customer_name(c.cust_type, c.grp_cust_id) ELSE mcf.get_customer_name(c.cust_type, c.cust_id) END "NAME OF CUSTOMER",
+d.product_name "FACILITY TYPE", c.approved_amount "SANCTIONED AMOUNT(GHS)", b.principal_amount "DISBURSED AMOUNT(GHS)", 
+CASE WHEN c.crdt_type = ''''Overdraft'''' THEN CASE WHEN (b.principal_amount - COALESCE(mcf.get_cstacnt_avlbl_bals(c.repayment_account_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))),0)) > 0
+THEN (b.principal_amount - COALESCE(mcf.get_cstacnt_avlbl_bals(c.repayment_account_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))),0)) ELSE 0.00 END
+ELSE mcf.get_loan_ttl_principal_bal_as_at(c.loan_rqst_id, ''''{:p_as_at_date}'''') END "OUTSTANDING AMOUNT(GHS)", 
+CASE WHEN substr(a.disbmnt_date,1,10) = ''''2018-02-05'''' THEN ''''NO RECORD FROM TEKSOL'''' WHEN cash_collateral_id > 0 THEN ''''CASH COLLATERAL'''' ELSE ''''NO COLLATERAL'''' END "TYPE OF SECURITY (GHS)",
+CASE WHEN substr(a.disbmnt_date,1,10) = ''''2018-02-05'''' THEN ''''NO RECORD FROM TEKSOL'''' 
+WHEN cash_collateral_id > 0 THEN  
+CASE WHEN c.crdt_type = ''''Overdraft'''' THEN coalesce((SELECT AMOUNT FROM mcf.mcf_account_liens WHERE loan_rqst_id = c.loan_rqst_id AND amount > 0),''''0.00'''')||''''''''  ELSE coalesce((SELECT AMOUNT FROM mcf.mcf_account_liens WHERE loan_rqst_id = c.loan_rqst_id),''''0.00'''')||''''''''END
+ELSE ''''0.00'''' END "VALUE OF SECURITY (GHS)",
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param Period",
+(select account_number from mcf.mcf_accounts where account_id = c.account_id) "Loan Account",
+(select account_number from mcf.mcf_accounts where account_id = c.repayment_account_id) "Repayment Account",
+c.loan_rqst_id
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_prdt_loans d
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.loan_product_id = d.loan_product_id
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+ORDER BY 5 DESC LIMIT 20) tbl1'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:06'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = ''2,3,4'', cols_to_average = '''', cols_to_no_frmt = ''2,3,4'', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''185.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 185)
+-------------------------Next Msg:-------------------------

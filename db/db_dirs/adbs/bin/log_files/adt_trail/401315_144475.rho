@@ -1,0 +1,66 @@
+@02-Nov-2020 09:10:16
+UPDATE rpt.rpt_reports SET report_name = ''Withholding Tax Report - GRA'', report_desc = ''Withholding Tax Report  - GRA'', rpt_sql_query = ''select 
+row_number() OVER (ORDER BY tbl2.pybls_invc_date ASC, tbl2.pybls_invc_hdr_id ASC) AS "No.  ", 
+tbl2.pybls_invc_date mt,
+to_char(to_timestamp(tbl2.pybls_invc_date,''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') AS "Document Date  ",
+REPLACE(scm.get_cstmr_splr_name(tbl2.supplier_id),''''GHANA INSTITUTION OF ENGINEERS (GhIE)'''',''''Unknown'''') AS "Vendor/Supplier          ",
+tbl3.tin_number AS "TIN NUMBER ",
+tbl2.invc_amnt AS "Invoice Amount",
+tbl2.pybls_smmry_amnt AS "Amount Withheld",
+tbl2.code_name AS "Tax Type               "
+from (Select tbl1.*, d.pybls_smmry_amnt, substring(c.code_name from 16) as code_name
+FROM (SELECT pybls_invc_hdr_id, pybls_invc_date,  pybls_invc_number, pybls_invc_type, 
+ supplier_id, 
+       SUM(b.pybls_smmry_amnt) invc_amnt,
+       -1,
+string_agg(b.pybls_smmry_desc,'''' & '''') work_desc 
+  FROM accb.accb_pybls_invc_hdr a, 
+  accb.accb_pybls_amnt_smmrys b
+   WHERE b.pybls_smmry_type =''''1Initial Amount''''
+  and a.pybls_invc_hdr_id = b.src_pybls_hdr_id
+  and a.pybls_invc_type = b.src_pybls_type 
+  and b.pybls_smmry_desc not ilike ''''%vat %''''
+  and a.approval_status=''''Approved''''
+  and a.org_id = {:orgID}
+  GROUP BY 1,2,3,4,5,7) tbl1,
+  scm.scm_tax_codes c, 
+  accb.accb_pybls_amnt_smmrys d
+   WHERE 
+  tbl1.pybls_invc_hdr_id = d.src_pybls_hdr_id
+  and tbl1.pybls_invc_type = d.src_pybls_type 
+  and d.code_id_behind = c.code_id
+  and c.itm_type =''''Tax'''' and c.is_withldng_tax=''''1'''' 
+  and d.initial_amnt_line_id < 0 
+  UNION
+  Select tbl1.*, d.pybls_smmry_amnt, substring(c.code_name from 16) as code_name
+FROM (SELECT pybls_invc_hdr_id, pybls_invc_date,  pybls_invc_number, pybls_invc_type, 
+  supplier_id, 
+       SUM(b.pybls_smmry_amnt) invc_amnt,
+       b.pybls_smmry_id,
+string_agg(b.pybls_smmry_desc,'''' & '''') work_desc 
+  FROM accb.accb_pybls_invc_hdr a, 
+  accb.accb_pybls_amnt_smmrys b
+   WHERE b.pybls_smmry_type =''''1Initial Amount''''
+  and a.pybls_invc_hdr_id = b.src_pybls_hdr_id
+  and a.pybls_invc_type = b.src_pybls_type 
+ and a.org_id = {:orgID}
+  and b.pybls_smmry_desc not ilike ''''%vat %''''
+  and a.approval_status=''''Approved''''
+  GROUP BY 1,2,3,4,5,7) tbl1,
+  scm.scm_tax_codes c, 
+  accb.accb_pybls_amnt_smmrys d
+   WHERE 
+  tbl1.pybls_invc_hdr_id = d.src_pybls_hdr_id
+  and tbl1.pybls_smmry_id=d.initial_amnt_line_id
+  and tbl1.pybls_invc_type = d.src_pybls_type 
+  and d.code_id_behind = c.code_id
+  and c.itm_type =''''Tax'''' and c.is_withldng_tax=''''1'''' 
+  and d.initial_amnt_line_id > 0) tbl2,
+  scm.scm_cstmr_suplr tbl3
+  WHERE  
+  tbl2.supplier_id = tbl3.cust_sup_id 
+  and (to_timestamp(tbl2.pybls_invc_date||'''' 00:00:00'''',''''YYYY-MM-DD HH24:MI:SS'''') between to_timestamp(''''{:strtDte}'''',''''DD-Mon-YYYY HH24:MI:SS'''')
+ and to_timestamp(''''{:endDte}'''',''''DD-Mon-YYYY HH24:MI:SS'''')) 
+ and (scm.get_cstmr_splr_name(tbl2.supplier_id)||'''' (''''||scm.get_cstmr_splr_site_name(tbl2.supplier_id)||'''')'''') ilike ''''%{:sppplr_nm}%'''' 
+  ORDER BY tbl2.pybls_invc_date ASC, tbl2.pybls_invc_hdr_id ASC;'', owner_module = ''Accounting'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:16'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''NO'', cols_to_sum = ''5,6'', cols_to_average = '''', cols_to_no_frmt = ''5,6'', output_type = ''HTML'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 95)
+-------------------------Next Msg:-------------------------

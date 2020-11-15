@@ -1,0 +1,42 @@
+Successfully Started Thread One
+Program ID:2
+Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: -1 Running on:  /  / Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: -1 Running on:  /  / 
+Run ID: 156568
+Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: -1 Running on:  /  / 
+Run ID: 156568
+
+Run ID3: 156568 Report ID:265
+Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: -1 Running on:  /  / 
+Run ID: 156568
+
+Run ID3: 156568 Report ID:265
+
+Run ID4: 156568 Report ID:265
+500
+Linux
+[7e822be6aab5, 02-42-AC-15-00-05, 172.21.0.5]
+PID: 500 Running on: 7e822be6aab5 / 02-42-AC-15-00-05 / 172.21.0.5Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: -1 Running on:  /  / 
+Run ID: 156568
+
+Run ID3: 156568 Report ID:265
+
+Run ID4: 156568 Report ID:265
+500
+Linux
+[7e822be6aab5, 02-42-AC-15-00-05, 172.21.0.5]
+PID: 500 Running on: 7e822be6aab5 / 02-42-AC-15-00-05 / 172.21.0.5Successfully Connected to Database
+false
+Successfully Connected to Database
+false
+
+Run ID: 156568 Report ID:265

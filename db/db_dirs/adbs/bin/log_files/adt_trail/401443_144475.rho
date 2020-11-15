@@ -1,0 +1,3 @@
+@02-Nov-2020 09:10:53
+UPDATE rpt.rpt_report_parameters SET parameter_name = ''Item Name'', paramtr_rprstn_nm_in_query = ''{:itemNm}'', default_value = ''%Dues%(Payment)%'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:52'', lov_name_id = ''-1'', param_data_type = ''TEXT'', date_format = ''None'', lov_name = '''', shd_be_dsplyd = ''1'' WHERE (parameter_id = 23)
+-------------------------Next Msg:-------------------------

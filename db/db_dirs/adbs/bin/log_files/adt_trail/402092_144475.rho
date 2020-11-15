@@ -1,0 +1,33 @@
+@02-Nov-2020 09:12:57
+UPDATE rpt.rpt_reports SET report_name = ''Deposit Trend - Per Year'', report_desc = ''Deposit Trend - Per Year'', rpt_sql_query = ''SELECT
+  tbl1.gnrl_data1::INTEGER rownumbr,
+  tbl1.gnrl_data2 accnt_num,
+  tbl1.gnrl_data3 accnt_name,
+  tbl1.gnrl_data4 account_type,
+  tbl1.gnrl_data5 tel_number,
+  tbl1.gnrl_data6 branch,
+  tbl1.gnrl_data7::NUMERIC Jan,
+  tbl1.gnrl_data9::NUMERIC Feb,
+  tbl1.gnrl_data11::NUMERIC March,
+  tbl1.gnrl_data13::NUMERIC April,
+  tbl1.gnrl_data15::NUMERIC May,
+  tbl1.gnrl_data17::NUMERIC June,
+  tbl1.gnrl_data19::NUMERIC July,
+  tbl1.gnrl_data21::NUMERIC August,
+  tbl1.gnrl_data23::NUMERIC September,
+  tbl1.gnrl_data25::NUMERIC October,
+  tbl1.gnrl_data27::NUMERIC November,
+  tbl1.gnrl_data29::NUMERIC December, 
+''''01-Jan-{:p_year}'''' P_FROM_DATE, 
+''''31-Dec-{:p_year}'''' P_TO_DATE ,
+-1 staff_id, 
+'''''''' relations_officer, 
+tbl1.gnrl_data6 branch_param
+ FROM rpt.rpt_gnrl_data_storage tbl1
+ WHERE tbl1.rpt_run_id={:rptRunID} 
+ ORDER BY tbl1.gnrl_data1::INTEGER'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:12:56'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''HTML'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos=''268.jrxml'', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''C:\fakepath\268.jrxml'', pre_rpt_sql_query=''select mcf.populate_monthly_trns_sums(
+{:rptRunID},
+''''{:p_year}'''',
+{:p_branch_id},
+{:usrID}, to_char(now(),''''YYYY-MM-DD HH24:MI:SS''''), {:orgID}, {:msgID});'', pst_rpt_sql_query='''' WHERE (report_id = 271)
+-------------------------Next Msg:-------------------------

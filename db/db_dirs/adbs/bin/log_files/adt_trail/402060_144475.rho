@@ -1,0 +1,3 @@
+@02-Nov-2020 09:12:30
+UPDATE rpt.rpt_report_parameters SET parameter_name = ''05.Local Classification:'', paramtr_rprstn_nm_in_query = ''{:clsfctn}'', default_value = ''%'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:12:30'', lov_name_id = ''432'', param_data_type = ''TEXT'', date_format = ''None'', lov_name = ''Internal Pay Item Classifications'', shd_be_dsplyd = ''1'' WHERE (parameter_id = 716)
+-------------------------Next Msg:-------------------------

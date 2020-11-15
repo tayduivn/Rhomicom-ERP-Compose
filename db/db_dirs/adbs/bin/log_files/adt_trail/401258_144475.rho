@@ -1,0 +1,40 @@
+@02-Nov-2020 09:10:10
+UPDATE rpt.rpt_reports SET report_name = ''Total deposits by product type-Details'', report_desc = ''CBR-Total deposits by product type-Details'', rpt_sql_query = ''SELECT
+  tbl1.product_name, 
+  tbl1.account_number, 
+  tbl1.account_title,
+  round(COALESCE(tbl1.deposits_ttls,0), 2)                          deposits_ttls,
+  round(COALESCE(tbl1.withdrawal_ttls,0), 2)                        withdrawal_ttls,
+  round((COALESCE(tbl1.deposits_ttls,0) - COALESCE(tbl1.withdrawal_ttls,0)), 2) net_ttls, 
+	org.get_site_code_desc({:P_BRNCH_ID}) branch_param,
+  ''''{:P_FROM_DATE}'''' P_FROM_DATE,
+  ''''{:P_TO_DATE}'''' P_TO_DATE  
+FROM (SELECT
+        a.svngs_product_id,
+        a.product_name,
+	b.account_id, 
+	b.account_number, 
+	b.account_title,
+        (SELECT SUM(COALESCE(z.amount, 0))
+         FROM mcf.mcf_cust_account_transactions z
+         WHERE z.account_id =b.account_id
+		AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''')
+               AND z.trns_date >= to_char(to_timestamp(''''{:P_FROM_DATE}'''',''''DD-Mon-YYYY''''),''''YYYY-MM-DD'''') ||'''' 00:00:00'''' 
+		AND z.trns_date <= to_char(to_timestamp(''''{:P_TO_DATE}'''',''''DD-Mon-YYYY''''),''''YYYY-MM-DD'''') ||'''' 23:59:59''''
+	 AND z.trns_type IN (''''DEPOSIT''''))   deposits_ttls,
+        (SELECT SUM(COALESCE(z.amount, 0))
+         FROM mcf.mcf_cust_account_transactions z
+         WHERE z.account_id =b.account_id
+		AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''')
+               AND z.trns_date >= to_char(to_timestamp(''''{:P_FROM_DATE}'''',''''DD-Mon-YYYY''''),''''YYYY-MM-DD'''') ||'''' 00:00:00'''' 
+		AND z.trns_date <= to_char(to_timestamp(''''{:P_TO_DATE}'''',''''DD-Mon-YYYY''''),''''YYYY-MM-DD'''') ||'''' 23:59:59''''
+	AND z.trns_type IN (''''WITHDRAWAL'''')) withdrawal_ttls
+      FROM mcf.mcf_prdt_savings a,
+	   mcf.mcf_accounts b
+	WHERE a.svngs_product_id = b.product_type_id 
+	and b.branch_id = COALESCE(NULLIF({:P_BRNCH_ID},-1),b.branch_id)
+      GROUP BY 1, 2,3,4,5) tbl1
+ Where (round(COALESCE(tbl1.deposits_ttls,0), 2)!=0 OR round(COALESCE(tbl1.withdrawal_ttls,0), 2)!=0)
+ AND tbl1.product_name ilike ''''{:P_PRODUCT}''''
+ORDER BY 1;'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:10'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = ''4,5,6'', cols_to_average = '''', cols_to_no_frmt = ''4,5,6'', output_type = ''PDF'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''153.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 153)
+-------------------------Next Msg:-------------------------

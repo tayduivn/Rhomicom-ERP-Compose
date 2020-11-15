@@ -1,0 +1,9 @@
+@02-Nov-2020 09:10:27
+UPDATE rpt.rpt_reports SET report_name = ''Person Divisions'', report_desc = ''Persons & Groups'', rpt_sql_query = ''select a.local_id_no "ID No.        ",(select j.div_code_name from org.org_divs_groups j 
+where j.div_id = b.div_id) "Division/Group                           ", to_char(to_timestamp(b.valid_start_date ,''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')
+"Start Date    ",
+ to_char(to_timestamp(b.valid_end_date ,''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "End Date      "
+       from prs.prsn_names_nos a 
+       LEFT OUTER JOIN pasn.prsn_divs_groups b ON a.person_id = b.person_id
+       where a.org_id = {:orgID} order by a.local_id_no;'', owner_module = ''Basic Person Data'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:27'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = ''0'', cols_to_count = ''0'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''HTML'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 5)
+-------------------------Next Msg:-------------------------

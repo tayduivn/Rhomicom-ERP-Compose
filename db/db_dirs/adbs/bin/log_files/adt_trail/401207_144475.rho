@@ -1,0 +1,7 @@
+@02-Nov-2020 09:10:04
+UPDATE rpt.rpt_reports SET report_name = ''Accounts with Unlinked Customers'', report_desc = ''Accounts with Unlinked Customers'', rpt_sql_query = ''SELECT row_number() over (order by 1 ) as "No.", tbl1.* from (select b.account_title, b.account_number, org.get_site_code_desc(b.branch_id::integer) branch, b.cust_type, b.account_id 
+from mcf.mcf_accounts b
+where mcf.get_customer_name(b.cust_type, b.cust_id) is null
+and b.branch_id = coalesce(nullif({:p_branch_id},-1),b.branch_id)
+order by 3 asc, 2)tbl1'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:04'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''HTML'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 209)
+-------------------------Next Msg:-------------------------

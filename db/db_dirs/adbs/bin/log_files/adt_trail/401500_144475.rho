@@ -1,0 +1,3 @@
+@02-Nov-2020 09:11:01
+UPDATE rpt.rpt_report_parameters SET parameter_name = ''PG Dump Directory'', paramtr_rprstn_nm_in_query = ''{:pg_dmp_dir}'', default_value = ''C:\Program Files (x86)\pgAdmin 4\v3\runtime'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:11:01'', lov_name_id = ''-1'', param_data_type = ''TEXT'', date_format = ''None'', lov_name = '''', shd_be_dsplyd = ''1'' WHERE (parameter_id = 83)
+-------------------------Next Msg:-------------------------

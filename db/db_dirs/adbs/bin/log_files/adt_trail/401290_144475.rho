@@ -1,0 +1,32 @@
+@02-Nov-2020 09:10:13
+UPDATE rpt.rpt_reports SET report_name = ''50 Largest Loans'', report_desc = ''CR-50 Largest Loans'', rpt_sql_query = ''SELECT
+row_number() over (order by tbl1.principal desc) as "No.", tbl1.*
+FROM (SELECT  
+org.get_site_code_desc(a.branch_id::integer) Branch,
+CASE WHEN a.cust_type = ''''Group'''' AND a.grp_cust_id > 0 THEN mcf.get_customer_name(a.cust_type, a.cust_id)||'''' (''''||mcf.get_cust_local_idno(a.cust_id)||'''')''''||'''' [Group: ''''||mcf.get_customer_name(a.cust_type, a.grp_cust_id)||'''']''''
+ELSE mcf.get_customer_name_LastNameFirst(a.cust_type, a.cust_id)||'''' (''''||mcf.get_cust_local_idno(a.cust_id)||'''')'''' END                 "Customer Name",
+a.cust_type "Customer Type",
+a.crdt_type "Credit Type",
+iso_code "Currency",
+c.principal_amount Principal,
+a.apprvd_interest_rate "Interest Rate",
+a.apprvd_loan_tenor||'''' ''''||a.apprvd_loan_tenor_type "Tenure",
+to_char(to_timestamp(c.repay_start_date, ''''YYYY-MM-DD''''), ''''DD-Mon-YYYY'''') "Start Date",
+to_char(to_timestamp(c.repay_end_date, ''''YYYY-MM-DD''''), ''''DD-Mon-YYYY'''')   "End Date",
+mcf.calc_loan_ttl_bal(a.loan_rqst_id::INTEGER,''''PRINCIPAL OUTSTANDING'''') "Principal Outstanding",
+mcf.calc_loan_ttl_bal(a.loan_rqst_id::INTEGER,''''INTEREST OUTSTANDING'''') "Interest Outstanding",
+(mcf.calc_loan_ttl_bal(a.loan_rqst_id::INTEGER,''''PRINCIPAL OUTSTANDING'''') + mcf.calc_loan_ttl_bal(a.loan_rqst_id::INTEGER,''''INTEREST OUTSTANDING'''')) "Total Outstanding"
+FROM mcf.mcf_loan_request a INNER JOIN mcf.mcf_prdt_loans b ON a.loan_product_id = b.loan_product_id
+INNER JOIN mcf.mcf_loan_disbursement_det c ON c.loan_rqst_id = a.loan_rqst_id
+INNER JOIN mcf.mcf_loan_disbursement_hdr d ON c.disbmnt_hdr_id = d.disbmnt_hdr_id
+INNER JOIN mcf.mcf_currencies e ON b.currency_id = e.crncy_id
+WHERE  1 = 1
+  AND b.currency_id = e.crncy_id
+AND a.branch_id = COALESCE(NULLIF({:branchID},-1),a.branch_id)
+ AND c.ttl_tenor_bal > 0 AND repayment_type = ''''Account Deductions'''' AND is_disbursed = ''''YES''''
+ AND a.status = ''''Approved'''' AND d.status = ''''Disbursed'''' AND c.principal_amount > 0
+ AND a.crdt_type = ''''Loan''''
+ AND (mcf.calc_loan_ttl_bal(a.loan_rqst_id::INTEGER,''''PRINCIPAL OUTSTANDING'''') + mcf.calc_loan_ttl_bal(a.loan_rqst_id::INTEGER,''''INTEREST OUTSTANDING'''')) > 0
+ORDER BY c.principal_amount DESC LIMIT 50
+) tbl1'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:13'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''NO'', cols_to_sum = ''6,11,12,13'', cols_to_average = '''', cols_to_no_frmt = ''6,7,11,12,13'', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 121)
+-------------------------Next Msg:-------------------------

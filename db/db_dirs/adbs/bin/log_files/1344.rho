@@ -1,0 +1,43 @@
+Username:admin|Login Number:1344|myImgFileName:4896v596443c87EUPP55mUKm65EL1c8NLFYINUv4525cv6c895.png|strlFileNm11:|extnsn:png
+-------------------------Next Msg:-------------------------
+Username:admin|Login Number:1344|Person:Mr. Shidah Delali Kovi Yussif (00012)
+-------------------------Next Msg:-------------------------
+Welcome Mr. Shidah Delali Kovi Yussif to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 12-Nov-2020 03:54:43-Machine Details(Unknown/IP:192.168.16.1/Browser:Google Chrome v86.0.4240.193/OS:windows/Session ID:efhpkgij7n753bik1cv043cta5) .
+        <br/><br/>Your last failed login was 19-Sep-2020 16:51:09-Machine Details(Unknown/IP:192.168.56.1/Browser:Google Chrome v85.0.4183.102/OS:windows/Session ID:1ab2585f9ebe0ec301922c1056d87182)
+-------------------------Next Msg:-------------------------
+@12-Nov-2020 14:34:42
+INSERT INTO wkf.wkf_actual_msgs_hdr(
+            msg_id, msg_hdr, msg_body, created_by, creation_date, herchy_id, 
+            msg_typ, app_id, msg_status, src_doc_type, src_doc_id, last_update_by, 
+            last_update_date, attchments, attchments_desc) VALUES (395, 'Welcome Mr. Shidah Delali Kovi Yussif', 'Welcome Mr. Shidah Delali Kovi Yussif to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 12-Nov-2020 03:54:43-Machine Details(Unknown/IP:192.168.16.1/Browser:Google Chrome v86.0.4240.193/OS:windows/Session ID:efhpkgij7n753bik1cv043cta5) .
+        <br/><br/>Your last failed login was 19-Sep-2020 16:51:09-Machine Details(Unknown/IP:192.168.56.1/Browser:Google Chrome v85.0.4183.102/OS:windows/Session ID:1ab2585f9ebe0ec301922c1056d87182)', 
+            8, '2020-11-12 14:34:42', -1, 'Informational', 
+            1, '0','Login',-1, 
+            8, '2020-11-12 14:34:42', '', '')
+-------------------------Next Msg:-------------------------
+@12-Nov-2020 14:34:42
+INSERT INTO wkf.wkf_actual_msgs_routng(
+            msg_id, from_prsn_id, to_prsn_id, date_sent, 
+            created_by, creation_date, msg_status, action_to_perform, last_update_by, 
+            last_update_date, to_prsns_hrchy_level, action_comments) 
+            VALUES (395, -1, 2540, '2020-11-12 14:34:42', 8, 
+            '2020-11-12 14:34:42', 'Initiated', 'Acknowledge', 8, '2020-11-12 14:34:42', 1, 
+                '')
+-------------------------Next Msg:-------------------------
+orgLogoFileName:dwnlds/tmp/3798249887EUPP55mUKm65EL1c8NLFYINUPNX3_c464c334c.png|strlFileNm11:1.png|extnsn:png
+-------------------------Next Msg:-------------------------
+@12-Nov-2020 14:34:44
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+
+RHOMICOM ERROR: [2] exec() has been disabled for security reasons<br />
+ This Rhomicom Error happened on line 595 in file /usr/share/nginx/html/app_code/cmncde/connect_pg.php
+-------------------------Next Msg:-------------------------
+@12-Nov-2020 14:34:59
+UPDATE pay.pay_balsitm_bals SET bals_amount = round(bals_amount , 2) WHERE (bals_amount - round(bals_amount , 2)) != 0
+-------------------------Next Msg:-------------------------

@@ -1,0 +1,15 @@
+@02-Nov-2020 09:10:05
+UPDATE rpt.rpt_reports SET report_name = ''Customer Account Liens'', report_desc = ''CAR-Customer Account Liens'', rpt_sql_query = ''select tbl1.* FROM (SELECT distinct account_title "Customer Name", account_number "Account Number", 
+c.product_name "Loan Type", d.amount "Lien Amount", CASE WHEN {:p_branch_id} = -1 THEN ''''All Branches'''' ELSE org.get_site_code_desc({:p_branch_id}) END "Branch", 
+b.loan_amount "Loan Amount", mcf.get_cstacnt_lien_bals(
+    a.account_id,
+    COALESCE(NULLIF('''''''',''''''''),mcf.xx_get_start_of_day_date(1))) Account_Lien_Balance, b.trnsctn_id,  a.account_id
+FROM mcf.mcf_accounts a inner join mcf.mcf_loan_request b ON a.account_id = b.repayment_account_id
+ INNER JOIN mcf.mcf_prdt_loans c ON b.loan_product_id = c.loan_product_id
+ inner JOIN mcf.mcf_account_liens d ON a.account_id = d.account_id
+ AND d.loan_rqst_id = b.loan_rqst_id
+AND lien_status = ''''Active''''
+AND a.branch_id = COALESCE(NULLIF({:p_branch_id},-1),a.branch_id)
+ORDER BY 2)tbl1
+WHERE tbl1.Account_Lien_Balance > 0'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:05'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = ''3,5'', cols_to_average = '''', cols_to_no_frmt = ''3,5'', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 205)
+-------------------------Next Msg:-------------------------

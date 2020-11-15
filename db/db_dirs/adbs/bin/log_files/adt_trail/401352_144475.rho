@@ -1,0 +1,51 @@
+@02-Nov-2020 09:10:21
+UPDATE rpt.rpt_reports SET report_name = ''Pay Run PAYE Returns Report'', report_desc = ''Pay Run PAYE Returns Report'', rpt_sql_query = ''SELECT tbl1.full_name "Name of Employee (1)",
+	tbl1.tax_number "Employee Tax I.D. No. (2)", 
+	tbl1.basic_salary "Basic Wage or Salary Paid (3)",
+	tbl1.total_allowances "Total Allowance Paid (4)",
+	tbl1.basic_salary+tbl1.total_allowances "Total Emoluments (5)",
+	tbl1.ssf_employee "Social Security Contribution (6)",
+	tbl1.monthly_relief "Monthly Deductible Relief (7)",
+	tbl1.basic_salary+tbl1.total_allowances-tbl1.ssf_employee-tbl1.monthly_relief "Net Taxable Pay (Col.5 less Col.6 & 7) (8)",
+	tbl1.paye_val "Tax Deductible (9)",
+	tbl1.paye_val "Tax Deducted and Paid to GRA (10)",
+	'''''''' "Remarks (11)",
+	tbl1.payment_date mt 
+FROM (SELECT 
+	c.local_id_no id_num, 
+	trim(c.title || '''' '''' || c.first_name || '''' '''' || c.other_names || '''' '''' || c.sur_name) full_name,
+	prs.get_prsn_ntnl_id(c.person_id,''''TIN'''') tax_number, 
+	SUM(a.amount_paid) basic_salary, 
+	(SELECT COALESCE(SUM(c.amount_paid),0) FROM pay.pay_itm_trnsctns c, org.org_pay_items d WHERE c.person_id = a.person_id 	and c.item_id = 
+	d.item_id and d.item_min_type=''''Earnings'''' and d.item_code_name NOT IN (''''Basic Monthly Salary'''') 
+	and (to_timestamp(c.paymnt_date,''''YYYY-MM-DD HH24:MI:SS'''') between 
+	to_timestamp(''''{:fromDate} 00:00:00'''',''''YYYY-MM-DD HH24:MI:SS'''') AND 
+	to_timestamp(''''{:toDate} 23:59:59'''',''''YYYY-MM-DD HH24:MI:SS''''))) total_allowances,
+	(SELECT COALESCE(SUM(c.amount_paid),0) FROM pay.pay_itm_trnsctns c, org.org_pay_items d WHERE c.person_id = a.person_id 	and c.item_id = 
+	d.item_id and d.item_code_name IN (''''Old SSF Employee (5.0%)'''',''''SSF Employee (5.5%)'''') 
+	and (to_timestamp(c.paymnt_date,''''YYYY-MM-DD HH24:MI:SS'''') between 
+	to_timestamp(''''{:fromDate} 00:00:00'''',''''YYYY-MM-DD HH24:MI:SS'''') AND 
+	to_timestamp(''''{:toDate} 23:59:59'''',''''YYYY-MM-DD HH24:MI:SS''''))) ssf_employee,
+	0 monthly_relief,
+	(SELECT COALESCE(SUM(c.amount_paid),0) FROM pay.pay_itm_trnsctns c, org.org_pay_items d WHERE c.person_id = a.person_id 	and c.item_id = 
+	d.item_id and d.item_code_name IN (''''PAYE Income Tax'''') 
+	and (to_timestamp(c.paymnt_date,''''YYYY-MM-DD HH24:MI:SS'''') between 
+	to_timestamp(''''{:fromDate} 00:00:00'''',''''YYYY-MM-DD HH24:MI:SS'''') AND 
+	to_timestamp(''''{:toDate} 23:59:59'''',''''YYYY-MM-DD HH24:MI:SS''''))) paye_val,
+	to_char(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''Mon-YYYY'''') 
+	payment_date
+	FROM (pay.pay_itm_trnsctns a 
+	LEFT OUTER JOIN org.org_pay_items b ON a.item_id = 
+	b.item_id) 
+	LEFT OUTER JOIN prs.prsn_names_nos c on a.person_id = c.person_id  
+WHERE((trim(c.title || '''' '''' || c.sur_name || '''', '''' || c.first_name || '''' '''' || 
+	c.other_names) ilike ''''%'''') 
+	and (b.org_id ={:orgID}) 
+	and (to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS'''') between 
+	to_timestamp(''''{:fromDate} 00:00:00'''',''''YYYY-MM-DD HH24:MI:SS'''') AND 
+	to_timestamp(''''{:toDate} 23:59:59'''',''''YYYY-MM-DD HH24:MI:SS''''))) 
+	AND c.local_id_no IN (c.local_id_no)
+	AND b.item_code_name ilike ''''Basic Monthly Salary'''' GROUP BY 1,2,3,5,6,7,8,9) tbl1
+	WHERE tbl1.paye_val <>0 
+	ORDER BY  tbl1.id_num ASC'', owner_module = ''Internal Payments'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:21'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = ''2,3,4,5,6,7,8,9'', cols_to_average = '''', cols_to_no_frmt = ''2,3,4,5,6,7,8,9'', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Customised Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 58)
+-------------------------Next Msg:-------------------------

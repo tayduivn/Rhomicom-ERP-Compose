@@ -1,0 +1,34 @@
+@02-Nov-2020 09:10:21
+UPDATE rpt.rpt_reports SET report_name = ''Mass Bookings/Reservations Report'', report_desc = ''Mass Bookings/Reservations Report'', rpt_sql_query = ''SELECT DISTINCT  a.doc_num "Document No.  ", 
+	b.room_name || '''' ('''' || d.service_type_name || '''')'''' "Facility No. ", 
+	scm.get_cstmr_splr_name(a.customer_id) "Occupant / Participant (Sponsee) ",
+	to_char(to_timestamp(a.start_date,''''YYYY-MM-DD HH24:MI:SS''''),''''DD-Mon-YYYY'''') "Start Date           ", 
+	to_char(to_timestamp(a.end_date,''''YYYY-MM-DD HH24:MI:SS''''),''''DD-Mon-YYYY'''') "End Date         ",
+	scm.get_doc_smry_typ_amnt(y.invc_hdr_id,''''Sales Invoice'''',''''5Grand Total'''') "Invoice Amount ",
+	scm.get_doc_smry_typ_amnt(y.invc_hdr_id,''''Sales Invoice'''',''''6Total Payments Received'''')+
+	scm.get_doc_smry_typ_amnt(y.invc_hdr_id,''''Sales Invoice'''',''''8Deposits'''') "Amount Paid ",
+	scm.get_doc_smry_typ_amnt(y.invc_hdr_id,''''Sales Invoice'''',''''9Actual_Change/Balance'''') "Amount Left ",
+	a.doc_type "Remark        ",
+	a.check_in_id mt,y.invc_number m1, a.start_date m2, a.sponsor_site_id m3,  
+	scm.get_cstmr_splr_name(a.sponsor_id)|| '''' ('''' ||scm.get_cstmr_splr_site_name(a.sponsor_site_id)||'''')'''' m4,
+	z.billing_address m5,
+	z.ship_to_address m6,
+	z.contact_person_name m7,
+	z.contact_nos m8,
+	z.email m9    
+FROM hotl.checkins_hdr a  
+LEFT OUTER JOIN hotl.service_types d ON (a.service_type_id=d.service_type_id ) 
+LEFT OUTER JOIN hotl.rooms b ON (a.service_det_id = b.room_id) 
+LEFT OUTER JOIN scm.scm_sales_invc_hdr y ON ((a.check_in_id = y.other_mdls_doc_id or 
+(a.prnt_chck_in_id=y.other_mdls_doc_id and y.other_mdls_doc_id>0))
+and (a.doc_type=y.other_mdls_doc_type or (a.prnt_doc_typ=y.other_mdls_doc_type and a.prnt_doc_typ != '''''''')))  
+LEFT OUTER JOIN scm.scm_cstmr_suplr_sites z ON (a.sponsor_site_id = z.cust_sup_site_id) 
+WHERE /*(a.doc_status=''''Reserved'''' or a.doc_status=''''Checked-In'''' or a.doc_status=''''Ordered'''')  
+	and*/ d.org_id={:orgID} and a.doc_type IN (''''Reservation'''',''''Check-In'''') 
+	and a.sponsor_id = {:cstmrID}
+	and a.fclty_type IN (''''Room/Hall'''',''''Field/Yard'''',''''Event'''') 
+	and (to_timestamp(a.start_date,''''YYYY-MM-DD HH24:MI:SS'''') between 
+	to_timestamp(''''{:fromDate} 00:00:00'''',''''YYYY-MM-DD HH24:MI:SS'''') AND /*--{:fromDate}*/ 
+	to_timestamp(''''{:toDate} 23:59:59'''',''''YYYY-MM-DD HH24:MI:SS'''')) /*--{:toDate}*/  
+ORDER BY a.start_date'', owner_module = ''Hospitality Management'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:20'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = ''5,6,7'', cols_to_average = '''', cols_to_no_frmt = ''5,6,7'', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Customised Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 59)
+-------------------------Next Msg:-------------------------

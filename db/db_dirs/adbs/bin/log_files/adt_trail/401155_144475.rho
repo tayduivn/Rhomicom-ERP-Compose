@@ -1,0 +1,39 @@
+@02-Nov-2020 09:09:59
+UPDATE rpt.rpt_reports SET report_name = ''Welfare Loan Credit Letter'', report_desc = ''Welfare Loan Credit Letter'', rpt_sql_query = ''SELECT row_number() OVER ( ORDER BY a.local_id_no )                                                                                                      row_num,
+       local_id_no                                                                                                                                       staff_no,
+       trim(title || '''' '''' || first_name || '''' '''' || other_names || '''' '''' || sur_name)                                                                         full_nm,
+       data_col1                                                                                                                                         account_number,
+       d.amount_paid,
+       substr(gst.cnvrt_ymdtm_to_dmytm(c.mass_pay_trns_date), 1, 11)                                                                                     trans_date,
+       c.mass_pay_desc,
+       f.local_clsfctn || '''' ('''' ||
+       (CASE
+            WHEN e.item_type_name ilike ''''Semi%Month%'''' THEN
+                ''''Till ''''||pay.get_tk_loan_end_dte(f.pay_request_id)
+            ELSE substr(pay.get_tk_loan_end_dte(f.pay_request_id), 8, 4)
+           END) ||
+       '''')''''                                                                                                                                               tied_to,
+       f.date_processed,
+       c.mass_pay_desc||'''' (''''||c.mass_pay_name || '''')'''' pay_desc,
+       ''''THE REGIONAL MANAGER''''                                                                                                                            P_LETTER_TO,
+       ''''WELFARE LOAN TO STAFF''''                                                                                                                           P_SUBJECT,
+       TO_CHAR(now(), ''''DD-MON-YYYY'''')                                                                                                                     P_LTR_DATE,
+       ''''Kindly credit the under-mentioned number of staff with the amount against each name and debit the Rhomicom Staff Welfare Account XXXXX.'''' P_LTR_BODY,
+             ''''_____________________________''''                                                                                                                         P_SIGN_1_NM,
+             ''''_____________________''''                                                                                                                                       P_SIGN_1_POST,
+             ''''_____________________________''''                                                                                                                         P_SIGN_2_NM,
+             ''''_____________________''''                                                                                                                                  P_SIGN_2_POST
+FROM prs.prsn_names_nos a,
+     prs.prsn_extra_data b,
+     pay.pay_mass_pay_run_hdr c,
+     pay.pay_itm_trnsctns d,
+     pay.loan_pymnt_invstmnt_typs e,
+     pay.pay_loan_pymnt_rqsts f
+WHERE a.person_id = b.person_id
+  and a.person_id = d.person_id
+  and c.mass_pay_id = d.mass_pay_id
+  and e.main_amnt_itm_id = d.item_id
+  and f.pay_request_id = d.pay_request_id
+  and c.mass_pay_id={:pay_run_id}
+ORDER BY a.local_id_no;'', owner_module = ''Internal Payments'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:09:59'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = ''4,5,6,7,8,9'', cols_to_average = '''', cols_to_no_frmt = ''4,5,6,7,8,9'', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name=''349.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 264)
+-------------------------Next Msg:-------------------------

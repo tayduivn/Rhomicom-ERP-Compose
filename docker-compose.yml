@@ -16,7 +16,7 @@ services:
     restart: always
     volumes:
       - ./src/RHO_ERP_WEB:/usr/share/nginx/html
-      - ./db/adbs:/opt/apache/adbs
+      - ./db/db_dirs:/opt/apache
       - ./conf/rho-php.ini:/etc/php7/php.ini
       - ./conf/rho-www.conf:/etc/php7/php-fpm.d/www.conf
       - ./conf/nginx_conf/nginx.conf:/etc/nginx/nginx.conf
@@ -86,7 +86,7 @@ services:
     #ports: - 3000:3000
     volumes:
       - ./src/RHO_ERP_WEB:/usr/share/nginx/html
-      - ./db/adbs:/opt/apache/adbs
+      - ./db/db_dirs:/opt/apache
       - ./api_image/code:/code
     #command: npm prod-start
 volumes:

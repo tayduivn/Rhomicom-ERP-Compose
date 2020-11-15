@@ -1,0 +1,20 @@
+@02-Nov-2020 09:10:02
+UPDATE rpt.rpt_reports SET report_name = ''Pay Run Bank Crediting CSV File-Web'', report_desc = ''Pay Run Bank Crediting CSV File-Web'', rpt_sql_query = ''SELECT
+  row_number()
+  OVER (
+    ORDER BY tbl1.local_id_no ) "No.",
+  ''''DEPOSIT''''                     "Transaction Type**",
+  ''''Net Salary''''                  "Transaction Description**",
+  '''''''''''''''' || tbl2.account_number   "Account Number**",
+  REPLACE(tbl2.account_name,'''','''','''''''')             "Account Title**",
+  CASE WHEN portion_uom = ''''Percent''''
+    THEN round(chartonumeric(to_char((tbl2.net_pay_portion / 100.00) *
+                                     (tbl1.total_earnings - tbl1.total_bills_charges - tbl1.total_deductions),
+                                     ''''999999999999999999999999999999999999999999999D99'''')), 2)
+  ELSE net_pay_portion END      "Amount**",
+  ''''''''''''1110510064''''                "GL Account Number**",
+  ''''Payroll Control Account  ''''   "GL Account Name"
+FROM pay.get_payment_summrys2({:orgID}, {:pay_run_name}, ''''{:ordrBy}'''') tbl1
+LEFT OUTER JOIN pasn.prsn_bank_accounts tbl2 ON (tbl1.person_id = tbl2.person_id AND tbl2.net_pay_portion !=0) 
+ORDER BY tbl1.local_id_no;'', owner_module = ''Internal Payments'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:02'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = ''10'', cols_to_average = '''', cols_to_no_frmt = ''2,8,10'', output_type = ''CHARACTER SEPARATED FILE (CSV)'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''Comma (,)'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 234)
+-------------------------Next Msg:-------------------------

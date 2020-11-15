@@ -1,0 +1,37 @@
+@02-Nov-2020 09:10:14
+UPDATE rpt.rpt_reports SET report_name = ''Teller Transaction Receipt (A4)'', report_desc = ''CBR-Teller Transaction Receipt (A4)'', rpt_sql_query = ''SELECT a.acct_trns_id, 
+	b.account_number account_number,
+	b.account_title,
+            to_char(to_timestamp(a.trns_date, ''''YYYY-MM-DD HH24:MI:SS''''),''''DD-Mon-YYYY HH24:MI:SS'''') trns_date, 
+	a.trns_type, 
+           a.amount, 
+           trim(to_char(a.amount,''''999G999G999G999G999G999G999D00'''')) amount1, 
+           gst.get_pssbl_val(c.mapped_lov_crncy_id) crncy_nm, 
+            a.trns_no, 
+            org.get_site_code_desc(a.branch_id::integer) branch, 
+            a.doc_type, a.doc_no, 
+            CASE WHEN a.trns_person_type=''''Others'''' THEN a.trns_person_name ELSE a.trns_person_type END trns_by, 
+            a.trns_person_tel_no,
+            a.trns_person_address, 
+            a.trns_person_id_type, 
+            a.trns_person_id_number,
+            sec.get_usr_name(a.created_by) user_nm,
+            (SELECT SUM(COALESCE((y.value * z.qty),0))
+          FROM mcf.mcf_currency_denominations y, mcf.mcf_account_trns_cash_analysis z
+          WHERE y.crncy_denom_id = z.denomination_id 
+           AND z.acct_trns_id = {:trns_id} AND COALESCE(z.qty,0)!=0 ) ttl_cash_amnt,
+            (SELECT count(1)
+          FROM mcf.mcf_currency_denominations y, mcf.mcf_account_trns_cash_analysis z
+          WHERE y.crncy_denom_id = z.denomination_id 
+           AND z.acct_trns_id = {:trns_id} AND COALESCE(z.qty,0)!=0 ) ttl_cash_cnt,
+           (SELECT SUM(f.amount)
+            FROM mcf.mcf_cust_account_trns_cheques f 
+			WHERE f.acct_trns_id ={:trns_id}) ttl_chq_amnt,
+           (SELECT count(1)
+            FROM mcf.mcf_cust_account_trns_cheques f 
+			WHERE f.acct_trns_id ={:trns_id}) ttl_chq_cnt
+           FROM mcf.mcf_cust_account_transactions a
+            LEFT OUTER JOIN mcf.mcf_accounts b ON (a.account_id = b.account_id)
+            LEFT OUTER JOIN mcf.mcf_currencies c ON (b.currency_id = c.crncy_id)
+            WHERE ((a.acct_trns_id ={:trns_id}  and a.acct_trns_id >0 ))'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:14'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''NO'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''112.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 112)
+-------------------------Next Msg:-------------------------

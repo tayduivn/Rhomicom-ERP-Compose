@@ -1,0 +1,4 @@
+@11-Nov-2020 21:12:21
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop=''0'', last_update_by=130, last_update_date=to_char(now(),''YYYY-MM-DD HH24:MI:SS'') WHERE rnnr_name = ''Jasper Process Runner''
+-------------------------Next Msg:-------------------------

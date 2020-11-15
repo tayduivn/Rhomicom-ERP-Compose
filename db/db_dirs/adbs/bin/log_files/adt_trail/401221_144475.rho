@@ -1,0 +1,32 @@
+@02-Nov-2020 09:10:06
+UPDATE rpt.rpt_reports SET report_name = ''Aging Analysis Breakdown'', report_desc = ''BOG-Aging Analysis Breakdown'', rpt_sql_query = ''SELECT row_number() over (order by 1) as "No.", tbl1.*
+FROM (
+SELECT mcf.get_cust_account_number(account_id) "Loan Account Number",
+CASE WHEN c.cust_type = ''''Group'''' AND c.grp_cust_id > 0 THEN mcf.get_customer_name(grp_applicant_type, c.cust_id)||'''' (''''||mcf.get_cust_local_idno(c.cust_id)||'''')''''||'''' [Group: ''''||mcf.get_customer_name(c.cust_type, c.grp_cust_id)||'''']''''
+ELSE mcf.get_customer_name_LastNameFirst(c.cust_type, c.cust_id)||'''' (''''||mcf.get_cust_local_idno(c.cust_id)||'''')'''' END "Customer Name",
+(select v.product_name from mcf.mcf_prdt_loans v where v.loan_product_Id = c.loan_product_id) "product name",
+b.principal_amount "Disbursed Amount",
+round((mcf.get_loan_ttl_principal_bal_as_at(c.loan_rqst_id, ''''{:p_as_at_date}'''')),2) ttl_amnt_outsndng,
+mcf.get_loan_dflt_age(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))) dflt_age_in_days,
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param Period",
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_start_date}'''',''''''''), ''''1901-01-01''''),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')  "Param Start Date",
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_end_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param End Date",
+CASE WHEN {:branchID} = -1 THEN ''''All Branches'''' ELSE org.get_site_code_desc({:branchID}) END "Selected Branch",
+CASE WHEN ''''{:p_loan_class}'''' = ''''%'''' THEN ''''All Classifications'''' ELSE ''''{:p_loan_class}'''' END "Loan Classification"
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c, mcf.mcf_prdt_loans v
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND v.loan_product_Id = c.loan_product_id
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND c.branch_id = coalesce(NULLIF({:branchID},-1),c.branch_id)
+AND CASE WHEN segment8_dataload != '''''''' THEN to_timestamp(segment8_dataload,''''YYYY-MM-DD'''') ELSE to_timestamp(a.disbmnt_date,''''YYYY-MM-DD'''') END BETWEEN  
+to_timestamp(coalesce(NULLIF(''''{:p_start_date}'''',''''''''),''''1901-01-01''''),''''YYYY-MM-DD'''')
+AND to_timestamp(coalesce(NULLIF(''''{:p_end_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD'''')
+AND CASE WHEN ''''{:p_loan_class}'''' = ''''Current Loans'''' THEN mcf.get_loan_dflt_age(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))) = 0 
+WHEN ''''{:p_loan_class}'''' = ''''Up to 30 days'''' THEN dflt_age_in_days BETWEEN 1 AND 30 
+WHEN ''''{:p_loan_class}'''' = ''''31 days and less than 91 days'''' THEN mcf.get_loan_dflt_age(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))) BETWEEN 31 AND 90 
+WHEN ''''{:p_loan_class}'''' = ''''91 days and less than 121 days'''' THEN mcf.get_loan_dflt_age(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))) BETWEEN 91 AND 120 
+WHEN ''''{:p_loan_class}'''' = ''''121 days and less than 151 days'''' THEN mcf.get_loan_dflt_age(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))) BETWEEN 121 AND 150
+WHEN ''''{:p_loan_class}'''' = ''''151 days and above'''' THEN mcf.get_loan_dflt_age(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))) >= 151
+ELSE mcf.get_loan_dflt_age(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))) >= 0 END)tbl1'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:06'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''193.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 193)
+-------------------------Next Msg:-------------------------

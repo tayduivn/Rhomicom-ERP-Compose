@@ -1,0 +1,35 @@
+@02-Nov-2020 09:10:18
+UPDATE rpt.rpt_reports SET report_name = ''Asset Rentals Report'', report_desc = ''Asset Rentals Report'', rpt_sql_query = ''SELECT row_number() OVER (ORDER BY a.invc_date, y.user_name, c.item_desc ASC, b.alternate_item_name ASC) AS "No.  ", 
+	e.asset_code_name, 
+        CASE WHEN b.alternate_item_name = '''''''' THEN 
+        trim(c.item_code || '''' '''' || REPLACE(c.item_desc, c.item_code,'''''''')) ELSE b.alternate_item_name END "Item Code/Desc.                     ", 
+        a.invc_number || ''''('''' || i.doc_num || '''')'''' "Document Number    ", 
+	a.comments_desc "Invoice Description                             ", 
+        b.doc_qty "QTY           ", 
+        d.uom_name "UOM              ", 
+        b.unit_selling_price "Sales Price ", 
+        b.doc_qty * b.unit_selling_price "Total Amount  ",
+        c.item_desc mt,
+        gst.get_pssbl_val(b.crncy_id) "Curr. ",
+	y.user_name "User Name " 
+        FROM scm.scm_sales_invc_hdr a, sec.sec_users y, scm.scm_sales_invc_det b, inv.inv_itm_list c, inv.unit_of_measure d,
+	accb.accb_fa_assets_rgstr e, hotl.rooms f, hotl.checkins_hdr g, hotl.service_types h, hotl.checkins_hdr i  
+        WHERE ((a.invc_hdr_id = b.invc_hdr_id AND b.itm_id = c.item_id AND c.base_uom_id = d.uom_id) 
+	AND f.lnkd_asset_id = e.asset_id
+	AND g.service_det_id = f.room_id
+	AND b.other_mdls_doc_id = g.check_in_id 
+	AND b.other_mdls_doc_type = g.doc_type
+	AND a.other_mdls_doc_id = i.check_in_id 
+	AND a.other_mdls_doc_type = i.doc_type
+	AND g.service_type_id = h.service_type_id
+	AND f.service_type_id = h.service_type_id
+	AND h.inv_item_id = b.itm_id 
+	AND f.lnkd_asset_id = e.asset_id 
+	AND ''''''''||e.asset_id = coalesce(NULLIF(''''{:asset_id}'''',''''''''), ''''''''||e.asset_id)
+        AND (b.is_itm_delivered =''''1'''') AND (a.org_id = {:orgID}) AND 
+        (b.created_by=y.user_id) and (a.invc_type ilike ''''{:doctype}'''') 
+        and (to_timestamp(a.invc_date || '''' 00:00:00'''',''''YYYY-MM-DD HH24:MI:SS'''') between 
+        to_timestamp(''''{:strtDte}'''',''''DD-Mon-YYYY HH24:MI:SS'''') AND 
+        to_timestamp(''''{:endDte}'''', ''''DD-Mon-YYYY HH24:MI:SS'''')))  
+        ORDER BY a.invc_date, y.user_name, c.item_desc ASC, b.alternate_item_name ASC;'', owner_module = ''Accounting'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:18'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''NO'', cols_to_sum = ''6'', cols_to_average = '''', cols_to_no_frmt = ''6'', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 77)
+-------------------------Next Msg:-------------------------

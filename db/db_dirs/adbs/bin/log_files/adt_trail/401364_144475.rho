@@ -1,0 +1,31 @@
+@02-Nov-2020 09:10:22
+UPDATE rpt.rpt_reports SET report_name = ''Technical Divisions Details'', report_desc = ''Technical Divisions Details'', rpt_sql_query = ''select div_code_name "division                  ", 
+'''''''''''''''' || local_id_no as "ID No.       ",
+  
+title||'''' ''''||first_name||'''' ''''||other_names||'''' ''''||sur_name as "Full Name                 ", 
+gender,  
+data_col6 practice, 
+
+scm.get_cstmr_splr_name(pnn.lnkd_firm_org_id) "Work Place Name", 
+scm.get_cstmr_splr_site_name(pnn.lnkd_firm_site_id) "Work Place Location",
+
+(select org.get_grade_name(pg.grade_id)) Grade, 
+res_address, pstl_addrs, email, cntct_no_tel, cntct_no_mobl, cntct_no_fax                    
+  
+from prs.prsn_names_nos pnn 
+left outer join prs.prsn_extra_data ped on ped.person_id = pnn.person_id 
+  
+left outer join pasn.prsn_grades pg on pnn.person_id = pg.person_id
+  
+left outer join pasn.prsn_divs_groups pdg 
+  on  pnn.person_id = pdg.person_id 
+  
+inner join org.org_divs_groups odg on pdg.div_id = odg.div_id
+  and (coalesce(pdg.valid_start_date, to_char((select now()),''''YYYY-MM-DD'''')) is not null and 
+  (pdg.valid_end_date is null OR ((SELECT NOW())
+  between to_timestamp(pdg.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+  AND to_timestamp(pdg.valid_end_date,''''YYYY-MM-DD HH24:MI:SS''''))))
+  and gst.get_pssbl_val(odg.div_typ_id) = ''''Technical Division''''
+  AND '''''''' || coalesce(pdg.div_id,-1) = coalesce(NULLIF(''''{:dv_id}'''',''''''''), '''''''' || coalesce(pdg.div_id,-1))
+  order by 1'', owner_module = ''Basic Person Data'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:22'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''1'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 46)
+-------------------------Next Msg:-------------------------

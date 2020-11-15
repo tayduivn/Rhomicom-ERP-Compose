@@ -1,0 +1,11 @@
+@02-Nov-2020 09:10:04
+UPDATE rpt.rpt_reports SET report_name = ''Accounts without Signatories'', report_desc = ''Accounts without Signatories'', rpt_sql_query = ''SELECT row_number() over (order by 1 ) as "No.", tbl1.* from (SELECT a.account_title, a.account_number, org.get_site_code_desc(a.branch_id::integer) branch, a.cust_type, a.account_id 
+from mcf.mcf_accounts a, mcf.mcf_account_signatories b
+where a.account_id = b.account_id
+and b.person_cust_id = (SELECT cust_id FROM MCF.MCF_CUSTOMERS A
+WHERE ID_NO = ''''0000000001'''')
+and account_type not in (''''Loan'''',''''Investment'''')
+and source_type = ''''Individual Customers''''
+and a.branch_id = coalesce(nullif({:p_branch_id},-1),a.branch_id)
+order by 3 asc, 2)tbl1'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:04'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''HTML'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 210)
+-------------------------Next Msg:-------------------------

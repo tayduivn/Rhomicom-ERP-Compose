@@ -1,0 +1,3 @@
+@02-Nov-2020 09:12:27
+UPDATE rpt.rpt_report_parameters SET parameter_name = ''Period Start Date:'', paramtr_rprstn_nm_in_query = ''{:p_start_date}'', default_value = '''', is_required = ''0'', last_update_by = 130, last_update_date = ''2020-11-02 09:12:27'', lov_name_id = ''-1'', param_data_type = ''DATE'', date_format = ''yyyy-MM-dd'', lov_name = '''', shd_be_dsplyd = ''1'' WHERE (parameter_id = 685)
+-------------------------Next Msg:-------------------------

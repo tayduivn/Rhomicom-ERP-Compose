@@ -1,0 +1,3 @@
+@02-Nov-2020 09:11:49
+UPDATE rpt.rpt_report_parameters SET parameter_name = ''09. Segment 6 Value:'', paramtr_rprstn_nm_in_query = ''{:p_sgmnt6_val}'', default_value = ''-1'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:11:49'', lov_name_id = ''353'', param_data_type = ''NUMBER'', date_format = ''None'', lov_name = ''All Segment Value IDs'', shd_be_dsplyd = ''0'' WHERE (parameter_id = 423)
+-------------------------Next Msg:-------------------------

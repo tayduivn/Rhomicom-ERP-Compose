@@ -1,0 +1,27 @@
+@02-Nov-2020 09:10:21
+UPDATE rpt.rpt_reports SET report_name = ''Daily Volume of Sales'', report_desc = '''', rpt_sql_query = ''SELECT  tbl1.dte, tbl1.mnth "Day", SUM(tbl1.amnt) "Amount" 
+ FROM (SELECT to_char(to_timestamp(a.invc_date,''''YYYY-MM-DD''''),''''YYYY-MM-DD'''') dte, 
+ to_char(to_timestamp(a.invc_date,''''YYYY-MM-DD''''),''''YYYY-MON-DD'''') mnth, 
+ sum((b.doc_qty * b.unit_selling_price)) amnt
+ FROM scm.scm_sales_invc_hdr a, scm.scm_sales_invc_det b WHERE 
+ a.invc_hdr_id = b.invc_hdr_id
+ and a.approval_status=''''Approved'''' 
+ and ((a.invc_number ilike ''''%'''') AND (a.org_id = {:orgID}) and invc_type = ''''Sales Invoice'''')
+ and to_timestamp(a.invc_date,''''YYYY-MM-DD'''')>=to_timestamp(''''{:fromDate}'''',''''YYYY-MM-DD'''') 
+ and  to_timestamp(a.invc_date,''''YYYY-MM-DD'''')<=to_timestamp(''''{:toDate}'''',''''YYYY-MM-DD'''') 
+ group by to_char(to_timestamp(a.invc_date,''''YYYY-MM-DD''''),''''YYYY-MM-DD''''), to_char(to_timestamp(a.invc_date,''''YYYY-MM-DD''''),''''YYYY-MON-DD'''')
+ UNION
+ SELECT to_char(to_timestamp(b.paymnt_date,''''YYYY-MM-DD''''),''''YYYY-MM-DD'''') dte, 
+ to_char(to_timestamp(b.paymnt_date,''''YYYY-MM-DD''''),''''YYYY-MON-DD'''') mnth, 
+ sum((b.amount_paid)) amnt 
+ FROM org.org_pay_items a, pay.pay_itm_trnsctns b WHERE 
+ a.item_id = b.item_id
+ and b.pymnt_vldty_status = ''''VALID'''' and b.src_py_trns_id <=0 
+ and b.pay_trns_id NOT IN (Select z.intnl_pay_trns_id FROM accb.accb_payments z WHERE z.intnl_pay_trns_id>0) 
+ and ((a.item_code_name ilike ''''%(Payment)%'''') AND (a.org_id = {:orgID}) and a.item_min_type = ''''Bills/Charges'''')
+ and to_timestamp(b.paymnt_date,''''YYYY-MM-DD'''')>=to_timestamp(''''{:fromDate}'''',''''YYYY-MM-DD'''') 
+ and  to_timestamp(b.paymnt_date,''''YYYY-MM-DD'''')<=to_timestamp(''''{:toDate}'''',''''YYYY-MM-DD'''') 
+ group by to_char(to_timestamp(b.paymnt_date,''''YYYY-MM-DD''''),''''YYYY-MM-DD''''), to_char(to_timestamp(b.paymnt_date,''''YYYY-MM-DD''''),''''YYYY-MON-DD'''')) tbl1 
+ GROUP BY 1,2
+ ORDER BY 1'', owner_module = ''Stores And Inventory Manager'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:21'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = ''800400'', cols_to_count = ''1,2'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''LINE CHART'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 53)
+-------------------------Next Msg:-------------------------

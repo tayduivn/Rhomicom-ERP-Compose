@@ -1,0 +1,36 @@
+@02-Nov-2020 09:10:13
+UPDATE rpt.rpt_reports SET report_name = ''Loan Applications'', report_desc = ''CR-Loan Applications'', rpt_sql_query = ''SELECT
+row_number() over (order by 1 ASC, 2 ASC, 7 DESC) as "No.", tbl1.*
+FROM (SELECT
+org.get_site_code_desc(a.branch_id::integer) "Branch",
+CASE WHEN a.cust_type = ''''Group'''' AND a.grp_cust_id > 0 THEN mcf.get_customer_name(grp_applicant_type, a.cust_id)||'''' (''''||mcf.get_cust_local_idno(a.cust_id)||'''')''''||'''' [Group: ''''||mcf.get_customer_name(a.cust_type, a.grp_cust_id)||'''']''''
+ELSE mcf.get_customer_name_LastNameFirst(a.cust_type, a.cust_id)||'''' (''''||mcf.get_cust_local_idno(a.cust_id)||'''')'''' END "Customer Name",
+a.cust_type "Customer Type",
+a.crdt_type "Credit Type",
+b.product_code||''''.''''||product_desc "Loan Product",
+iso_code "Currency",
+CASE WHEN upper(a.status) = ''''APPROVED'''' THEN a.loan_amount ELSE a.approved_amount END "Principal",
+CASE WHEN upper(a.status) = ''''APPROVED'''' THEN a.interest_rate ELSE a.apprvd_interest_rate END "Interest Rate",
+CASE WHEN upper(a.status) = ''''APPROVED'''' THEN a.loan_tenor||'''' ''''||a.loan_tenor_type ELSE a.apprvd_loan_tenor||'''' ''''||a.apprvd_loan_tenor_type END "Tenure",
+mcf.get_cust_account_number(repayment_account_id) "Repayment Account",
+mcf.get_cust_account_title(repayment_account_id) "Repayment Account Title",
+prs.get_prsn_name(rcvry_officer_prsn_id) "Credit Officer",
+to_char(to_timestamp(application_date,''''YYYY-MM-DD HH24:MI:SS''''),''''DD-Mon-YYYY HH24:MI:SS'''') "Application Date",
+a.status "Approval Status",
+CASE WHEN {:branchID} > 0 THEN org.get_site_code_desc({:branchID}) ELSE ''''All Branches'''' END "sltdBranch",
+to_char(to_timestamp(coalesce(NULLIF(''''{:pStartDte}'''',''''''''), ''''1901-01-01''''),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')  "Param Start Date",
+to_char(to_timestamp(coalesce(NULLIF(''''{:pEndDte}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param End Date"
+FROM mcf.mcf_loan_request a INNER JOIN mcf.mcf_prdt_loans b ON a.loan_product_id = b.loan_product_id
+INNER JOIN mcf.mcf_currencies e ON b.currency_id = e.crncy_id
+WHERE  1 = 1
+AND b.currency_id = e.crncy_id
+AND a.branch_id = COALESCE(NULLIF({:branchID},-1),a.branch_id)
+AND repayment_type = ''''Account Deductions'''' 
+AND UPPER(a.status) = COALESCE(NULLIF(''''{:apprvlStatus}'''',''''%''''),UPPER(a.status)) 
+AND a.crdt_type =  COALESCE(NULLIF(''''{:crdtType}'''',''''%''''),a.crdt_type )
+AND to_timestamp(application_date,''''YYYY-MM-DD'''') between 
+to_timestamp(coalesce(NULLIF(''''{:pStartDte}'''',''''''''),''''1901-01-01''''),''''YYYY-MM-DD'''')
+AND to_timestamp(coalesce(NULLIF(''''{:pEndDte}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD'''')
+ORDER BY 1 ASC, 2 ASC, a.approved_amount DESC
+)tbl1'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:13'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''NO'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''HTML'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 123)
+-------------------------Next Msg:-------------------------

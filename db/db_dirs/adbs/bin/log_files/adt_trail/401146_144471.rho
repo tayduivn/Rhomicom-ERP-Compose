@@ -1,0 +1,5 @@
+@11-Nov-2020 21:14:27
+UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || ''
+
+Program Cancelled by User Consultant1'', last_update_by=130, last_update_date=''2020-11-11 21:14:26'' WHERE msg_id = 156555
+-------------------------Next Msg:-------------------------

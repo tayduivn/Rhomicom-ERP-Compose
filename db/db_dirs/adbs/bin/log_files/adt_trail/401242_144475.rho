@@ -1,0 +1,372 @@
+@02-Nov-2020 09:10:08
+UPDATE rpt.rpt_reports SET report_name = ''Loan Size Distributions (Currrent Month) - MF7'', report_desc = ''BOG-Loan Size Distributions (Current Month) - MF7'', rpt_sql_query = ''SELECT 1 "no", ''''1.00 - 500.00'''' loan_size, (SELECT count(x.*) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1 AND 500
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Number of Male Borrowers",
+(SELECT count(x.*) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1 AND 500
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Number of Female Borrowers", 
+(SELECT round(sum(x.principal_amount),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1 AND 500
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Total Disbursed Amount - Male(GHS)",
+(SELECT round(sum(x.principal_amount),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1 AND 500
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Total Disbursed Amount - Female(GHS)",
+(SELECT round(sum(x.prncpl_amnt_outsndng),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount, mcf.calc_loan_ttl_bal_asat(c.loan_rqst_id::INTEGER, ''''PRINCIPAL OUTSTANDING AS AT'''', to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')) prncpl_amnt_outsndng
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1 AND 500
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Total Principal Amount Outstanding - Male(GHS)",
+(SELECT round(sum(x.prncpl_amnt_outsndng),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount, mcf.calc_loan_ttl_bal_asat(c.loan_rqst_id::INTEGER, ''''PRINCIPAL OUTSTANDING AS AT'''', to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')) prncpl_amnt_outsndng
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1 AND 500
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Total Principal Amount Outstanding - Female(GHS)",
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param Period"
+UNION
+SELECT 2 "no", ''''501.00 - 1,000.00'''' loan_size, (SELECT count(x.*) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 501 AND 1000
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Number of Male Borrowers",
+(SELECT count(x.*) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 501 AND 1000
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Number of Female Borrowers", 
+(SELECT round(sum(x.principal_amount),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 501 AND 1000
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Total Disbursed Amount - Male(GHS)",
+(SELECT round(sum(x.principal_amount),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 501 AND 1000
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Total Disbursed Amount - Female(GHS)",
+(SELECT round(sum(x.prncpl_amnt_outsndng),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount, mcf.calc_loan_ttl_bal_asat(c.loan_rqst_id::INTEGER, ''''PRINCIPAL OUTSTANDING AS AT'''', to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')) prncpl_amnt_outsndng
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 501 AND 1000
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Total Principal Amount Outstanding - Male(GHS)",
+(SELECT round(sum(x.prncpl_amnt_outsndng),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount, mcf.calc_loan_ttl_bal_asat(c.loan_rqst_id::INTEGER, ''''PRINCIPAL OUTSTANDING AS AT'''', to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')) prncpl_amnt_outsndng
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 501 AND 1000
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Total Principal Amount Outstanding - Female(GHS)",
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param Period"
+UNION
+SELECT 3 "no", ''''1,001.00 - 1,500.00'''' loan_size, (SELECT count(x.*) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1001 AND 1500
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Number of Male Borrowers",
+(SELECT count(x.*) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1001 AND 1500
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Number of Female Borrowers", 
+(SELECT round(sum(x.principal_amount),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1001 AND 1500
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Total Disbursed Amount - Male(GHS)",
+(SELECT round(sum(x.principal_amount),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1001 AND 1500
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Total Disbursed Amount - Female(GHS)",
+(SELECT round(sum(x.prncpl_amnt_outsndng),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount, mcf.calc_loan_ttl_bal_asat(c.loan_rqst_id::INTEGER, ''''PRINCIPAL OUTSTANDING AS AT'''', to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')) prncpl_amnt_outsndng
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1001 AND 1500
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Total Principal Amount Outstanding - Male(GHS)",
+(SELECT round(sum(x.prncpl_amnt_outsndng),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount, mcf.calc_loan_ttl_bal_asat(c.loan_rqst_id::INTEGER, ''''PRINCIPAL OUTSTANDING AS AT'''', to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')) prncpl_amnt_outsndng
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1001 AND 1500
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Total Principal Amount Outstanding - Female(GHS)",
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param Period"
+UNION
+SELECT 4 "no", ''''1,501.00 - 3,000.00'''' loan_size, (SELECT count(x.*) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1501 AND 3000
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Number of Male Borrowers",
+(SELECT count(x.*) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1501 AND 3000
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Number of Female Borrowers", 
+(SELECT round(sum(x.principal_amount),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1501 AND 3000
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Total Disbursed Amount - Male(GHS)",
+(SELECT round(sum(x.principal_amount),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1501 AND 3000
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Total Disbursed Amount - Female(GHS)",
+(SELECT round(sum(x.prncpl_amnt_outsndng),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount, mcf.calc_loan_ttl_bal_asat(c.loan_rqst_id::INTEGER, ''''PRINCIPAL OUTSTANDING AS AT'''', to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')) prncpl_amnt_outsndng
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1501 AND 3000
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Total Principal Amount Outstanding - Male(GHS)",
+(SELECT round(sum(x.prncpl_amnt_outsndng),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount, mcf.calc_loan_ttl_bal_asat(c.loan_rqst_id::INTEGER, ''''PRINCIPAL OUTSTANDING AS AT'''', to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')) prncpl_amnt_outsndng
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount BETWEEN 1501 AND 3000
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Total Principal Amount Outstanding - Female(GHS)",
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param Period"
+UNION
+SELECT 5 "no", ''''3,001.00 and above'''' loan_size, (SELECT count(x.*) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount >= 3001
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Number of Male Borrowers",
+(SELECT count(x.*) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount >= 3001
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Number of Female Borrowers", 
+(SELECT round(sum(x.principal_amount),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount >= 3001
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Total Disbursed Amount - Male(GHS)",
+(SELECT round(sum(x.principal_amount),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount >= 3001
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Total Disbursed Amount - Female(GHS)",
+(SELECT round(sum(x.prncpl_amnt_outsndng),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount, mcf.calc_loan_ttl_bal_asat(c.loan_rqst_id::INTEGER, ''''PRINCIPAL OUTSTANDING AS AT'''', to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')) prncpl_amnt_outsndng
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount >= 3001
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''MALE'''')  "Total Principal Amount Outstanding - Male(GHS)",
+(SELECT round(sum(x.prncpl_amnt_outsndng),2) FROM  
+(SELECT c.loan_rqst_id, e.gender, b.principal_amount, mcf.calc_loan_ttl_bal_asat(c.loan_rqst_id::INTEGER, ''''PRINCIPAL OUTSTANDING AS AT'''', to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')) prncpl_amnt_outsndng
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_customers d, mcf.mcf_customers_ind e
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.cust_id = d.cust_id AND c.cust_type = d.cust_type
+AND d.cust_id = e.cust_id
+AND (c.cust_type = ''''Individual'''' OR c.grp_applicant_type = ''''Individual'''')
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND b.principal_amount >= 3001
+AND substr(disbmnt_date,6,2) = substr(coalesce(nullif(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),6,2))x WHERE upper(x.gender) =''''FEMALE'''')  "Total Principal Amount Outstanding - Female(GHS)",
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param Period"
+ORDER BY 1'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:08'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = ''2,3,4,5,6,7'', cols_to_average = '''', cols_to_no_frmt = ''4,5,6,7'', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 172)
+-------------------------Next Msg:-------------------------

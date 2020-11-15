@@ -1,0 +1,75 @@
+@02-Nov-2020 09:10:06
+UPDATE rpt.rpt_reports SET report_name = ''Loan Repayment Default List Per Period'', report_desc = ''CR-Loan Repayment Default List Per Period'', rpt_sql_query = ''SELECT row_number() over (order by 1 ASC, 2 ASC, 6 DESC) as "No.", tbl1.*
+FROM ( SELECT 
+mcf.get_cust_account_number(a.account_id) "Loan Account Number",
+CASE WHEN a.cust_type = ''''Group'''' AND a.grp_cust_id > 0 THEN mcf.get_customer_name(grp_applicant_type, a.cust_id)||'''' (''''||mcf.get_cust_local_idno(a.cust_id)||'''')''''||'''' [Group: ''''||mcf.get_customer_name(a.cust_type, a.grp_cust_id)||'''']''''
+ELSE mcf.get_customer_name_LastNameFirst(a.cust_type, a.cust_id)||'''' (''''||mcf.get_cust_local_idno(a.cust_id)||'''')'''' END "Customer Name",
+gst.get_pssbl_val(mcf.get_mppd_lov_crncy_id(f.currency_id)) currency,
+c.principal_amount "Disbursed Amount",
+(SELECT round(SUM(interest_amnt),2) FROM
+mcf.mcf_loan_schedule z
+WHERE z.disbmnt_det_id = c.disbmnt_det_id) "Expected Interest",
+round((mcf.calc_loan_ttl_bal(a.loan_rqst_id::INTEGER,''''PRINCIPAL PAYMENT'''') + mcf.calc_loan_ttl_bal(a.loan_rqst_id::INTEGER,''''INTEREST PAYMENT'''')),2) "Repayment Made",
+round((mcf.calc_loan_ttl_bal(a.loan_rqst_id::INTEGER,''''PRINCIPAL OUTSTANDING'''') + mcf.calc_loan_ttl_bal(a.loan_rqst_id::INTEGER,''''INTEREST OUTSTANDING'''')),2) "Outstanding Balance",
+coalesce((SELECT SUM(round((principal_amnt + interest_amnt),2)) FROM
+mcf.mcf_loan_schedule z
+WHERE z.disbmnt_det_id = c.disbmnt_det_id
+AND to_timestamp(z.repay_date,''''YYYY-MM-DD'''') between to_timestamp(coalesce(NULLIF(''''{:p_start_date}'''',''''''''),''''01-Jan-2000''''),''''DD-Mon-YYYY'''')
+AND to_timestamp(coalesce(NULLIF(''''{:p_end_date}'''',''''''''),to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')),''''DD-Mon-YYYY'''')),0.00) "Total Repayment Due For The Period",
+coalesce((SELECT SUM(round((principal_amnt_paid + interest_amnt_paid),2)) FROM
+mcf.mcf_loan_schedule z
+WHERE z.disbmnt_det_id = c.disbmnt_det_id
+AND upper(z.is_paid) IN (''''YES'''', ''''PARTIAL'''')
+AND to_timestamp(z.repay_date,''''YYYY-MM-DD'''') between to_timestamp(coalesce(NULLIF(''''{:p_start_date}'''',''''''''),''''01-Jan-2000''''),''''DD-Mon-YYYY'''')
+AND to_timestamp(coalesce(NULLIF(''''{:p_end_date}'''',''''''''),to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')),''''DD-Mon-YYYY'''')),0.00) "Total Repayment Received For The Period",
+coalesce((
+coalesce((SELECT SUM(round((principal_amnt + interest_amnt),2)) FROM
+mcf.mcf_loan_schedule z
+WHERE z.disbmnt_det_id = c.disbmnt_det_id
+AND to_timestamp(z.repay_date,''''YYYY-MM-DD'''') between to_timestamp(coalesce(NULLIF(''''{:p_start_date}'''',''''''''),''''01-Jan-2000''''),''''DD-Mon-YYYY'''')
+AND to_timestamp(coalesce(NULLIF(''''{:p_end_date}'''',''''''''),to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')),''''DD-Mon-YYYY'''')),0.00)
+- 
+coalesce((SELECT SUM(round((principal_amnt_paid + interest_amnt_paid),2)) FROM
+mcf.mcf_loan_schedule z
+WHERE z.disbmnt_det_id = c.disbmnt_det_id
+AND upper(z.is_paid) IN (''''YES'''', ''''PARTIAL'''')
+AND to_timestamp(z.repay_date,''''YYYY-MM-DD'''') between to_timestamp(coalesce(NULLIF(''''{:p_start_date}'''',''''''''),''''01-Jan-2000''''),''''DD-Mon-YYYY'''')
+AND to_timestamp(coalesce(NULLIF(''''{:p_end_date}'''',''''''''),to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')),''''DD-Mon-YYYY'''')),0.00)),0.00) "Difference In Repayment",
+(COALESCE((SELECT EXTRACT(DAY FROM (to_timestamp(to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY''''),''''DD-Mon-YYYY'''') - to_timestamp(z.repay_date,''''YYYY-MM-DD''''))) :: INTEGER
+    FROM mcf.mcf_loan_schedule z
+    WHERE 1 = 1
+          AND z.disbmnt_det_id = c.disbmnt_det_id
+          AND upper(z.is_paid) IN (''''NO'''', ''''PARTIAL'''')
+    ORDER BY z.repay_date ASC
+    LIMIT 1),0) )"Days In Default",
+
+z.account_clsfctn  "CATEGORY",
+prs.get_prsn_surname(rcvry_officer_prsn_id) "Name of Credit Officer",
+CASE WHEN segment8_dataload != '''''''' THEN to_char(to_timestamp(segment8_dataload,''''YYYY-MM-DD''''),''''DD-Mon-yyyy'''') ELSE to_char(to_timestamp(d.disbmnt_date,''''YYYY-MM-DD''''),''''DD-Mon-yyyy'''') END "Disbursment Date",
+(select to_char(to_timestamp(max(x.repay_date),''''YYYY-MM-DD''''),''''DD-Mon-yyyy'''')  from mcf.mcf_loan_schedule x
+where x.disbmnt_det_id = c.disbmnt_det_id AND x.repay_date != ''''4000-12-31'''') "Expiry Date",
+org.get_site_code_desc(a.branch_id::integer) branch,
+CASE WHEN {:p_branch_id} = -1 THEN ''''All Branches'''' ELSE org.get_site_code_desc({:p_branch_id}) END "Selected Branch",
+a.loan_rqst_id, c.disbmnt_det_id, 	
+org.get_site_code_desc({:p_branch_id}::integer) "Param Branch",
+prs.get_prsn_surname({:rltnshpOffcrID}) "Param Relationship Officer",
+''''{:p_start_date}'''' "Param Start Date",
+''''{:p_end_date}'''' "Param End Date"
+FROM mcf.mcf_loan_request a, mcf.mcf_loan_disbursement_det c, mcf.mcf_loan_disbursement_hdr d, mcf.mcf_loan_schedule e, mcf.mcf_prdt_loans f ,  mcf.mcf_accounts z
+WHERE c.loan_rqst_id = a.loan_rqst_id 
+AND c.disbmnt_hdr_id = d.disbmnt_hdr_id
+AND e.disbmnt_det_id = c.disbmnt_det_id
+AND a.loan_product_id = f.loan_product_id
+AND a.repayment_account_id = z.account_id
+AND a.branch_id = COALESCE(NULLIF({:p_branch_id},-1),a.branch_id)
+AND rcvry_officer_prsn_id = COALESCE(NULLIF({:rltnshpOffcrID},-1), rcvry_officer_prsn_id)
+AND repayment_type = ''''Account Deductions'''' AND is_disbursed = ''''YES'''' 
+AND crdt_type = ''''Loan'''' 
+AND a.status = ''''Approved'''' AND d.status = ''''Disbursed'''' AND c.principal_amount > 0
+/*AND to_timestamp(e.repay_date,''''YYYY-MM-DD'''') BETWEEN*/
+AND CASE WHEN segment8_dataload != '''''''' THEN to_timestamp(segment8_dataload,''''YYYY-MM-DD'''') ELSE to_timestamp(e.repay_date,''''YYYY-MM-DD'''') END BETWEEN  
+to_timestamp(coalesce(NULLIF(''''{:p_start_date}'''',''''''''),''''01-Jan-2000''''),''''DD-Mon-YYYY'''')
+AND to_timestamp(coalesce(NULLIF(''''{:p_end_date}'''',''''''''),to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')),''''DD-Mon-YYYY'''') 
+GROUP BY a.loan_rqst_id, c.disbmnt_det_id, a.branch_id, f.currency_id, a.account_id, disbmnt_date,a.repayment_account_id,z.account_id,z.account_clsfctn
+ORDER BY c.disbmnt_det_id desc)tbl1'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:06'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''189.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 189)
+-------------------------Next Msg:-------------------------

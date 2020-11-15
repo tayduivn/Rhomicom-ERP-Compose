@@ -1,0 +1,23 @@
+@02-Nov-2020 09:10:19
+UPDATE rpt.rpt_reports SET report_name = ''Approved Receivables Invoices'', report_desc = ''Approved Receivables Invoices'', rpt_sql_query = ''SELECT row_number() OVER (ORDER BY a.approval_status DESC, a.rcvbls_invc_date DESC, a.rcvbls_invc_hdr_id DESC) AS "No.  ", 
+rcvbls_invc_hdr_id mt, rcvbls_invc_number "Invoice Number", 
+to_char(to_timestamp(a.rcvbls_invc_date,''''YYYY-MM-DD HH24:MI:SS''''),
+''''DD-Mon-YYYY HH24:MI:SS'''') "Invoice Date", 
+/*a.rcvbls_invc_type "Invoice Type",*/scm.get_cstmr_splr_name(a.customer_id)||
+'''' ('''' ||scm.get_cstmr_splr_site_name(customer_site_id)||'''')''''  "Customer Name/Site", 
+a.comments_desc ||'''' (''''|| scm.get_src_doc_num(a.src_doc_hdr_id, a.src_doc_type) || ''''-''''||a.src_doc_type ||'''')'''' "Invoice Description",
+round(accb.get_rcvbl_smry_typ_amnt(a.rcvbls_invc_hdr_id, a.rcvbls_invc_type, ''''6Grand Total'''') + 
+abs(accb.get_rcvbl_smry_typ_amnt(a.rcvbls_invc_hdr_id, a.rcvbls_invc_type, ''''3Discount'''')),2) "Invoice Amount", 
+round(accb.get_rcvbl_smry_typ_amnt(a.rcvbls_invc_hdr_id, a.rcvbls_invc_type, ''''3Discount''''),2)  "Discount Amount",
+round(accb.get_rcvbl_smry_typ_amnt(a.rcvbls_invc_hdr_id, a.rcvbls_invc_type, ''''7Total Payments Made''''),2)  "Payments Made", 
+round(accb.get_rcvbl_smry_typ_amnt(a.rcvbls_invc_hdr_id, a.rcvbls_invc_type, ''''8Outstanding Balance''''),2)  "Outstanding Amount",
+ a.approval_status "Approval Status"
+        FROM accb.accb_rcvbls_invc_hdr a 
+        WHERE((a.org_id = {:orgID}) and a.approval_status!=''''Cancelled'''' and a.approval_status ilike ''''Approved'''' and (COALESCE(scm.get_cstmr_splr_name(a.customer_id),'''''''') ilike ''''{:cstmr_nm}'''') 
+        
+/*and round(accb.get_rcvbl_smry_typ_amnt(a.rcvbls_invc_hdr_id, a.rcvbls_invc_type, ''''8Outstanding Balance''''),2)>0
+*/        
+AND (to_timestamp(a.rcvbls_invc_date,''''YYYY-MM-DD HH24:MI:SS'''') between to_timestamp(''''{:strtDte}'''',''''DD-Mon-YYYY HH24:MI:SS'''')
+and to_timestamp(''''{:endDte}'''',''''DD-Mon-YYYY HH24:MI:SS''''))) 
+        ORDER BY a.approval_status DESC, a.rcvbls_invc_date DESC, a.rcvbls_invc_hdr_id DESC'', owner_module = ''Accounting'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:19'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''NO'', cols_to_sum = ''6,7,8,9'', cols_to_average = '''', cols_to_no_frmt = ''6,7,8,9'', output_type = ''HTML'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 74)
+-------------------------Next Msg:-------------------------

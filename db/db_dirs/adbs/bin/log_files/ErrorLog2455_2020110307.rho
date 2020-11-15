@@ -1,0 +1,50 @@
+Successfully Started Thread One
+Program ID:2
+Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: -1 Running on:  /  / Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: -1 Running on:  /  / 
+Run ID: 2455
+412
+Linux
+[732507d1639c, 02-42-AC-1A-00-04, 172.26.0.4]
+PID: 412 Running on: 732507d1639c / 02-42-AC-1A-00-04 / 172.26.0.4Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: -1 Running on:  /  / 
+Run ID: 2455
+412
+Linux
+[732507d1639c, 02-42-AC-1A-00-04, 172.26.0.4]
+PID: 412 Running on: 732507d1639c / 02-42-AC-1A-00-04 / 172.26.0.4Successfully Connected to Database
+false
+Successfully Connected to Database
+false
+
+Run ID3: 2455 Report ID:150
+Successfully Connected to Database
+false
+
+Run ID3: 2455 Report ID:150
+
+Run ID4: 2455 Report ID:150
+Successfully Connected to Database
+false
+
+Run ID3: 2455 Report ID:150
+
+Run ID4: 2455 Report ID:150
+
+Run ID: 2455 Report ID:150
+Successfully Connected to Database
+false
+
+Run ID3: 2455 Report ID:150
+
+Run ID4: 2455 Report ID:150
+
+Run ID: 2455 Report ID:150
+ API URL: http://rho-nginx:8080/xchange/mailer/sendMail.php
+Messages to info@rhomicom.com;support@rhomicom.com; worked on
+Messages to info@rhomicom.com;support@rhomicom.com; worked on API URL: http://rho-nginx:8080/xchange/mailer/sendMail.php
+Messages to richarda.mensah@gmail.com;support@rhomicom.com; worked on

@@ -1,0 +1,14 @@
+@02-Nov-2020 09:10:26
+UPDATE rpt.rpt_reports SET report_name = ''Inventory Items Stock Qty Report'', report_desc = ''Inventory Items Stock Qty Report'', rpt_sql_query = ''select '''''''''''''''' || a.item_code "Item Code     ", 
+a.item_desc "Description          ",
+a.cat_name "Category  ",
+a.subinv_name "Store  ", 
+trim(to_char(a.totqty,''''9999999999999999990D99'''')) "QTY  ", 
+a.uom_name "UOM ", 
+trim(to_char(a.costprice,''''9999999999999999990D99'''')) "Cost Price ", 
+trim(to_char(a.crnt_sllng_rpice,''''9999999999999999990D99'''')) "Selling Price     ", 
+trim(to_char(a.crnt_prft_mgn,''''9999999999999999990D99'''')) "Profit Margin (%)"
+FROM scm.get_inv_sllng_price({:orgID}, {:strID} , {:catID}, 10.00, ''''2'''')  a, inv.inv_itm_list b
+ WHERE a.item_id=b.item_id and (b.enabled_flag=''''1'''' or b.enabled_flag IS NULL)
+ and a.totqty between {:qty1} and {:qty2} and a.crnt_prft_mgn between {:mrgn1} and {:mrgn2};'', owner_module = ''Stores And Inventory Manager'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:25'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = ''6,7,10'', cols_to_average = '''', cols_to_no_frmt = ''4,6,7,8,9,10'', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 20)
+-------------------------Next Msg:-------------------------

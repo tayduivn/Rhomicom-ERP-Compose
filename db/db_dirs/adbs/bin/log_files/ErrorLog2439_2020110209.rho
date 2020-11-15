@@ -1,0 +1,38 @@
+Successfully Started Thread One
+Program ID:4
+Successfully Started Thread Five
+Program ID:4: Program Name: Jasper Process Runner: Program Runner File: \bin\REMSProcessRunner.jar
+PID: -1 Running on:  /  / Successfully Started Thread Five
+Program ID:4: Program Name: Jasper Process Runner: Program Runner File: \bin\REMSProcessRunner.jar
+PID: -1 Running on:  /  / 
+Run ID: 2439
+855
+Linux
+[7e822be6aab5, 02-42-AC-15-00-05, 172.21.0.5]
+PID: 855 Running on: 7e822be6aab5 / 02-42-AC-15-00-05 / 172.21.0.5Successfully Started Thread Five
+Program ID:4: Program Name: Jasper Process Runner: Program Runner File: \bin\REMSProcessRunner.jar
+PID: -1 Running on:  /  / 
+Run ID: 2439
+855
+Linux
+[7e822be6aab5, 02-42-AC-15-00-05, 172.21.0.5]
+PID: 855 Running on: 7e822be6aab5 / 02-42-AC-15-00-05 / 172.21.0.5Successfully Connected to Database
+false
+Successfully Connected to Database
+false
+
+Run ID3: 2439 Report ID:254
+Successfully Connected to Database
+false
+
+Run ID3: 2439 Report ID:254
+
+Run ID4: 2439 Report ID:254
+Successfully Connected to Database
+false
+
+Run ID3: 2439 Report ID:254
+
+Run ID4: 2439 Report ID:254
+
+Run ID: 2439 Report ID:254

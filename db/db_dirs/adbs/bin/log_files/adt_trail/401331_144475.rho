@@ -1,0 +1,17 @@
+@02-Nov-2020 09:10:18
+UPDATE rpt.rpt_reports SET report_name = ''Asset Expenditure Report'', report_desc = ''Asset Expenditure Report'', rpt_sql_query = ''SELECT a.asset_trns_id mt1, b.asset_code_name, 
+       b.asset_desc, a.line_desc, a.trns_amount,       
+       to_char(to_timestamp(a.trns_date,''''YYYY-MM-DD HH24:MI:SS''''),''''DD-Mon-YYYY HH24:MI:SS'''') "Transaction Date  ", 
+       a.entrd_curr_id mt2, gst.get_pssbl_val(a.entrd_curr_id), 
+       a.incrs_dcrs1, accb.get_accnt_num(a.cost_accnt_id) || ''''.'''' || accb.get_accnt_name(a.cost_accnt_id) "Charge Account  ", 
+       a.incrs_dcrs2, accb.get_accnt_num(a.bals_leg_accnt_id) || ''''.'''' || accb.get_accnt_name(a.bals_leg_accnt_id) "Balancing Account  ", 
+       accb.get_gl_batch_name(a.gl_batch_id) "GL Batch Name     ",        
+       a.func_curr_id mt3, gst.get_pssbl_val(a.func_curr_id), 
+       a.accnt_curr_id mt4, gst.get_pssbl_val(a.accnt_curr_id), 
+       a.func_curr_rate, a.accnt_curr_rate, a.func_curr_amount, a.accnt_curr_amnt
+  FROM accb.accb_fa_asset_trns a,
+accb.accb_fa_assets_rgstr b 
+WHERE a.asset_id = b.asset_id  and b.org_id = {:orgID} 
+and a.trns_type ilike ''''{:assetTrnsTyp}'''' 
+AND ''''''''||a.asset_id = coalesce(NULLIF(''''{:asset_id}'''',''''''''), ''''''''||a.asset_id);'', owner_module = ''Accounting'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:18'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''NO'', cols_to_sum = ''6'', cols_to_average = '''', cols_to_no_frmt = ''6'', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 79)
+-------------------------Next Msg:-------------------------

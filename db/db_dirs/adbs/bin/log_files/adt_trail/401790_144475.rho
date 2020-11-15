@@ -1,0 +1,3 @@
+@02-Nov-2020 09:11:43
+UPDATE rpt.rpt_report_parameters SET parameter_name = ''2. Product Name'', paramtr_rprstn_nm_in_query = ''{:P_PRODUCT}'', default_value = ''%'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:11:43'', lov_name_id = ''360'', param_data_type = ''TEXT'', date_format = ''None'', lov_name = ''Bank Product Types (for Reports)'', shd_be_dsplyd = ''1'' WHERE (parameter_id = 547)
+-------------------------Next Msg:-------------------------

@@ -1,0 +1,3 @@
+@02-Nov-2020 09:11:29
+UPDATE rpt.rpt_report_parameters SET parameter_name = ''Cage ID:'', paramtr_rprstn_nm_in_query = ''{:P_CAGE_ID}'', default_value = ''-1'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:11:29'', lov_name_id = ''311'', param_data_type = ''NUMBER'', date_format = ''None'', lov_name = ''All VMS Vault Cages'', shd_be_dsplyd = ''1'' WHERE (parameter_id = 277)
+-------------------------Next Msg:-------------------------

@@ -1,0 +1,3 @@
+@02-Nov-2020 09:11:22
+UPDATE rpt.rpt_report_parameters SET parameter_name = ''INVOICE ID:'', paramtr_rprstn_nm_in_query = ''{:invoice_id}'', default_value = ''-1'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:11:22'', lov_name_id = ''178'', param_data_type = ''NUMBER'', date_format = ''None'', lov_name = ''All Receivables Documents'', shd_be_dsplyd = ''1'' WHERE (parameter_id = 234)
+-------------------------Next Msg:-------------------------

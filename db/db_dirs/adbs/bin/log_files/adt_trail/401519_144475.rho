@@ -1,0 +1,3 @@
+@02-Nov-2020 09:11:03
+UPDATE rpt.rpt_report_parameters SET parameter_name = ''Approval Status'', paramtr_rprstn_nm_in_query = ''{:apprvl_status}'', default_value = ''%'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:11:03'', lov_name_id = ''-1'', param_data_type = ''TEXT'', date_format = ''None'', lov_name = '''', shd_be_dsplyd = ''1'' WHERE (parameter_id = 102)
+-------------------------Next Msg:-------------------------

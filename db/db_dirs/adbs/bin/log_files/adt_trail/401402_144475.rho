@@ -1,0 +1,31 @@
+@02-Nov-2020 09:10:27
+UPDATE rpt.rpt_reports SET report_name = ''Person Payment Item Balances'', report_desc = ''Person Payment Item Balances'', rpt_sql_query = ''SELECT row_number() over (order by c.local_id_no,b.pay_run_priority ) as                                           Num,
+       c.local_id_no                                                                            ID_No,
+       trim(c.title || '''' '''' || c.sur_name ||
+            '''', '''' || c.first_name || '''' '''' || c.other_names)                                       Full_Name,
+       b.item_code_name                                                                         Pay_Item,
+       CASE WHEN b.item_maj_type = ''''Balance Item'''' THEN b.item_maj_type ELSE b.item_min_type END m1,
+       coalesce((CASE
+                     WHEN b.item_maj_type = ''''Balance Item'''' THEN pay.get_ltst_blsitm_bals(c.person_id,
+                                                                                         org.get_payitm_id(b.item_code_name),
+                                                                                         ''''{:pay_dte}'''')
+                     ELSE a.amount_paid END), 0)                                                Amount,
+       b.pay_run_priority                                                                       m2,
+       scm.get_cstmr_splr_name(c.lnkd_firm_org_id)
+FROM prs.prsn_names_nos c
+         LEFT OUTER JOIN pasn.prsn_bnfts_cntrbtns f ON (c.person_id = f.person_id and
+                                                        (now() between to_timestamp(f.valid_start_date, ''''YYYY-MM-DD HH24:MI:SS'''') AND to_timestamp(f.valid_end_date, ''''YYYY-MM-DD HH24:MI:SS'''')))
+         LEFT OUTER JOIN org.org_pay_items b ON (b.item_id = f.item_id)
+         LEFT OUTER JOIN pay.pay_itm_trnsctns a ON (a.item_id = b.item_id and a.person_id = c.person_id and
+                                                    (to_timestamp(a.paymnt_date, ''''YYYY-MM-DD HH24:MI:SS'''') between to_timestamp(''''{:pay_dte} 00:00:00'''', ''''YYYY-MM-DD HH24:MI:SS'''') AND to_timestamp(''''{:pay_dte} 23:59:59'''', ''''YYYY-MM-DD HH24:MI:SS'''')))
+WHERE ((b.org_id = {:orgID}) and (b.local_classfctn ilike ''''{:clsfctn}'''')
+    AND (b.item_code_name ilike ''''{:itmNm}'''')
+    AND (c.local_id_no IN ({:id_num})) AND (b.item_maj_type = ''''Balance Item''''))
+  AND coalesce((CASE
+                    WHEN b.item_maj_type = ''''Balance Item'''' THEN pay.get_ltst_blsitm_bals(c.person_id,
+                                                                                        org.get_payitm_id(b.item_code_name),
+                                                                                        ''''{:pay_dte}'''')
+                    ELSE a.amount_paid END), 0) > 0
+  AND '''''''' || c.lnkd_firm_org_id = coalesce(NULLIF(''''{:instu_id}'''', ''''''''), '''''''' || c.lnkd_firm_org_id)
+ORDER BY c.local_id_no, b.pay_run_priority'', owner_module = ''Internal Payments'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:27'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = ''4'', output_type = ''PDF'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name=''342.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 6)
+-------------------------Next Msg:-------------------------

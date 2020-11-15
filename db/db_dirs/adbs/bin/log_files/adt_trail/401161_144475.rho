@@ -1,0 +1,23 @@
+@02-Nov-2020 09:10:00
+UPDATE rpt.rpt_reports SET report_name = ''Account Credit Letter'', report_desc = ''Account Credit Letter'', rpt_sql_query = ''SELECT a.smpl_vchr_hdr_id,
+       a.supplier_id,
+       scm.get_cstmr_splr_name(a.supplier_id)              fullnm,
+       a.smpl_vchr_type,
+       a.comments_desc,
+       to_char(to_timestamp(a.smpl_vchr_date, ''''YYYY-MM-DD''''), ''''DD-Mon-YYYY'''') trans_date,
+       round(a.invoice_amount, 2)                                                                 PRNCPL_AMOUNT,
+       a.invoice_amount net_credit_amnt,
+       a.ref_doc_number,
+       a.approval_status                                                                          is_pstd,
+       gst.get_pssbl_val(a.invc_curr_id) crncy,
+       ''''THE REGIONAL MANAGER''''                                                                                                                            P_LETTER_TO,
+       ''''EXPENSE VOUCHER PAYMENT''''                                                                                                                           P_SUBJECT,
+       TO_CHAR(now(), ''''DD-MON-YYYY'''')                                                                                                                     P_LTR_DATE,
+       ''''Kindly credit the under-mentioned account with the stated amount and debit the Rhomicom Staff Welfare Account XXXXX.'''' P_LTR_BODY,
+             ''''_____________________________''''                                                                                                                         P_SIGN_1_NM,
+             ''''_____________________''''                                                                                                                                       P_SIGN_1_POST,
+             ''''_____________________________''''                                                                                                                         P_SIGN_2_NM,
+             ''''_____________________''''                                                                                                                                  P_SIGN_2_POST
+FROM accb.accb_smpl_vchr_hdr a
+WHERE (a.smpl_vchr_hdr_id = {:pay_rqst_id});'', owner_module = ''Internal Payments'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:00'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = ''4,5,6,7,8,9'', cols_to_average = '''', cols_to_no_frmt = ''4,5,6,7,8,9'', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name=''355.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 258)
+-------------------------Next Msg:-------------------------

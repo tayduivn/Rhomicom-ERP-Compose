@@ -1,0 +1,223 @@
+Username:admin|Login Number:1330|myImgFileName:fGPccT1cw11fBBK5HYRAJGYGHcvXHmIJx1QXFHwPMGTfwGPTHf.png|strlFileNm11:|extnsn:png
+-------------------------Next Msg:-------------------------
+Username:admin|Login Number:1330|Person:Mr. Shidah Delali Kovi Yussif (00012)
+-------------------------Next Msg:-------------------------
+Welcome Mr. Shidah Delali Kovi Yussif to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 31-Oct-2020 09:58:59-Machine Details(Unknown/IP:172.20.0.1/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:9sko3hlpa9kn792m2lgcm9edff) .
+        <br/><br/>Your last failed login was 11-Sep-2020 08:26:47-Machine Details(Unknown/IP:192.168.56.1/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:e358b6a36e6b6841434f693ba43551d5)
+-------------------------Next Msg:-------------------------
+@31-Oct-2020 09:59:44
+INSERT INTO wkf.wkf_actual_msgs_hdr(
+            msg_id, msg_hdr, msg_body, created_by, creation_date, herchy_id, 
+            msg_typ, app_id, msg_status, src_doc_type, src_doc_id, last_update_by, 
+            last_update_date, attchments, attchments_desc) VALUES (382, 'Welcome Mr. Shidah Delali Kovi Yussif', 'Welcome Mr. Shidah Delali Kovi Yussif to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 31-Oct-2020 09:58:59-Machine Details(Unknown/IP:172.20.0.1/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:9sko3hlpa9kn792m2lgcm9edff) .
+        <br/><br/>Your last failed login was 11-Sep-2020 08:26:47-Machine Details(Unknown/IP:192.168.56.1/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:e358b6a36e6b6841434f693ba43551d5)', 
+            8, '2020-10-31 09:59:44', -1, 'Informational', 
+            1, '0','Login',-1, 
+            8, '2020-10-31 09:59:44', '', '')
+-------------------------Next Msg:-------------------------
+@31-Oct-2020 09:59:44
+INSERT INTO wkf.wkf_actual_msgs_routng(
+            msg_id, from_prsn_id, to_prsn_id, date_sent, 
+            created_by, creation_date, msg_status, action_to_perform, last_update_by, 
+            last_update_date, to_prsns_hrchy_level, action_comments) 
+            VALUES (382, -1, 2540, '2020-10-31 09:59:44', 8, 
+            '2020-10-31 09:59:44', 'Initiated', 'Acknowledge', 8, '2020-10-31 09:59:44', 1, 
+                '')
+-------------------------Next Msg:-------------------------
+@31-Oct-2020 09:59:45
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_60441812_20201031095945.txt
+-------------------------Next Msg:-------------------------
+@31-Oct-2020 10:00:27
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_82004345_20201031100027.txt
+-------------------------Next Msg:-------------------------
+@31-Oct-2020 10:00:29
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_21782350_20201031100029.txt
+-------------------------Next Msg:-------------------------
+@31-Oct-2020 10:00:49
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_26357173_20201031100049.txt
+-------------------------Next Msg:-------------------------
+@31-Oct-2020 10:00:51
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_86657643_20201031100051.txt
+-------------------------Next Msg:-------------------------
+@31-Oct-2020 10:01:16
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_80240315_20201031100116.txt
+-------------------------Next Msg:-------------------------
+@31-Oct-2020 10:01:39
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_70807166_20201031100139.txt
+-------------------------Next Msg:-------------------------
+@31-Oct-2020 10:07:33
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-10-31 10:01:39', logout_time='' WHERE login_number=1330
+-------------------------Next Msg:-------------------------
+@31-Oct-2020 10:07:35
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_95380498_20201031100735.txt
+-------------------------Next Msg:-------------------------
+Username:admin|Login Number:1330|myImgFileName:MMMcfGMcw11fAcvWVQQXMKMwFczpzCUxwfXUpYwPMGcMcP1GcP.jpg|strlFileNm11:2540.jpg|extnsn:jpg
+-------------------------Next Msg:-------------------------
+Username:admin|Login Number:1330|Person:Mr. Shidah Delali Kovi Yussif (00012)
+-------------------------Next Msg:-------------------------
+Welcome Mr. Shidah Delali Kovi Yussif to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 31-Oct-2020 20:19:57-Machine Details(Unknown/IP:192.168.160.1/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:h9t4b1emtob29rkf5tk0dq2gfm) .
+        <br/><br/>Your last failed login was 11-Sep-2020 08:26:47-Machine Details(Unknown/IP:192.168.56.1/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:e358b6a36e6b6841434f693ba43551d5)
+-------------------------Next Msg:-------------------------
+@01-Nov-2020 14:46:06
+INSERT INTO wkf.wkf_actual_msgs_hdr(
+            msg_id, msg_hdr, msg_body, created_by, creation_date, herchy_id, 
+            msg_typ, app_id, msg_status, src_doc_type, src_doc_id, last_update_by, 
+            last_update_date, attchments, attchments_desc) VALUES (381, 'Welcome Mr. Shidah Delali Kovi Yussif', 'Welcome Mr. Shidah Delali Kovi Yussif to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 31-Oct-2020 20:19:57-Machine Details(Unknown/IP:192.168.160.1/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:h9t4b1emtob29rkf5tk0dq2gfm) .
+        <br/><br/>Your last failed login was 11-Sep-2020 08:26:47-Machine Details(Unknown/IP:192.168.56.1/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:e358b6a36e6b6841434f693ba43551d5)', 
+            8, '2020-11-01 14:46:06', -1, 'Informational', 
+            1, '0','Login',-1, 
+            8, '2020-11-01 14:46:06', '', '')
+-------------------------Next Msg:-------------------------
+@01-Nov-2020 14:46:06
+INSERT INTO wkf.wkf_actual_msgs_routng(
+            msg_id, from_prsn_id, to_prsn_id, date_sent, 
+            created_by, creation_date, msg_status, action_to_perform, last_update_by, 
+            last_update_date, to_prsns_hrchy_level, action_comments) 
+            VALUES (381, -1, 2540, '2020-11-01 14:46:06', 8, 
+            '2020-11-01 14:46:06', 'Initiated', 'Acknowledge', 8, '2020-11-01 14:46:06', 1, 
+                '')
+-------------------------Next Msg:-------------------------
+orgLogoFileName:dwnlds/tmp/WHGcMWGcAcvWVQQXMKMwFczpzCUxwfXUpYAvI1_fTWGfc1Gf.png|strlFileNm11:1.png|extnsn:png
+-------------------------Next Msg:-------------------------
+@01-Nov-2020 14:46:07
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_19749824_20201101144607.txt
+-------------------------Next Msg:-------------------------
+Username:admin|Login Number:1330|myImgFileName:v7876387v33c2PXTmMEF6GzvFQU1R23Uc4Mm01v45284844c84.png|strlFileNm11:|extnsn:png
+-------------------------Next Msg:-------------------------
+Username:admin|Login Number:1330|Person:Mr. Shidah Delali Kovi Yussif (00012)
+-------------------------Next Msg:-------------------------
+Welcome Mr. Shidah Delali Kovi Yussif to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 01-Nov-2020 23:06:24-Machine Details(Unknown/IP:172.29.0.1/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:mrik10hibqrq7s05d5koov6n7g) .
+        <br/><br/>Your last failed login was 11-Sep-2020 08:26:47-Machine Details(Unknown/IP:192.168.56.1/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:e358b6a36e6b6841434f693ba43551d5)
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 05:33:03
+INSERT INTO wkf.wkf_actual_msgs_hdr(
+            msg_id, msg_hdr, msg_body, created_by, creation_date, herchy_id, 
+            msg_typ, app_id, msg_status, src_doc_type, src_doc_id, last_update_by, 
+            last_update_date, attchments, attchments_desc) VALUES (382, 'Welcome Mr. Shidah Delali Kovi Yussif', 'Welcome Mr. Shidah Delali Kovi Yussif to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 01-Nov-2020 23:06:24-Machine Details(Unknown/IP:172.29.0.1/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:mrik10hibqrq7s05d5koov6n7g) .
+        <br/><br/>Your last failed login was 11-Sep-2020 08:26:47-Machine Details(Unknown/IP:192.168.56.1/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:e358b6a36e6b6841434f693ba43551d5)', 
+            8, '2020-11-02 05:33:03', -1, 'Informational', 
+            1, '0','Login',-1, 
+            8, '2020-11-02 05:33:03', '', '')
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 05:33:04
+INSERT INTO wkf.wkf_actual_msgs_routng(
+            msg_id, from_prsn_id, to_prsn_id, date_sent, 
+            created_by, creation_date, msg_status, action_to_perform, last_update_by, 
+            last_update_date, to_prsns_hrchy_level, action_comments) 
+            VALUES (382, -1, 2540, '2020-11-02 05:33:04', 8, 
+            '2020-11-02 05:33:04', 'Initiated', 'Acknowledge', 8, '2020-11-02 05:33:04', 1, 
+                '')
+-------------------------Next Msg:-------------------------
+orgLogoFileName:dwnlds/tmp/3c6628562PXTmMEF6GzvFQU1R23Uc4Mm01PNX3_c49533653.png|strlFileNm11:1.png|extnsn:png
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 05:33:07
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_83240571_20201102053307.txt
+-------------------------Next Msg:-------------------------
+Username:admin|Login Number:1330|myImgFileName:39889588v33cRF6MMFRFQM9VX5X596F1X9X4Vcv45236449244.png|strlFileNm11:|extnsn:png
+-------------------------Next Msg:-------------------------
+Username:admin|Login Number:1330|Person:Mr. Shidah Delali Kovi Yussif (00012)
+-------------------------Next Msg:-------------------------
+Welcome Mr. Shidah Delali Kovi Yussif to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 02-Nov-2020 14:29:29-Machine Details(Unknown/IP:172.26.0.1/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:1m4p9ptl695p5pm9brlhlbb6lh) .
+        <br/><br/>Your last failed login was 11-Sep-2020 08:26:47-Machine Details(Unknown/IP:192.168.56.1/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:e358b6a36e6b6841434f693ba43551d5)
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 14:32:41
+INSERT INTO wkf.wkf_actual_msgs_hdr(
+            msg_id, msg_hdr, msg_body, created_by, creation_date, herchy_id, 
+            msg_typ, app_id, msg_status, src_doc_type, src_doc_id, last_update_by, 
+            last_update_date, attchments, attchments_desc) VALUES (382, 'Welcome Mr. Shidah Delali Kovi Yussif', 'Welcome Mr. Shidah Delali Kovi Yussif to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 02-Nov-2020 14:29:29-Machine Details(Unknown/IP:172.26.0.1/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:1m4p9ptl695p5pm9brlhlbb6lh) .
+        <br/><br/>Your last failed login was 11-Sep-2020 08:26:47-Machine Details(Unknown/IP:192.168.56.1/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:e358b6a36e6b6841434f693ba43551d5)', 
+            8, '2020-11-02 14:32:41', -1, 'Informational', 
+            1, '0','Login',-1, 
+            8, '2020-11-02 14:32:41', '', '')
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 14:32:41
+INSERT INTO wkf.wkf_actual_msgs_routng(
+            msg_id, from_prsn_id, to_prsn_id, date_sent, 
+            created_by, creation_date, msg_status, action_to_perform, last_update_by, 
+            last_update_date, to_prsns_hrchy_level, action_comments) 
+            VALUES (382, -1, 2540, '2020-11-02 14:32:41', 8, 
+            '2020-11-02 14:32:41', 'Initiated', 'Acknowledge', 8, '2020-11-02 14:32:41', 1, 
+                '')
+-------------------------Next Msg:-------------------------
+orgLogoFileName:dwnlds/tmp/2c56c846RF6MMFRFQM9VX5X596F1X9X4VcPNX3_cvcv39792.png|strlFileNm11:1.png|extnsn:png
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 14:32:42
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_55659610_20201102143242.txt
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 14:34:28
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-02 14:33:20', logout_time='' WHERE login_number=1330
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 14:40:48
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-02 14:35:03', logout_time='' WHERE login_number=1330
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 14:41:23
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=8, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "rho_erp_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_81973768_20201102144123.txt
+-------------------------Next Msg:-------------------------

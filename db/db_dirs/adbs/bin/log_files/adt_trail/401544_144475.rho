@@ -1,0 +1,3 @@
+@02-Nov-2020 09:11:07
+UPDATE rpt.rpt_report_parameters SET parameter_name = ''Visitor Classification'', paramtr_rprstn_nm_in_query = ''{:visClas}'', default_value = ''Visitor'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:11:07'', lov_name_id = ''327'', param_data_type = ''TEXT'', date_format = ''None'', lov_name = ''Visitor Classifications'', shd_be_dsplyd = ''1'' WHERE (parameter_id = 127)
+-------------------------Next Msg:-------------------------

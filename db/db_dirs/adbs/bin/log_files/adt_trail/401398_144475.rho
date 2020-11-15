@@ -1,0 +1,16 @@
+@02-Nov-2020 09:10:27
+UPDATE rpt.rpt_reports SET report_name = ''Pay Items Weekly Summary Per Date Range'', report_desc = ''Internal  Payments Detail Per Date Range'', rpt_sql_query = ''SELECT a.item_id "3", b.item_code_name 
+"Item Name   ", SUM(a.amount_paid) "Amount Paid", to_char(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''W (Mon YYYY)'''') "Week(Month Year)", to_char(to_timestamp
+(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''WW'''') "Week(1-53) of the Year",  to_char(to_timestamp
+(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''MM YYYY (W)'''') "_"
+FROM (pay.pay_itm_trnsctns a LEFT OUTER JOIN org.org_pay_items b ON a.item_id = 
+b.item_id) LEFT OUTER JOIN prs.prsn_names_nos c on a.person_id = c.person_id 
+WHERE((trim(c.title || '''' '''' || c.sur_name || '''', '''' || c.first_name || '''' '''' || 
+c.other_names) ilike ''''%'''') and (b.org_id ={:orgID})
+AND (b.item_code_name ilike ''''{:itemNm}'''') and 
+(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS'''') between 
+to_timestamp(''''{:fromDate} 00:00:00'''',''''YYYY-MM-DD HH24:MI:SS'''') AND 
+to_timestamp(''''{:toDate} 23:59:59'''',''''YYYY-MM-DD HH24:MI:SS''''))) 
+GROUP BY a.item_id, b.item_code_name, to_char(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''MM YYYY (W)''''),  to_char(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''WW''''),to_char(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''W (Mon YYYY)'''')
+ORDER BY  to_char(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''MM YYYY (W)''''), to_char(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''WW''''),  b.item_code_name'', owner_module = ''Internal Payments'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:26'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''1'', cols_to_sum = ''2'', cols_to_average = '''', cols_to_no_frmt = ''2'', output_type = ''HTML'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter='''', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 10)
+-------------------------Next Msg:-------------------------

@@ -1,0 +1,37 @@
+@02-Nov-2020 09:10:27
+UPDATE rpt.rpt_reports SET report_name = ''Balance Sheet'', report_desc = ''ACC-Balance Sheet'', rpt_sql_query = ''SELECT
+  tbl1.gnrl_data1::INTEGER rownumbr,
+  (CASE WHEN ''''{:p_pad_acnts}'''' ilike ''''Yes'''' THEN tbl1.gnrl_data12||tbl1.gnrl_data2
+ELSE tbl1.gnrl_data2 END) account_number,
+  tbl1.gnrl_data3 accnt_name,
+  tbl1.gnrl_data4::NUMERIC trns_amnt,
+  tbl1.gnrl_data5::INTEGER accnt_id,
+  tbl1.gnrl_data6 is_prnt_accnt,
+  tbl1.gnrl_data7 has_sub_ledgers,
+  tbl1.gnrl_data8 accnt_type,
+  tbl1.gnrl_data9::NUMERIC trns_amntsm,
+  tbl1.gnrl_data10 depth,
+  tbl1.gnrl_data11 path,
+  tbl1.gnrl_data12 lftpaddng,
+  to_char(to_timestamp(''''{:p_as_at_date}'''',''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') p_as_at_date,
+  (Select SUM(b.gnrl_data9::NUMERIC) FROM rpt.rpt_gnrl_data_storage b WHERE b.rpt_run_id={:rptRunID} and b.gnrl_data8=''''A'''') asset_sum,
+  (Select SUM(b.gnrl_data9::NUMERIC) FROM rpt.rpt_gnrl_data_storage b WHERE b.rpt_run_id={:rptRunID} and b.gnrl_data8=''''EQ'''') equity_sum,
+  (Select SUM(b.gnrl_data9::NUMERIC) FROM rpt.rpt_gnrl_data_storage b WHERE b.rpt_run_id={:rptRunID} and b.gnrl_data8=''''L'''') lblty_sum
+ FROM rpt.rpt_gnrl_data_storage tbl1
+ WHERE tbl1.rpt_run_id={:rptRunID} 
+ ORDER BY tbl1.gnrl_data1::INTEGER'', owner_module = ''Accounting'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:27'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = ''0'', cols_to_count = ''NO'', cols_to_sum = ''2'', cols_to_average = '''', cols_to_no_frmt = ''2,5'', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''7.jrxml'', pre_rpt_sql_query=''select accb.populate_bals_sheet(
+{:rptRunID},
+''''{:p_as_at_date}'''',
+{:p_max_acnt_level},
+{:p_sgmnt1_val},
+{:p_sgmnt2_val},
+{:p_sgmnt3_val},
+{:p_sgmnt4_val},
+{:p_sgmnt5_val},
+{:p_sgmnt6_val},
+{:p_sgmnt7_val},
+{:p_sgmnt8_val},
+{:p_sgmnt9_val},
+{:p_sgmnt10_val},
+{:usrID}, to_char(now(),''''YYYY-MM-DD HH24:MI:SS''''), {:orgID}, {:msgID});'', pst_rpt_sql_query='''' WHERE (report_id = 7)
+-------------------------Next Msg:-------------------------

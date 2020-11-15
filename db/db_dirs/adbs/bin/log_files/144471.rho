@@ -1,0 +1,376 @@
+Username:Consultant1|Login Number:144471|myImgFileName:63663v66c7444c2PXTmMEF6GzvFQU1R23Uc4Mm01c72524942.png|strlFileNm11:|extnsn:png
+-------------------------Next Msg:-------------------------
+Username:Consultant1|Login Number:144471|Person:Mr. SYSTEM USER SETUP (RHO0002012)
+-------------------------Next Msg:-------------------------
+Welcome Mr. SYSTEM USER SETUP to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 31-Oct-2020 14:46:18-Machine Details(Unknown/IP:162.158.91.27/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:25d0244c4e2c652a2f4e632d73147c96) .
+        <br/><br/>Your last failed login was 09-Sep-2020 07:14:55-Machine Details(Unknown/IP:141.101.104.197/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:2b7490e92707ada566ca510d795aa15e)
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 05:45:14
+INSERT INTO wkf.wkf_actual_msgs_hdr(
+            msg_id, msg_hdr, msg_body, created_by, creation_date, herchy_id, 
+            msg_typ, app_id, msg_status, src_doc_type, src_doc_id, last_update_by, 
+            last_update_date, attchments, attchments_desc) VALUES (295463, 'Welcome Mr. SYSTEM USER SETUP', 'Welcome Mr. SYSTEM USER SETUP to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 31-Oct-2020 14:46:18-Machine Details(Unknown/IP:162.158.91.27/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:25d0244c4e2c652a2f4e632d73147c96) .
+        <br/><br/>Your last failed login was 09-Sep-2020 07:14:55-Machine Details(Unknown/IP:141.101.104.197/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:2b7490e92707ada566ca510d795aa15e)', 
+            130, '2020-11-02 05:45:14', -1, 'Informational', 
+            1, '0','Login',-1, 
+            130, '2020-11-02 05:45:14', '', '')
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 05:45:14
+INSERT INTO wkf.wkf_actual_msgs_routng(
+            msg_id, from_prsn_id, to_prsn_id, date_sent, 
+            created_by, creation_date, msg_status, action_to_perform, last_update_by, 
+            last_update_date, to_prsns_hrchy_level, action_comments) 
+            VALUES (295463, -1, 1, '2020-11-02 05:45:14', 130, 
+            '2020-11-02 05:45:14', 'Initiated', 'Acknowledge', 130, '2020-11-02 05:45:14', 1, 
+                '')
+-------------------------Next Msg:-------------------------
+orgLogoFileName:dwnlds/tmp/598646862PXTmMEF6GzvFQU1R23Uc4Mm01PNX3_c2542c242.png|strlFileNm11:1.png|extnsn:png
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 05:45:15
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=130, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "ys_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_36611330_20201102054515.txt
+-------------------------Next Msg:-------------------------
+Username:Consultant1|Login Number:144471|myImgFileName:48c7c5c7c7444c2PXTmMEF6GzvFQU1R23Uc4Mm01c94246c24.png|strlFileNm11:|extnsn:png
+-------------------------Next Msg:-------------------------
+Username:Consultant1|Login Number:144471|Person:Mr. SYSTEM USER SETUP (RHO0002012)
+-------------------------Next Msg:-------------------------
+Welcome Mr. SYSTEM USER SETUP to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 31-Oct-2020 14:46:18-Machine Details(Unknown/IP:162.158.91.27/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:25d0244c4e2c652a2f4e632d73147c96) .
+        <br/><br/>Your last failed login was 09-Sep-2020 07:14:55-Machine Details(Unknown/IP:141.101.104.197/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:2b7490e92707ada566ca510d795aa15e)
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 06:07:36
+INSERT INTO wkf.wkf_actual_msgs_hdr(
+            msg_id, msg_hdr, msg_body, created_by, creation_date, herchy_id, 
+            msg_typ, app_id, msg_status, src_doc_type, src_doc_id, last_update_by, 
+            last_update_date, attchments, attchments_desc) VALUES (295463, 'Welcome Mr. SYSTEM USER SETUP', 'Welcome Mr. SYSTEM USER SETUP to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 31-Oct-2020 14:46:18-Machine Details(Unknown/IP:162.158.91.27/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:25d0244c4e2c652a2f4e632d73147c96) .
+        <br/><br/>Your last failed login was 09-Sep-2020 07:14:55-Machine Details(Unknown/IP:141.101.104.197/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:2b7490e92707ada566ca510d795aa15e)', 
+            130, '2020-11-02 06:07:36', -1, 'Informational', 
+            1, '0','Login',-1, 
+            130, '2020-11-02 06:07:36', '', '')
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 06:07:36
+INSERT INTO wkf.wkf_actual_msgs_routng(
+            msg_id, from_prsn_id, to_prsn_id, date_sent, 
+            created_by, creation_date, msg_status, action_to_perform, last_update_by, 
+            last_update_date, to_prsns_hrchy_level, action_comments) 
+            VALUES (295463, -1, 1, '2020-11-02 06:07:36', 130, 
+            '2020-11-02 06:07:36', 'Initiated', 'Acknowledge', 130, '2020-11-02 06:07:36', 1, 
+                '')
+-------------------------Next Msg:-------------------------
+orgLogoFileName:dwnlds/tmp/2336cv362PXTmMEF6GzvFQU1R23Uc4Mm01PNX3_cvv449634.png|strlFileNm11:1.png|extnsn:png
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 06:07:38
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=130, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "ys_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_37704978_20201102060738.txt
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 06:12:30
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-02 06:08:01', logout_time='' WHERE login_number=144471
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 06:14:58
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-02 06:12:52', logout_time='' WHERE login_number=144471
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 06:16:47
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-02 06:15:04', logout_time='' WHERE login_number=144471
+-------------------------Next Msg:-------------------------
+Username:Consultant1|Login Number:144471|myImgFileName:3256v946c7444c501E34vKEcxLM357N7mLPxXRGYc9cv46893.png|strlFileNm11:|extnsn:png
+-------------------------Next Msg:-------------------------
+Username:Consultant1|Login Number:144471|Person:Mr. SYSTEM USER SETUP (RHO0002012)
+-------------------------Next Msg:-------------------------
+Welcome Mr. SYSTEM USER SETUP to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 31-Oct-2020 14:46:18-Machine Details(Unknown/IP:162.158.91.27/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:25d0244c4e2c652a2f4e632d73147c96) .
+        <br/><br/>Your last failed login was 09-Sep-2020 07:14:55-Machine Details(Unknown/IP:141.101.104.197/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:2b7490e92707ada566ca510d795aa15e)
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:07:35
+INSERT INTO wkf.wkf_actual_msgs_hdr(
+            msg_id, msg_hdr, msg_body, created_by, creation_date, herchy_id, 
+            msg_typ, app_id, msg_status, src_doc_type, src_doc_id, last_update_by, 
+            last_update_date, attchments, attchments_desc) VALUES (295463, 'Welcome Mr. SYSTEM USER SETUP', 'Welcome Mr. SYSTEM USER SETUP to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 31-Oct-2020 14:46:18-Machine Details(Unknown/IP:162.158.91.27/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:25d0244c4e2c652a2f4e632d73147c96) .
+        <br/><br/>Your last failed login was 09-Sep-2020 07:14:55-Machine Details(Unknown/IP:141.101.104.197/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:2b7490e92707ada566ca510d795aa15e)', 
+            130, '2020-11-11 21:07:35', -1, 'Informational', 
+            1, '0','Login',-1, 
+            130, '2020-11-11 21:07:35', '', '')
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:07:35
+INSERT INTO wkf.wkf_actual_msgs_routng(
+            msg_id, from_prsn_id, to_prsn_id, date_sent, 
+            created_by, creation_date, msg_status, action_to_perform, last_update_by, 
+            last_update_date, to_prsns_hrchy_level, action_comments) 
+            VALUES (295463, -1, 1, '2020-11-11 21:07:35', 130, 
+            '2020-11-11 21:07:35', 'Initiated', 'Acknowledge', 130, '2020-11-11 21:07:35', 1, 
+                '')
+-------------------------Next Msg:-------------------------
+orgLogoFileName:dwnlds/tmp/2c36c826501E34vKEcxLM357N7mLPxXRGYPNX3_c68935593.png|strlFileNm11:1.png|extnsn:png
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:07:36
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=130, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "ys_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_43392904_20201111210736.txt
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:07:46
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=130, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "ys_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_96814589_20201111210746.txt
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:08:32
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=130, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "ys_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_35789931_20201111210832.txt
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:11:02
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-11 21:08:32', logout_time='' WHERE login_number=144471
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:11:03
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=130, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "ys_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_57306632_20201111211103.txt
+-------------------------Next Msg:-------------------------
+Inside generateReportRun, RPTID=160==392~11|393~02-Nov-2020|395~02-Nov-2020|-130~VMS Summary Bin Card Report|-190~PDF
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:11:40
+INSERT INTO rpt.rpt_report_runs(
+            run_by, run_date, rpt_run_output, run_status_txt, 
+            run_status_prct, report_id, rpt_rn_param_ids, rpt_rn_param_vals, 
+            output_used, orntn_used, last_actv_date_tme, is_this_from_schdler, alert_id) 
+            VALUES (130, '2020-11-11 21:11:40', '', 'Not Started!', 0, 160, 
+            '', 
+            '', 
+            '', 
+            '', '2020-11-11 21:11:40', '0', -1)
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:11:40
+INSERT INTO rpt.rpt_run_msgs(log_messages, process_typ, process_id, created_by, creation_date, last_update_by, last_update_date) VALUES ('2020-11-11 21:11:40 .... Report/Process Run is about to Start...(Being run by Consultant1)','Process Run',156568, 130, '2020-11-11 21:11:40', 130, '2020-11-11 21:11:40')
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:11:40
+UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || '
+
+392|393|395|-130|-190
+11|02-Nov-2020|02-Nov-2020|VMS Summary Bin Card Report|PDF
+
+OUTPUT FORMAT: PDF
+ORIENTATION: ', last_update_by=130, last_update_date='2020-11-11 21:11:40' WHERE msg_id = 156553
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:11:40
+UPDATE rpt.rpt_report_runs SET rpt_rn_param_ids = '392|393|395|-130|-190', rpt_rn_param_vals = '11|02-Nov-2020|02-Nov-2020|VMS Summary Bin Card Report|PDF', output_used = 'PDF', orntn_used= '' WHERE (rpt_run_id = 156568)
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:11:40
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=130, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'Jasper Process Runner'
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:11:40
+UPDATE rpt.rpt_report_runs SET shld_run_stop = '0' WHERE (rpt_run_id = 156568)
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "***************" "ys_db" "Jasper Process Runner" "156568" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+
+RHOMICOM ERROR: [8] Trying to get property 'percent' of non-object<br />
+ This Rhomicom Error happened on line 706 in file /usr/share/nginx/html/app_code/rpt/rpts_rnnr.php
+-------------------------Next Msg:-------------------------
+Inside generateReportRun, RPTID=269==734~-1|735~-1|736~01-Oct-2020|737~31-Oct-2020|-130~Deposit & Withdrawal Trend - 2020|-190~PDF
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:12:21
+INSERT INTO rpt.rpt_report_runs(
+            run_by, run_date, rpt_run_output, run_status_txt, 
+            run_status_prct, report_id, rpt_rn_param_ids, rpt_rn_param_vals, 
+            output_used, orntn_used, last_actv_date_tme, is_this_from_schdler, alert_id) 
+            VALUES (130, '2020-11-11 21:12:21', '', 'Not Started!', 0, 269, 
+            '', 
+            '', 
+            '', 
+            '', '2020-11-11 21:12:21', '0', -1)
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:12:21
+INSERT INTO rpt.rpt_run_msgs(log_messages, process_typ, process_id, created_by, creation_date, last_update_by, last_update_date) VALUES ('2020-11-11 21:12:21 .... Report/Process Run is about to Start...(Being run by Consultant1)','Process Run',156569, 130, '2020-11-11 21:12:21', 130, '2020-11-11 21:12:21')
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:12:21
+UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || '
+
+734|735|736|737|-130|-190
+-1|-1|01-Oct-2020|31-Oct-2020|Deposit & Withdrawal Trend - 2020|PDF
+
+OUTPUT FORMAT: PDF
+ORIENTATION: ', last_update_by=130, last_update_date='2020-11-11 21:12:21' WHERE msg_id = 156554
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:12:21
+UPDATE rpt.rpt_report_runs SET rpt_rn_param_ids = '734|735|736|737|-130|-190', rpt_rn_param_vals = '-1|-1|01-Oct-2020|31-Oct-2020|Deposit & Withdrawal Trend - 2020|PDF', output_used = 'PDF', orntn_used= '' WHERE (rpt_run_id = 156569)
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:12:21
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=130, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'Jasper Process Runner'
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:12:21
+UPDATE rpt.rpt_report_runs SET shld_run_stop = '0' WHERE (rpt_run_id = 156569)
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "***************" "ys_db" "Jasper Process Runner" "156569" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:12:32
+UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || '
+
+Program Cancelled by User Consultant1', last_update_by=130, last_update_date='2020-11-11 21:12:32' WHERE msg_id = 156554
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:12:32
+UPDATE rpt.rpt_report_runs SET shld_run_stop = '1', run_status_prct=100, run_status_txt='Cancelled' WHERE (rpt_run_id = 156569)
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:12:35
+UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || '
+
+Program Cancelled by User Consultant1', last_update_by=130, last_update_date='2020-11-11 21:12:35' WHERE msg_id = 156554
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:12:35
+UPDATE rpt.rpt_report_runs SET shld_run_stop = '1', run_status_prct=100, run_status_txt='Cancelled' WHERE (rpt_run_id = 156569)
+-------------------------Next Msg:-------------------------
+Inside generateReportRun, RPTID=269==734~-1|735~5|736~01-Oct-2020|737~31-Oct-2020|-130~Deposit & Withdrawal Trend - 2020|-190~PDF
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:13:02
+INSERT INTO rpt.rpt_report_runs(
+            run_by, run_date, rpt_run_output, run_status_txt, 
+            run_status_prct, report_id, rpt_rn_param_ids, rpt_rn_param_vals, 
+            output_used, orntn_used, last_actv_date_tme, is_this_from_schdler, alert_id) 
+            VALUES (130, '2020-11-11 21:13:02', '', 'Not Started!', 0, 269, 
+            '', 
+            '', 
+            '', 
+            '', '2020-11-11 21:13:02', '0', -1)
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:13:02
+INSERT INTO rpt.rpt_run_msgs(log_messages, process_typ, process_id, created_by, creation_date, last_update_by, last_update_date) VALUES ('2020-11-11 21:13:02 .... Report/Process Run is about to Start...(Being run by Consultant1)','Process Run',156570, 130, '2020-11-11 21:13:02', 130, '2020-11-11 21:13:02')
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:13:02
+UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || '
+
+734|735|736|737|-130|-190
+-1|5|01-Oct-2020|31-Oct-2020|Deposit & Withdrawal Trend - 2020|PDF
+
+OUTPUT FORMAT: PDF
+ORIENTATION: ', last_update_by=130, last_update_date='2020-11-11 21:13:02' WHERE msg_id = 156555
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:13:02
+UPDATE rpt.rpt_report_runs SET rpt_rn_param_ids = '734|735|736|737|-130|-190', rpt_rn_param_vals = '-1|5|01-Oct-2020|31-Oct-2020|Deposit & Withdrawal Trend - 2020|PDF', output_used = 'PDF', orntn_used= '' WHERE (rpt_run_id = 156570)
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:13:02
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=130, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'Jasper Process Runner'
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:13:02
+UPDATE rpt.rpt_report_runs SET shld_run_stop = '0' WHERE (rpt_run_id = 156570)
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "***************" "ys_db" "Jasper Process Runner" "156570" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:14:20
+UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || '
+
+Program Cancelled by User Consultant1', last_update_by=130, last_update_date='2020-11-11 21:14:20' WHERE msg_id = 156555
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:14:21
+UPDATE rpt.rpt_report_runs SET shld_run_stop = '1', run_status_prct=100, run_status_txt='Cancelled' WHERE (rpt_run_id = 156570)
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:14:26
+UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || '
+
+Program Cancelled by User Consultant1', last_update_by=130, last_update_date='2020-11-11 21:14:26' WHERE msg_id = 156555
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:14:27
+UPDATE rpt.rpt_report_runs SET shld_run_stop = '1', run_status_prct=100, run_status_txt='Cancelled' WHERE (rpt_run_id = 156570)
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:14:43
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=130, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "ys_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+/opt/apache/adbs/Logs/cmnd_line_logs_64785298_20201111211443.txt
+-------------------------Next Msg:-------------------------
+@11-Nov-2020 21:40:11
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-11 21:14:51', logout_time='2020-11-11 21:14:51' WHERE login_number=144471
+-------------------------Next Msg:-------------------------
+Username:Consultant1|Login Number:144471|myImgFileName:3987v687c7444c501E34vKEcxLM357N7mLPxXRGYc57632463.png|strlFileNm11:|extnsn:png
+-------------------------Next Msg:-------------------------
+Username:Consultant1|Login Number:144471|Person:Mr. SYSTEM USER SETUP (RHO0002012)
+-------------------------Next Msg:-------------------------
+Welcome Mr. SYSTEM USER SETUP to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 31-Oct-2020 14:46:18-Machine Details(Unknown/IP:162.158.91.27/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:25d0244c4e2c652a2f4e632d73147c96) .
+        <br/><br/>Your last failed login was 09-Sep-2020 07:14:55-Machine Details(Unknown/IP:141.101.104.197/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:2b7490e92707ada566ca510d795aa15e)
+-------------------------Next Msg:-------------------------
+@12-Nov-2020 02:58:53
+INSERT INTO wkf.wkf_actual_msgs_hdr(
+            msg_id, msg_hdr, msg_body, created_by, creation_date, herchy_id, 
+            msg_typ, app_id, msg_status, src_doc_type, src_doc_id, last_update_by, 
+            last_update_date, attchments, attchments_desc) VALUES (295463, 'Welcome Mr. SYSTEM USER SETUP', 'Welcome Mr. SYSTEM USER SETUP to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was 31-Oct-2020 14:46:18-Machine Details(Unknown/IP:162.158.91.27/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:25d0244c4e2c652a2f4e632d73147c96) .
+        <br/><br/>Your last failed login was 09-Sep-2020 07:14:55-Machine Details(Unknown/IP:141.101.104.197/Browser:Google Chrome v85.0.4183.83/OS:windows/Session ID:2b7490e92707ada566ca510d795aa15e)', 
+            130, '2020-11-12 02:58:53', -1, 'Informational', 
+            1, '0','Login',-1, 
+            130, '2020-11-12 02:58:53', '', '')
+-------------------------Next Msg:-------------------------
+@12-Nov-2020 02:58:53
+INSERT INTO wkf.wkf_actual_msgs_routng(
+            msg_id, from_prsn_id, to_prsn_id, date_sent, 
+            created_by, creation_date, msg_status, action_to_perform, last_update_by, 
+            last_update_date, to_prsns_hrchy_level, action_comments) 
+            VALUES (295463, -1, 1, '2020-11-12 02:58:53', 130, 
+            '2020-11-12 02:58:53', 'Initiated', 'Acknowledge', 130, '2020-11-12 02:58:53', 1, 
+                '')
+-------------------------Next Msg:-------------------------
+orgLogoFileName:dwnlds/tmp/92968986501E34vKEcxLM357N7mLPxXRGYPNX3_c73746v74.png|strlFileNm11:1.png|extnsn:png
+-------------------------Next Msg:-------------------------
+@12-Nov-2020 02:58:56
+UPDATE rpt.rpt_prcss_rnnrs SET 
+            shld_rnnr_stop='0', last_update_by=130, last_update_date=to_char(now(),'YYYY-MM-DD HH24:MI:SS') WHERE rnnr_name = 'REQUESTS LISTENER PROGRAM-JAVA'
+-------------------------Next Msg:-------------------------
+java -jar /opt/apache/adbs/bin/REMSProcessRunner.jar "rho-pgdb" "5432" "postgres" "*****************" "ys_db" "REQUESTS LISTENER PROGRAM-JAVA" "-1" "/opt/apache/adbs/bin" WEB "/opt/apache/adbs" "http://localhost:8000/"
+-------------------------Next Msg:-------------------------
+
+RHOMICOM ERROR: [2] exec() has been disabled for security reasons<br />
+ This Rhomicom Error happened on line 595 in file /usr/share/nginx/html/app_code/cmncde/connect_pg.php
+-------------------------Next Msg:-------------------------
+@12-Nov-2020 03:13:45
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-12 02:59:22', logout_time='2020-11-12 02:59:22' WHERE login_number=144471
+-------------------------Next Msg:-------------------------
+
+RHOMICOM ERROR: [2] exec() has been disabled for security reasons<br />
+ This Rhomicom Error happened on line 635 in file /usr/share/nginx/html/app_code/cmncde/connect_pg.php
+-------------------------Next Msg:-------------------------
+@12-Nov-2020 03:13:49
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-12 02:59:22', logout_time='2020-11-12 02:59:22' WHERE login_number=144471
+-------------------------Next Msg:-------------------------
+
+RHOMICOM ERROR: [2] exec() has been disabled for security reasons<br />
+ This Rhomicom Error happened on line 635 in file /usr/share/nginx/html/app_code/cmncde/connect_pg.php
+-------------------------Next Msg:-------------------------
+@12-Nov-2020 03:13:53
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-12 02:59:22', logout_time='2020-11-12 02:59:22' WHERE login_number=144471
+-------------------------Next Msg:-------------------------
+
+RHOMICOM ERROR: [2] exec() has been disabled for security reasons<br />
+ This Rhomicom Error happened on line 635 in file /usr/share/nginx/html/app_code/cmncde/connect_pg.php
+-------------------------Next Msg:-------------------------
+@12-Nov-2020 03:14:09
+UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-12 02:59:22', logout_time='2020-11-12 02:59:22' WHERE login_number=144471
+-------------------------Next Msg:-------------------------
+
+RHOMICOM ERROR: [2] exec() has been disabled for security reasons<br />
+ This Rhomicom Error happened on line 635 in file /usr/share/nginx/html/app_code/cmncde/connect_pg.php
+-------------------------Next Msg:-------------------------

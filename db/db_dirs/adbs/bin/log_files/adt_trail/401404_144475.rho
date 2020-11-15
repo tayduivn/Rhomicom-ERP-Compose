@@ -1,0 +1,14 @@
+@02-Nov-2020 09:10:27
+UPDATE rpt.rpt_reports SET report_name = ''Person Names'', report_desc = ''Person Names'', rpt_sql_query = ''SELECT a.local_id_no "ID No.     ", 
+ trim(a.title || '''' '''' || a.sur_name || '''', '''' || 
+a.first_name || '''' '''' || a.other_names) "Full Name      ",
+       a.gender "Gender       ", a.marital_status "Marital Status   ", to_char(to_timestamp(a.date_of_birth,''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')  "Date of Birth     ", a.place_of_birth "Place of Birth        ", a.religion "Religion       ", 
+       a.res_address "Residential Address     ", a.pstl_addrs "Postal Address     ", a.email "Email Address      ", a.cntct_no_tel "Tel No.                 ", a.cntct_no_mobl "Mobile No.           ", 
+       a.cntct_no_fax "Fax No.          ", b.prsn_type "Person Type            ", b.prn_typ_asgnmnt_rsn "Person Type Assignment Reason     ", 
+        b.further_details "Further Details         "
+       FROM prs.prsn_names_nos a LEFT OUTER JOIN pasn.prsn_prsntyps b
+       ON (a.person_id = b.person_id ) where ((a.org_id = {:orgID}
+       ) and (to_timestamp(''''{:as_at_dte}'''',''''YYYY-MM-DD HH24:MI:SS'''') 
+between to_timestamp(b.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') 
+AND to_timestamp(b.valid_end_date,''''YYYY-MM-DD HH24:MI:SS''''))) ORDER BY a.local_id_no;'', owner_module = ''Basic Person Data'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:27'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''HTML'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 4)
+-------------------------Next Msg:-------------------------

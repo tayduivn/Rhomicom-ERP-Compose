@@ -1,0 +1,44 @@
+@02-Nov-2020 09:10:02
+UPDATE rpt.rpt_reports SET report_name = ''Sales Invoice-POS'', report_desc = ''Sales Invoice-POS'', rpt_sql_query = ''SELECT a.invc_hdr_id,
+       a.doc_qty, a.unit_selling_price, (a.doc_qty * a.unit_selling_price*a.rented_itm_qty) amnt,
+       e.invc_number,
+       e.invc_type,
+       to_char(to_timestamp(e.invc_date, ''''YYYY-MM-DD''''), ''''DD-Mon-YYYY'''')                            invc_date,
+       scm.get_cstmr_splr_name(e.customer_id)                                                     customer_name,
+       COALESCE(f.site_name, '''' '''')                                                                 site_name,
+       COALESCE(f.billing_address, '''' '''')                                                           billing_address,
+       COALESCE(f.ship_to_address, '''' '''')                                                           ship_to_address,
+       e.payment_terms,
+       gst.get_pssbl_val(e.invc_curr_id)                                                          curr,
+       z.rcvbls_invc_hdr_id,
+       z.rcvbls_invc_type,
+       tbl1a.pymnt_id,
+       accb.get_pymnt_mthd_name(tbl1a.pymnt_mthd_id)||(CASE WHEN tbl1a.change_or_balance<=0 THEN ''''-Full Payment'''' ELSE ''''-Part Payment'''' END)                                              pymnt_mthd,
+       tbl1a.amount_paid,
+       tbl1a.change_or_balance,
+       tbl1a.pymnt_remark,
+       tbl1a.src_doc_typ,
+       tbl1a.src_doc_id,
+       tbl1a.created_by,
+       to_char(to_timestamp(tbl1a.pymnt_date, ''''YYYY-MM-DD HH24:MI:SS''''), ''''DD-Mon-YYYY HH24:MI:SS'''') pymnt_date,
+       z.rcvbls_invc_number,
+       tbl1c.user_name, 
+       e.branch_id, org.get_site_code_desc(e.branch_id) branch_nm,
+       tbl1a.amount_given
+FROM scm.scm_sales_invc_det a,
+     inv.inv_itm_list b,
+     inv.unit_of_measure c,
+     inv.inv_product_categories d,
+     scm.scm_sales_invc_hdr e
+       LEFT OUTER JOIN scm.scm_cstmr_suplr_sites f ON (e.customer_site_id = f.cust_sup_site_id)
+       LEFT OUTER JOIN accb.accb_rcvbls_invc_hdr z
+                       ON (z.src_doc_hdr_id = e.invc_hdr_id AND z.src_doc_type = e.invc_type)
+       LEFT OUTER JOIN accb.accb_payments tbl1a
+                       ON (tbl1a.src_doc_typ = z.rcvbls_invc_type AND tbl1a.src_doc_id = z.rcvbls_invc_hdr_id)
+       LEFT OUTER JOIN SEC.sec_users tbl1c ON (tbl1a.created_by = tbl1c.user_id)
+WHERE (a.invc_hdr_id = e.invc_hdr_id AND a.invc_hdr_id ={:invoice_id}  AND a.invc_hdr_id
+  >0
+  AND a.itm_id = b.item_id AND b.base_uom_id= C.uom_id AND D.cat_id = b.category_id)
+ORDER BY to_timestamp(tbl1a.pymnt_date, ''''YYYY-MM-DD HH24:MI:SS'''') DESC, tbl1a.pymnt_id DESC
+LIMIT 1'', owner_module = ''Generic Module'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:02'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''NO'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''232.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 232)
+-------------------------Next Msg:-------------------------

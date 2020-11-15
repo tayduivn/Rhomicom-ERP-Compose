@@ -1,0 +1,10 @@
+@02-Nov-2020 09:10:12
+UPDATE rpt.rpt_reports SET report_name = ''Process Batch Transaction'', report_desc = ''CBR-Process Batch Transaction'', rpt_sql_query = ''select mcf.process_batch_trns({:batch_id}, {:usrID}, to_char(now(),''''YYYY-MM-DD HH24:MI:SS''''), {:orgID}, {:msgID});'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:12'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''None'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name='''', pre_rpt_sql_query=''SELECT 1/(CASE WHEN mcf.chk_updt_batch_prcsng(bulk_trns_hdr_id) = ''''1''''
+  THEN 0 ELSE 1 END) processing_ongoing 
+ FROM mcf.mcf_bulk_trns_hdr 
+ WHERE bulk_trns_hdr_id = COALESCE(NULLIF({:batch_id}, -1), bulk_trns_hdr_id)
+ AND (CASE WHEN {:batch_id}<=0 THEN processing_ongoing ELSE ''''0'''' END)!=''''1''''
+ AND (created_by = {:usrID} OR (branch_id IN ( SELECT r.location_id
+ FROM org.org_sites_locations r
+ WHERE org.does_prsn_hv_crtria_id(sec.get_usr_prsn_id({:usrID}), r.allwd_group_value :: BIGINT, r.allwd_group_type) > 0)))'', pst_rpt_sql_query='''' WHERE (report_id = 127)
+-------------------------Next Msg:-------------------------

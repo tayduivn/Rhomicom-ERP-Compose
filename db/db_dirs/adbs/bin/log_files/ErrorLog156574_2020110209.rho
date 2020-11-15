@@ -1,0 +1,40 @@
+Successfully Started Thread One
+Program ID:4
+Successfully Started Thread Five
+Program ID:4: Program Name: Jasper Process Runner: Program Runner File: \bin\REMSProcessRunner.jar
+PID: -1 Running on:  /  / Successfully Started Thread Five
+Program ID:4: Program Name: Jasper Process Runner: Program Runner File: \bin\REMSProcessRunner.jar
+PID: -1 Running on:  /  / 
+Run ID: 156574
+Successfully Started Thread Five
+Program ID:4: Program Name: Jasper Process Runner: Program Runner File: \bin\REMSProcessRunner.jar
+PID: -1 Running on:  /  / 
+Run ID: 156574
+
+Run ID3: 156574 Report ID:271
+Successfully Started Thread Five
+Program ID:4: Program Name: Jasper Process Runner: Program Runner File: \bin\REMSProcessRunner.jar
+PID: -1 Running on:  /  / 
+Run ID: 156574
+
+Run ID3: 156574 Report ID:271
+728
+Linux
+[7e822be6aab5, 02-42-AC-15-00-05, 172.21.0.5]
+PID: 728 Running on: 7e822be6aab5 / 02-42-AC-15-00-05 / 172.21.0.5Successfully Connected to Database
+false
+Successfully Connected to Database
+false
+
+Run ID4: 156574 Report ID:271
+Successfully Connected to Database
+false
+
+Run ID4: 156574 Report ID:271
+
+Run ID: 156574 Report ID:271
+select mcf.populate_monthly_trns_sums( 156574, '2020', 5, 130, to_char(now(),'YYYY-MM-DD HH24:MI:SS'), 1, 156559);
+null
+[rems.Global.executeGnrlSQL(Global.java:312), rems.RunActualRqtsfunc.run(RunActualRqtsfunc.java:318), java.base/java.lang.Thread.run(Thread.java:834)]select mcf.populate_monthly_trns_sums( 156574, '2020', 5, 130, to_char(now(),'YYYY-MM-DD HH24:MI:SS'), 1, 156559);
+null
+[rems.Global.executeGnrlSQL(Global.java:312), rems.RunActualRqtsfunc.run(RunActualRqtsfunc.java:318), java.base/java.lang.Thread.run(Thread.java:834)]

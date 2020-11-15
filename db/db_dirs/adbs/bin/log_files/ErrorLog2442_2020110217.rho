@@ -1,0 +1,47 @@
+SELECT pssbl_value_desc from gst.gen_stp_lov_values where (pssbl_value_id = 3505) AND (is_enabled='1'))
+ERROR: syntax error at or near ")"
+  Position: 103
+[org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2510), org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2245), org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:311), org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447), org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368), org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:309), org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:295), org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:272), org.postgresql.jdbc.PgStatement.executeQuery(PgStatement.java:225), rems.Global.selectDataNoParams(Global.java:189), rems.Global.getEnbldPssblValDesc1(Global.java:3761), rems.Program.main(Program.java:104)]Successfully Started Thread One
+Program ID:2
+Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: 56 Running on:  /  / 56
+Linux
+[732507d1639c, 02-42-AC-1A-00-04, 172.26.0.4]
+PID: 56 Running on: 732507d1639c / 02-42-AC-1A-00-04 / 172.26.0.4Successfully Started Thread Five
+Program ID:2: Program Name: Standard Process Runner: Program Runner File: \bin\REMSProcessRunner.exe
+PID: 56 Running on:  /  / 56
+Linux
+[732507d1639c, 02-42-AC-1A-00-04, 172.26.0.4]
+PID: 56 Running on: 732507d1639c / 02-42-AC-1A-00-04 / 172.26.0.4Successfully Connected to Database
+false
+Successfully Connected to Database
+false
+
+Run ID: 2442
+Successfully Connected to Database
+false
+
+Run ID: 2442
+
+Run ID3: 2442 Report ID:150
+Successfully Connected to Database
+false
+
+Run ID: 2442
+
+Run ID3: 2442 Report ID:150
+
+Run ID4: 2442 Report ID:150
+Successfully Connected to Database
+false
+
+Run ID: 2442
+
+Run ID3: 2442 Report ID:150
+
+Run ID4: 2442 Report ID:150
+
+Run ID: 2442 Report ID:150
+
+Messages to info@rhomicom.com;support@rhomicom.com; worked on

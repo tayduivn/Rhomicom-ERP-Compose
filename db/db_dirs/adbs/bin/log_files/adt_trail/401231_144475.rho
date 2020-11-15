@@ -1,0 +1,101 @@
+@02-Nov-2020 09:10:07
+UPDATE rpt.rpt_reports SET report_name = ''Types of Loans (Schedule D)'', report_desc = ''BOG-Types of Loans(Schedule D)'', rpt_sql_query = ''SELECT tbl.no "SN", tbl.cust_type "TYPE OF LOAN", tbl.p_value "AMOUNT (GHS)", tbl.p_prcnt_to_gross_loan "% TO GROSS LOAN",
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param Period" FROM 
+(SELECT 1 "no", tbl1.cust_type, tbl1.p_value, round(100* (tbl1.p_value/(SELECT SUM(mcf.get_loan_ttl_principal_bal_as_at(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))))
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_prdt_loans d
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.loan_product_id = d.loan_product_id
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND CASE WHEN segment8_dataload != '''''''' THEN to_timestamp(segment8_dataload,''''YYYY-MM-DD'''') ELSE to_timestamp(a.disbmnt_date,''''YYYY-MM-DD'''') END
+<=  to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''))),2) p_prcnt_to_gross_loan
+FROM (SELECT c.cust_type, 
+round(SUM(mcf.get_loan_ttl_principal_bal_as_at(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)))),2) p_value 
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_prdt_loans d
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.loan_product_id = d.loan_product_id
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND CASE WHEN segment8_dataload != '''''''' THEN to_timestamp(segment8_dataload,''''YYYY-MM-DD'''') ELSE to_timestamp(a.disbmnt_date,''''YYYY-MM-DD'''') END
+<=  to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD'''')
+AND is_staff_loan_product = ''''No''''
+AND c.cust_type = ''''Individual''''
+GROUP BY c.cust_type) tbl1
+GROUP BY tbl1.cust_type, tbl1.p_value
+UNION
+SELECT 2 "no", tbl1.cust_type, tbl1.p_value, round(100* (tbl1.p_value/(SELECT SUM(mcf.get_loan_ttl_principal_bal_as_at(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))))
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_prdt_loans d
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.loan_product_id = d.loan_product_id
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND CASE WHEN segment8_dataload != '''''''' THEN to_timestamp(segment8_dataload,''''YYYY-MM-DD'''') ELSE to_timestamp(a.disbmnt_date,''''YYYY-MM-DD'''') END
+<=  to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''))),2) p_prcnt_to_gross_loan
+FROM (SELECT c.cust_type, 
+round(SUM(mcf.get_loan_ttl_principal_bal_as_at(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)))),2) p_value 
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_prdt_loans d
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.loan_product_id = d.loan_product_id
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND CASE WHEN segment8_dataload != '''''''' THEN to_timestamp(segment8_dataload,''''YYYY-MM-DD'''') ELSE to_timestamp(a.disbmnt_date,''''YYYY-MM-DD'''') END
+<=  to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD'''')
+AND is_staff_loan_product = ''''No''''
+AND c.cust_type = ''''Group''''
+GROUP BY c.cust_type) tbl1
+GROUP BY tbl1.cust_type, tbl1.p_value
+UNION
+SELECT 3 "no", ''''Enterprises'''' cust_type, tbl1.p_value, round(100* (tbl1.p_value/(SELECT SUM(mcf.get_loan_ttl_principal_bal_as_at(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))))
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_prdt_loans d
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.loan_product_id = d.loan_product_id
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND CASE WHEN segment8_dataload != '''''''' THEN to_timestamp(segment8_dataload,''''YYYY-MM-DD'''') ELSE to_timestamp(a.disbmnt_date,''''YYYY-MM-DD'''') END
+<=  to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''))),2) p_prcnt_to_gross_loan
+FROM (SELECT c.cust_type, 
+round(SUM(mcf.get_loan_ttl_principal_bal_as_at(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)))),2) p_value 
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_prdt_loans d
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.loan_product_id = d.loan_product_id
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND CASE WHEN segment8_dataload != '''''''' THEN to_timestamp(segment8_dataload,''''YYYY-MM-DD'''') ELSE to_timestamp(a.disbmnt_date,''''YYYY-MM-DD'''') END
+<=  to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD'''')
+AND is_staff_loan_product = ''''No''''
+AND c.cust_type = ''''Corporate''''
+GROUP BY c.cust_type) tbl1
+GROUP BY tbl1.cust_type, tbl1.p_value
+UNION
+SELECT 4 "no", ''''Others (Staff Loans)'''' cust_type, tbl1.p_value, round(100* (tbl1.p_value/(SELECT SUM(mcf.get_loan_ttl_principal_bal_as_at(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1))))
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_prdt_loans d
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.loan_product_id = d.loan_product_id
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND CASE WHEN segment8_dataload != '''''''' THEN to_timestamp(segment8_dataload,''''YYYY-MM-DD'''') ELSE to_timestamp(a.disbmnt_date,''''YYYY-MM-DD'''') END
+<=  to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''))),2) p_prcnt_to_gross_loan
+FROM (SELECT c.cust_type, 
+round(SUM(mcf.get_loan_ttl_principal_bal_as_at(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)))),2) p_value 
+FROM mcf.mcf_loan_disbursement_hdr a, mcf.mcf_loan_disbursement_det b, mcf.mcf_loan_request c,
+mcf.mcf_prdt_loans d
+WHERE a.disbmnt_hdr_id = b.disbmnt_hdr_id
+AND b.loan_rqst_id = c.loan_rqst_id
+AND c.loan_product_id = d.loan_product_id
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND CASE WHEN segment8_dataload != '''''''' THEN to_timestamp(segment8_dataload,''''YYYY-MM-DD'''') ELSE to_timestamp(a.disbmnt_date,''''YYYY-MM-DD'''') END
+<=  to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD'''')
+AND is_staff_loan_product = ''''Yes''''
+AND c.cust_type = ''''Individual''''
+GROUP BY c.cust_type) tbl1
+GROUP BY tbl1.cust_type, tbl1.p_value
+order by 1)tbl
+order by 1'', owner_module = ''Banking'', is_enabled = ''0'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:07'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = ''2,3'', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''183.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 183)
+-------------------------Next Msg:-------------------------

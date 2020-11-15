@@ -1,0 +1,3 @@
+@02-Nov-2020 09:12:17
+UPDATE rpt.rpt_report_parameters SET parameter_name = ''Pay Run ID:'', paramtr_rprstn_nm_in_query = ''{:pay_run_name}'', default_value = ''-1'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:12:17'', lov_name_id = ''393'', param_data_type = ''TEXT'', date_format = ''None'', lov_name = ''Pay Run IDs'', shd_be_dsplyd = ''1'' WHERE (parameter_id = 625)
+-------------------------Next Msg:-------------------------

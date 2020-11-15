@@ -1,0 +1,251 @@
+@02-Nov-2020 09:10:01
+UPDATE rpt.rpt_reports SET report_name = ''MFI FINANCIAL INCLUSION DATA - DEPOSITS'', report_desc = '''', rpt_sql_query = ''SELECT tbl.no "SN", 
+tbl.age_grp "Age Group (yrs)", 
+tbl.no_of_accts_cust "Total No Account Customers", 
+tbl.no_of_accounts "Number of Accounts", 
+round(COALESCE(tbl.total_deposite_amnt,0), 2)  "Total Deposite (GHS)" 
+FROM (SELECT 1 "no", ''''Male Above 35'''' age_grp, 
+(select count(a.account_title) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and a.status=''''Authorized'''' 
+AND e.nationality = ''''Ghanaian''''	
+and a.account_status = ''''Active''''
+AND e.gender = ''''Male'''' 
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 35 ) no_of_accts_cust, 
+(select count(a.account_number) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and status=''''Authorized'''' 
+AND e.nationality = ''''Ghanaian''''
+AND e.gender = ''''Male'''' 
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 35 ) no_of_accounts, 
+((SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e,mcf.mcf_prdt_savings k
+where  a.cust_id = e.cust_id and  z.account_id = a.account_id AND e.nationality = ''''Ghanaian'''' AND e.gender = ''''Male'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 35 AND k.svngs_product_id = a.product_type_id 
+AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''') AND z.trns_date <= ''''{:p_as_at_date}'''' AND z.trns_type IN (''''DEPOSIT'''' ))
+-
+(SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e ,mcf.mcf_prdt_savings k
+where   z.account_id = a.account_id and a.cust_id = e.cust_id AND e.nationality = ''''Ghanaian'''' AND e.gender = ''''Male'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 35 AND k.svngs_product_id = a.product_type_id 
+ AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''')  AND z.trns_date <=  ''''{:p_as_at_date}'''' AND z.trns_type IN (''''WITHDRAWAL''''))	) total_deposite_amnt
+  FROM mcf.mcf_cust_account_transactions z,  mcf.mcf_prdt_savings k,  mcf.mcf_accounts a, mcf.mcf_customers_ind e
+WHERE z.account_id = a.account_id
+AND k.svngs_product_id = a.product_type_id 
+AND a.cust_id = e.cust_id 
+AND e.nationality = ''''Ghanaian''''
+AND e.gender = ''''Male'''' 	
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 35 
+Group by a.account_id 							   
+							   
+UNION
+SELECT 2 "no", ''''Female Above 35'''' age_grp, 
+(select count(a.account_title) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and a.status=''''Authorized'''' 
+AND e.nationality = ''''Ghanaian''''
+and a.account_status = ''''Active''''
+AND e.gender = ''''Female'''' 
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 35 ) no_of_accts_cust, 
+(select count(a.account_number) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and status=''''Authorized'''' 
+AND e.nationality = ''''Ghanaian''''
+AND e.gender = ''''Female'''' 
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 35 ) no_of_accounts, 
+((SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e ,mcf.mcf_prdt_savings k
+where  a.cust_id = e.cust_id and  z.account_id = a.account_id AND e.nationality = ''''Ghanaian'''' AND e.gender = ''''Female'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 35 AND k.svngs_product_id = a.product_type_id 
+AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''') AND z.trns_date <= ''''{:p_as_at_date}'''' AND z.trns_type IN (''''DEPOSIT'''' ))
+-
+(SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e ,mcf.mcf_prdt_savings k
+where   z.account_id = a.account_id and a.cust_id = e.cust_id AND e.nationality = ''''Ghanaian'''' AND e.gender = ''''Female'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 35 AND k.svngs_product_id = a.product_type_id 
+ AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''')  AND z.trns_date <=  ''''{:p_as_at_date}'''' AND z.trns_type IN (''''WITHDRAWAL''''))	) total_deposite_amnt
+  FROM mcf.mcf_cust_account_transactions z,  mcf.mcf_prdt_savings k,  mcf.mcf_accounts a, mcf.mcf_customers_ind e
+WHERE z.account_id = a.account_id
+AND k.svngs_product_id = a.product_type_id 
+AND a.cust_id = e.cust_id 
+AND e.nationality = ''''Ghanaian''''
+AND e.gender = ''''Female'''' 		
+AND a.creation_date <= ''''{:p_as_at_date}''''	 
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 35 
+Group by a.account_id 								   
+							   
+
+UNION
+SELECT 3 "no", ''''Male 18 - 35'''' age_grp, 
+(select count(a.account_title) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and a.status=''''Authorized'''' 
+AND e.nationality = ''''Ghanaian''''
+and a.account_status = ''''Active''''
+AND e.gender = ''''Male'''' 
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) between 18 and 35 ) no_of_accts_cust, 
+(select count(a.account_number) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and status=''''Authorized'''' 
+AND e.nationality = ''''Ghanaian''''
+AND e.gender = ''''Male'''' 
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) between 18 and 35 ) no_of_accounts, 
+((SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e ,mcf.mcf_prdt_savings k
+where  a.cust_id = e.cust_id and  z.account_id = a.account_id AND e.nationality = ''''Ghanaian'''' AND e.gender = ''''Male'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) between 18 and 35  AND k.svngs_product_id = a.product_type_id 
+AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''') AND z.trns_date <= ''''{:p_as_at_date}'''' AND z.trns_type IN (''''DEPOSIT'''' ))
+-
+(SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e ,mcf.mcf_prdt_savings k
+where   z.account_id = a.account_id and a.cust_id = e.cust_id AND e.nationality = ''''Ghanaian'''' AND e.gender = ''''Male'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) between 18 and 35 AND k.svngs_product_id = a.product_type_id 
+ AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''')  AND z.trns_date <=  ''''{:p_as_at_date}'''' AND z.trns_type IN (''''WITHDRAWAL''''))	) total_deposite_amnt
+  FROM mcf.mcf_cust_account_transactions z,  mcf.mcf_prdt_savings k,  mcf.mcf_accounts a, mcf.mcf_customers_ind e
+WHERE z.account_id = a.account_id
+AND k.svngs_product_id = a.product_type_id 
+AND a.cust_id = e.cust_id 
+and a.status=''''Authorized'''' 
+AND e.gender = ''''Male'''' 	
+AND e.nationality = ''''Ghanaian''''
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) between 18 and 35 
+Group by a.account_id 							   
+							   
+UNION
+SELECT 4 "no", ''''Female  18 - 35'''' age_grp, 
+(select count(a.account_title) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and a.status=''''Authorized'''' 
+AND e.nationality = ''''Ghanaian''''
+and a.account_status = ''''Active''''
+AND e.gender = ''''Female'''' 
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) between 18 and 35) no_of_accts_cust, 
+(select count(a.account_number) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and status=''''Authorized'''' 
+AND e.nationality = ''''Ghanaian''''
+AND e.gender = ''''Female'''' 
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) between 18 and 35 ) no_of_accounts, 
+((SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e ,mcf.mcf_prdt_savings k
+where  a.cust_id = e.cust_id and  z.account_id = a.account_id AND e.nationality = ''''Ghanaian'''' AND e.gender = ''''Female'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) between 18 and 35 AND k.svngs_product_id = a.product_type_id 
+AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''') AND z.trns_date <= ''''{:p_as_at_date}'''' AND z.trns_type IN (''''DEPOSIT'''' ))
+-
+(SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e ,mcf.mcf_prdt_savings k
+where   z.account_id = a.account_id and a.cust_id = e.cust_id AND e.nationality = ''''Ghanaian'''' AND e.gender = ''''Female'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) between 18 and 35 AND k.svngs_product_id = a.product_type_id 
+ AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''')  AND z.trns_date <=  ''''{:p_as_at_date}'''' AND z.trns_type IN (''''WITHDRAWAL''''))	) total_deposite_amnt
+  FROM mcf.mcf_cust_account_transactions z,  mcf.mcf_prdt_savings k,  mcf.mcf_accounts a, mcf.mcf_customers_ind e
+WHERE z.account_id = a.account_id
+AND k.svngs_product_id = a.product_type_id 
+AND a.cust_id = e.cust_id 
+AND e.nationality = ''''Ghanaian''''
+AND e.gender = ''''Female'''' 
+AND a.creation_date <= ''''{:p_as_at_date}''''			  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) between 18 and 35 
+Group by a.account_id 
+
+
+UNION
+SELECT 5 "no", ''''Male < 18'''' age_grp, 
+(select count(a.account_title) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and a.status=''''Authorized'''' 
+AND e.nationality = ''''Ghanaian''''
+and a.account_status = ''''Active''''
+AND e.gender = ''''Male'''' 
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) <= 18) no_of_accts_cust, 
+(select count(a.account_number) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and status=''''Authorized'''' 
+AND e.nationality = ''''Ghanaian''''
+AND e.gender = ''''Male'''' 
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) <= 18) no_of_accounts, 
+((SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e ,mcf.mcf_prdt_savings k
+where  a.cust_id = e.cust_id and  z.account_id = a.account_id AND e.nationality = ''''Ghanaian'''' AND e.gender = ''''Male'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) <= 18 AND k.svngs_product_id = a.product_type_id 
+AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''') AND z.trns_date <= ''''{:p_as_at_date}'''' AND z.trns_type IN (''''DEPOSIT'''' ))
+-
+(SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e ,mcf.mcf_prdt_savings k
+where   z.account_id = a.account_id and a.cust_id = e.cust_id AND e.nationality = ''''Ghanaian'''' AND e.gender = ''''Male'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) <= 18 AND k.svngs_product_id = a.product_type_id 
+ AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''')  AND z.trns_date <=  ''''{:p_as_at_date}'''' AND z.trns_type IN (''''WITHDRAWAL''''))	) total_deposite_amnt
+  FROM mcf.mcf_cust_account_transactions z,  mcf.mcf_prdt_savings k,  mcf.mcf_accounts a, mcf.mcf_customers_ind e
+WHERE z.account_id = a.account_id
+AND k.svngs_product_id = a.product_type_id 
+AND a.cust_id = e.cust_id 
+AND e.nationality = ''''Ghanaian''''
+AND e.gender = ''''Male'''' 	
+AND a.creation_date <= ''''{:p_as_at_date}''''
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) <= 18 
+Group by a.account_id 							   
+							   
+UNION
+SELECT 6 "no", ''''Female < 18'''' age_grp, 
+(select count(a.account_title) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and a.status=''''Authorized'''' 
+and a.account_status = ''''Active''''
+AND e.gender = ''''Female'''' 
+AND e.nationality = ''''Ghanaian''''
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) <= 18) no_of_accts_cust, 
+(select count(a.account_number) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and status=''''Authorized'''' 
+AND e.nationality = ''''Ghanaian''''
+AND e.gender = ''''Female'''' 
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) <= 18 ) no_of_accounts, 
+((SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e ,mcf.mcf_prdt_savings k
+where  a.cust_id = e.cust_id and  z.account_id = a.account_id AND e.nationality = ''''Ghanaian'''' AND e.gender = ''''Female'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) <= 18 AND k.svngs_product_id = a.product_type_id 
+AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''') AND z.trns_date <= ''''{:p_as_at_date}'''' AND z.trns_type IN (''''DEPOSIT'''' ))
+-
+(SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e ,mcf.mcf_prdt_savings k
+where   z.account_id = a.account_id and a.cust_id = e.cust_id AND e.nationality = ''''Ghanaian'''' AND e.gender = ''''Female'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) <= 18 AND k.svngs_product_id = a.product_type_id 
+ AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''')  AND z.trns_date <=  ''''{:p_as_at_date}'''' AND z.trns_type IN (''''WITHDRAWAL''''))	) total_deposite_amnt
+  FROM mcf.mcf_cust_account_transactions z,  mcf.mcf_prdt_savings k,  mcf.mcf_accounts a, mcf.mcf_customers_ind e
+WHERE z.account_id = a.account_id
+AND k.svngs_product_id = a.product_type_id 
+AND a.cust_id = e.cust_id 
+AND e.gender = ''''Female'''' 	
+AND e.nationality = ''''Ghanaian''''
+AND a.creation_date <= ''''{:p_as_at_date}''''	 
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) <= 18
+Group by a.account_id 
+							   
+UNION
+
+
+SELECT 7 "no", ''''Refugees & Foreigners (All ages)'''' age_grp, 
+(select count(a.account_title) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and a.status=''''Authorized'''' 
+and a.account_status = ''''Active''''
+AND e.nationality != ''''Ghanaian''''
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 0 ) no_of_accts_cust, 
+(select count(a.account_number) from  mcf.mcf_accounts a, mcf.mcf_customers_ind e 
+Where a.cust_id = e.cust_id 
+and status=''''Authorized'''' 	
+AND e.nationality != ''''Ghanaian''''	
+AND a.creation_date <= ''''{:p_as_at_date}''''	  
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 0 ) no_of_accounts, 
+((SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e ,mcf.mcf_prdt_savings k
+where  a.cust_id = e.cust_id and  z.account_id = a.account_id AND e.nationality != ''''Ghanaian'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 0 AND k.svngs_product_id = a.product_type_id 
+AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''') AND z.trns_date <= ''''{:p_as_at_date}'''' AND z.trns_type IN (''''DEPOSIT'''' ))
+-
+(SELECT SUM(COALESCE(z.amount, 0))  FROM mcf.mcf_cust_account_transactions z, mcf.mcf_accounts a, mcf.mcf_customers_ind e ,mcf.mcf_prdt_savings k
+where   z.account_id = a.account_id and a.cust_id = e.cust_id AND e.nationality != ''''Ghanaian'''' AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 0 AND k.svngs_product_id = a.product_type_id 
+ AND z.status IN (''''Paid'''', ''''Received'''', ''''Void'''')  AND z.trns_date <=  ''''{:p_as_at_date}'''' AND z.trns_type IN (''''WITHDRAWAL''''))	) total_deposite_amnt
+  FROM mcf.mcf_cust_account_transactions z,  mcf.mcf_prdt_savings k,  mcf.mcf_accounts a, mcf.mcf_customers_ind e
+WHERE z.account_id = a.account_id
+AND k.svngs_product_id = a.product_type_id 
+AND a.cust_id = e.cust_id 
+AND e.nationality != ''''Ghanaian''''	  
+AND a.creation_date <= ''''{:p_as_at_date}''''	 
+AND EXTRACT(YEAR FROM age(cast(e.date_of_birth as date))) >= 0
+Group by a.account_id 
+
+							   
+order by 1)tbl 
+Group by tbl.no, tbl.age_grp, tbl.no_of_accts_cust,tbl.no_of_accounts,tbl.total_deposite_amnt
+order by tbl.no'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:01'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''249.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 249)
+-------------------------Next Msg:-------------------------

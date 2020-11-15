@@ -1,0 +1,45 @@
+@02-Nov-2020 09:10:00
+UPDATE rpt.rpt_reports SET report_name = ''Disbursed Loans Voided Per Period'', report_desc = ''Disbursed Loans Voided Per Period'', rpt_sql_query = ''SELECT
+row_number() over (order by 1 ASC, 2 ASC, 8 DESC) as "No.", tbl1.*
+FROM (SELECT
+
+CASE WHEN a.cust_type = ''''Group'''' AND a.grp_cust_id > 0 THEN mcf.get_customer_name(grp_applicant_type, a.cust_id)||'''' (''''||mcf.get_cust_local_idno(a.cust_id)||'''')''''||'''' [Group: ''''||mcf.get_customer_name(a.cust_type, a.grp_cust_id)||'''']''''
+ELSE mcf.get_customer_name_LastNameFirst(a.cust_type, a.cust_id)||'''' (''''||mcf.get_cust_local_idno(a.cust_id)||'''')'''' END    "Customer Name",	 
+mcf.get_cust_account_number(z.account_id) "Loan Account Number",
+mcf.get_cust_accnt_status(z.account_id)	"Account Status" , 
+CASE WHEN segment8_dataload != '''''''' THEN to_char(to_timestamp(segment8_dataload,''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') 
+ELSE to_char(to_timestamp(d.disbmnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''DD-Mon-YYYY'''') END "Disbursement Date",
+round(SUM(c.principal_amount),2) "Disbursed Amount",
+d.status "Disbursment Status",
+to_char(to_timestamp(d.last_update_date,''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Date Voided",
+ sec.get_usr_name(d.last_update_by)	 "Voided By",  
+org.get_site_code_desc(a.branch_id::integer) branch,
+z.account_clsfctn  "CATEGORY",	 
+b.product_code||''''.''''||product_desc "Product Type", 
+         prs.get_prsn_name(rcvry_officer_prsn_id) "Credit Officer",
+a.crdt_type "Loan Type",
+	''''{:pStartDate}'''' "Start Date",
+	''''{:pEndDate}'''' "End Date"	
+FROM mcf.mcf_loan_request a INNER JOIN mcf.mcf_prdt_loans b ON a.loan_product_id = b.loan_product_id
+INNER JOIN mcf.mcf_loan_disbursement_det c ON c.loan_rqst_id = a.loan_rqst_id
+INNER JOIN mcf.mcf_loan_disbursement_hdr d ON c.disbmnt_hdr_id = d.disbmnt_hdr_id
+INNER JOIN mcf.mcf_currencies e ON b.currency_id = e.crncy_id
+left outer JOIN   mcf.mcf_accounts z ON a.repayment_account_id = z.account_id
+WHERE  1 = 1
+  AND b.currency_id = e.crncy_id
+ 
+AND repayment_type = ''''Account Deductions'''' AND is_disbursed = ''''YES''''
+ AND a.status = ''''Approved'''' AND d.status = ''''Void'''' 
+ AND rcvry_officer_prsn_id = COALESCE(NULLIF({:rltnshpOffcrID},-1), rcvry_officer_prsn_id)
+ AND a.crdt_type = COALESCE(NULLIF(''''{:crdtType}'''',''''%''''), a.crdt_type)
+ AND a.loan_product_id = COALESCE(NULLIF({:lnPrdtID},-1), a.loan_product_id)
+ AND a.branch_id = COALESCE(NULLIF({:branchID},-1),a.branch_id)
+  AND CASE WHEN segment8_dataload != '''''''' THEN to_timestamp(segment8_dataload,''''YYYY-MM-DD'''') ELSE to_timestamp(d.disbmnt_date,''''YYYY-MM-DD'''') END BETWEEN  
+ to_timestamp(coalesce(NULLIF(''''{:pStartDate}'''',''''''''),''''01-Jan-2000''''),''''DD-Mon-YYYY'''')
+ AND to_timestamp(coalesce(NULLIF(''''{:pEndDate}'''',''''''''),to_char(to_timestamp(mcf.xx_get_start_of_day_date(1),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')),''''DD-Mon-YYYY'''') 
+  group by a.branch_id, d.disbmnt_date, iso_code, a.crdt_type, b.product_code||''''.''''||product_desc, segment8_dataload , a.cust_type,a.grp_cust_id,
+a.grp_applicant_type,a.cust_id,a.repayment_account_id,z.account_id	,     a.rcvry_officer_prsn_id	,d.status	,d.last_update_date,	d.last_update_by	   
+ 
+ORDER BY 1 asc
+)tbl1'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:00'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 254)
+-------------------------Next Msg:-------------------------

@@ -1,0 +1,31 @@
+@02-Nov-2020 09:10:22
+UPDATE rpt.rpt_reports SET report_name = ''Members in Good Standing Chart'', report_desc = ''Members in Good Standing Chart'', rpt_sql_query = ''Select tbl1.status, count(tbl1.id_no) 
+from (SELECT distinct 
+'''''''''''''''' || c.local_id_no id_no, 
+trim(c.title || '''' '''' || c.sur_name ||
+         '''', '''' || c.first_name || '''' '''' || c.other_names) "Full Name                              ",
+ 
+CASE WHEN pay.get_ltst_blsitm_bals(c.person_id,org.get_payitm_id(b.item_code_name),to_char(now(), ''''YYYY-MM-DD''''))>0
+ THEN 
+''''Not In Good Standing'''' 
+ELSE ''''In Good Standing'''' END status, 
+ped.data_col6 "Practice                  ",
+
+(select org.get_grade_name(pg.grade_id)) "Grade                   "
+, 
+c.sur_name m1      
+FROM prs.prsn_names_nos c  
+left outer join prs.prsn_extra_data ped on ped.person_id = c.person_id 
+  
+left outer join pasn.prsn_grades pg on c.person_id = pg.person_id
+       
+LEFT OUTER JOIN pasn.prsn_bnfts_cntrbtns f ON (c.person_id = f.person_id and (now() between to_timestamp(f.valid_start_date,''''YYYY-MM-DD HH24:MI:SS'''') AND to_timestamp(f.valid_end_date,''''YYYY-MM-DD HH24:MI:SS'''')))/**/ 
+       
+LEFT OUTER JOIN org.org_pay_items b ON (b.item_id=f.item_id) 
+       
+WHERE((b.org_id = {:orgID}) AND (b.item_code_name ilike ''''{:itmNm}'''' or b.item_code_name ilike ''''%'''' || to_char(now(), ''''YYYY'''') || ''''%'''') AND (b.item_maj_type=''''Balance Item'''')) 
+   
+ORDER BY 6, 1 ) tbl1
+      
+ GROUP BY tbl1.status'', owner_module = ''Basic Person Data'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:22'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = ''1100500'', cols_to_count = ''0,1'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PIE CHART'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 49)
+-------------------------Next Msg:-------------------------

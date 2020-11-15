@@ -1,0 +1,20 @@
+@02-Nov-2020 09:10:18
+UPDATE rpt.rpt_reports SET report_name = ''Sales Invoice'', report_desc = ''Sales Invoice'', rpt_sql_query = ''SELECT 
+	a.invc_hdr_id,
+	e.invc_number, 
+	e.invc_type, 
+	to_char(to_timestamp(e.invc_date,''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''')  invc_date,
+        a.doc_qty, a.unit_selling_price, (a.doc_qty * a.unit_selling_price*a.rented_itm_qty) amnt, 
+        b.item_code, CASE WHEN a.alternate_item_name='''''''' THEN b.item_desc ELSE a.alternate_item_name END item_desc, 
+        b.base_uom_id,c.uom_name, d.cat_name, scm.get_cstmr_splr_name(e.customer_id) customer_name, 
+        COALESCE(f.site_name,'''' '''') site_name, COALESCE(f.billing_address,'''' '''') billing_address, 
+        COALESCE(f.ship_to_address,'''' '''') ship_to_address, e.payment_terms,
+	    gst.get_pssbl_val(e.invc_curr_id) curr,
+	    CASE WHEN a.rented_itm_qty>1 THEN ''''''''||a.rented_itm_qty||'''' x '''' || a.doc_qty ELSE ''''''''|| a.doc_qty END  doc_qty2 
+      FROM scm.scm_sales_invc_det a, inv.inv_itm_list b, 
+        inv.unit_of_measure c, inv.inv_product_categories d, scm.scm_sales_invc_hdr e 
+      LEFT OUTER JOIN scm.scm_cstmr_suplr_sites f  ON (e.customer_site_id =f.cust_sup_site_id)
+      WHERE(a.invc_hdr_id=e.invc_hdr_id  and a.invc_hdr_id = {:invoice_id} and a.invc_hdr_id >0 
+      and a.itm_id = b.item_id and b.base_uom_id=c.uom_id and d.cat_id = b.category_id) 
+      ORDER BY a.invc_det_ln_id'', owner_module = ''Generic Module'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:17'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''NO'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''83.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 83)
+-------------------------Next Msg:-------------------------

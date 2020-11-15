@@ -1,0 +1,24 @@
+@02-Nov-2020 09:10:05
+UPDATE rpt.rpt_reports SET report_name = ''Loan Portfolio By BoG Sectors - Summary'', report_desc = ''CR-Loan Portfolio By BoG Sectors - Summary'', rpt_sql_query = ''SELECT row_number() over (order by 1 DESC) as "No.", tbl2.sector_major "MAJOR SECTOR", tbl2.sector_minor "MINOR SECTOR", 
+tbl2.principal_amount "PRINCIPAL DISBURSED", tbl2.prncpl_bal "PRINCIPAL BALANCE", tbl2.intrst_bal "INTEREST BALANCE",   (tbl2.prncpl_bal + tbl2.intrst_bal) "TOTAL", tbl2.cust_count "NO. OF CUSTOMERS",
+to_char(to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD''''),''''DD-Mon-YYYY'''') "Param Period" FROM 
+(SELECT tbl.sector_major, tbl.sector_minor, sum(tbl.principal_amount) principal_amount, sum(tbl.prncpl_bal) prncpl_bal, sum(tbl.intrst_bal) intrst_bal, count(tbl.*) cust_count
+FROM
+(SELECT COALESCE(d.sector_desc,''''***NO SECTOR***'''') sector_major, COALESCE(e.sector_desc,''''***NO SECTOR***'''') sector_minor, 
+round(coalesce(b.principal_amount,0),2) principal_amount,
+round((mcf.get_loan_ttl_principal_bal_as_at(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)))),2) prncpl_bal, 
+round((mcf.get_loan_ttl_interest_bal_as_at(c.loan_rqst_id, coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)))),2) intrst_bal, c.loan_rqst_id
+FROM mcf.mcf_loan_disbursement_hdr a LEFT OUTER JOIN mcf.mcf_loan_disbursement_det b ON a.disbmnt_hdr_id = b.disbmnt_hdr_id
+LEFT OUTER JOIN mcf.mcf_loan_request c ON b.loan_rqst_id = c.loan_rqst_id
+LEFT OUTER JOIN mcf.mcf_loan_sectors_major d ON c.sector_clsfctn_major_id = d.major_sector_id
+LEFT OUTER JOIN mcf.mcf_loan_sectors_minor e ON c.sector_clsfctn_minor_id = e.minor_sector_id 
+WHERE 1 = 1
+AND d.major_sector_id = e.major_sector_id
+AND a.status = ''''Disbursed'''' AND b.principal_amount > 0
+AND CASE WHEN segment8_dataload != '''''''' THEN to_timestamp(segment8_dataload,''''YYYY-MM-DD'''') ELSE to_timestamp(a.disbmnt_date,''''YYYY-MM-DD'''') END
+<= to_timestamp(coalesce(NULLIF(''''{:p_as_at_date}'''',''''''''), mcf.xx_get_start_of_day_date(1)),''''YYYY-MM-DD'''')
+order by 1, 2)tbl
+GROUP BY tbl.sector_major, tbl.sector_minor
+order by 1)tbl2
+order by 1'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:05'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''197.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 197)
+-------------------------Next Msg:-------------------------

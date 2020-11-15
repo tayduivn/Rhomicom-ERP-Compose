@@ -1,0 +1,12 @@
+@02-Nov-2020 09:10:21
+UPDATE rpt.rpt_reports SET report_name = ''Seminar/Event Income/Expenditure'', report_desc = ''Seminar/Event Income/Expenditure'', rpt_sql_query = ''SELECT b.pssbl_value_desc "Major Category ", 
+       a.cost_classfctn "Sub-Category ", 
+       sum(a.no_of_persons) || '''' x '''' || MAX(a.unit_cost) "No. of Participants ", 
+       (CASE WHEN b.pssbl_value_desc=''''1Income'''' THEN 1 ELSE -1 END)*SUM(a.no_of_persons*a.unit_cost) "Total Amount (GHS) "
+       FROM attn.attn_attendance_costs a, gst.gen_stp_lov_values b 
+       WHERE((a.recs_hdr_id = {:rgstr_id}) 
+       AND (a.cost_comments ilike ''''%'''') 
+       AND (a.cost_classfctn = b.pssbl_value and b.value_list_id = gst.get_lov_id(''''Event Cost Categories''''))) 
+       GROUP BY 1,2
+       ORDER BY 1,2'', owner_module = ''Events And Attendance'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:21'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = ''0'', cols_to_count = ''NO'', cols_to_sum = ''3'', cols_to_average = '''', cols_to_no_frmt = ''3'', output_type = ''HTML'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 55)
+-------------------------Next Msg:-------------------------

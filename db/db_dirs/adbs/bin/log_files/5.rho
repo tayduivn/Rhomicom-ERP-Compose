@@ -1,0 +1,30 @@
+Username:admin|Login Number:5|myImgFileName:554672465Mvc2m8VxI0QmP3EPcV2L4F57P4c58637563.png|strlFileNm11:|extnsn:png
+-------------------------Next Msg:-------------------------
+Username:admin|Login Number:5|Person:Mr. SYSTEM USER SETUP (RHO0002012)
+-------------------------Next Msg:-------------------------
+Welcome Mr. SYSTEM USER SETUP to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was  .
+        <br/><br/>Your last failed login was 02-Nov-2020 10:48:49-Machine Details(Unknown/IP:172.20.0.1/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:4g75l4i2m1gc3gjraskm8j210b)
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 10:49:18
+INSERT INTO wkf.wkf_actual_msgs_hdr(
+            msg_id, msg_hdr, msg_body, created_by, creation_date, herchy_id, 
+            msg_typ, app_id, msg_status, src_doc_type, src_doc_id, last_update_by, 
+            last_update_date, attchments, attchments_desc) VALUES (1, 'Welcome Mr. SYSTEM USER SETUP', 'Welcome Mr. SYSTEM USER SETUP to Rhomicom Systems Tech. Ltd.. 
+        <br/><br/>Your last successful login was  .
+        <br/><br/>Your last failed login was 02-Nov-2020 10:48:49-Machine Details(Unknown/IP:172.20.0.1/Browser:Google Chrome v86.0.4240.111/OS:windows/Session ID:4g75l4i2m1gc3gjraskm8j210b)', 
+            1, '2020-11-02 10:49:18', -1, 'Informational', 
+            -1, '0','Login',-1, 
+            1, '2020-11-02 10:49:18', '', '')
+-------------------------Next Msg:-------------------------
+@02-Nov-2020 10:49:18
+INSERT INTO wkf.wkf_actual_msgs_routng(
+            msg_id, from_prsn_id, to_prsn_id, date_sent, 
+            created_by, creation_date, msg_status, action_to_perform, last_update_by, 
+            last_update_date, to_prsns_hrchy_level, action_comments) 
+            VALUES (1, -1, 1, '2020-11-02 10:49:18', 1, 
+            '2020-11-02 10:49:18', 'Initiated', 'Acknowledge', 1, '2020-11-02 10:49:18', 1, 
+                '')
+-------------------------Next Msg:-------------------------
+orgLogoFileName:cmn_images/3.png|strlFileNm11:0.png|extnsn:png
+-------------------------Next Msg:-------------------------

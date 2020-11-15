@@ -1,0 +1,56 @@
+@02-Nov-2020 09:09:59
+UPDATE rpt.rpt_reports SET report_name = ''Total Withdrawals Summary'', report_desc = ''Total Withdrawals Summary'', rpt_sql_query = ''SELECT 
+tbl1.somanya,  
+tbl1.nkurakan, 
+tbl1.koforidua,
+tbl1.asesewa,
+tbl1.from,
+tbl1.tot
+FROM (
+SELECT 	SUM(amount) "somanya",0 "nkurakan",0 "koforidua", 0 "asesewa", 
+	''''{:fromDate}''''    "from",
+	''''{:toDate}''''    "tot"
+FROM mcf.mcf_cust_account_transactions
+where trns_type in (''''WITHDRAWAL'''')
+AND branch_id  = 2
+AND (to_timestamp(trns_date,''''YYYY-MM-DD HH24:MI:SS'''') between to_timestamp(''''{:fromDate}'''',''''DD-Mon-YYYY HH24:MI:SS'''')
+and to_timestamp(''''{:toDate}'''',''''DD-Mon-YYYY HH24:MI:SS''''))
+
+UNION
+SELECT 	0 "somanya",SUM(amount) "nkurakan",0 "koforidua", 0 "asesewa",
+	''''{:fromDate}''''    "from",
+	''''{:toDate}''''    "tot"
+FROM mcf.mcf_cust_account_transactions
+where trns_type in (''''WITHDRAWAL'''')
+AND branch_id  = 3
+AND (to_timestamp(trns_date,''''YYYY-MM-DD HH24:MI:SS'''') between to_timestamp(''''{:fromDate}'''',''''DD-Mon-YYYY HH24:MI:SS'''')
+and to_timestamp(''''{:toDate}'''',''''DD-Mon-YYYY HH24:MI:SS''''))
+	
+UNION
+	
+SELECT 0 "somanya",0 "nkurakan",	SUM(amount) "koforidua", 0 "asesewa",
+	''''{:fromDate}''''    "from",
+	''''{:toDate}''''    "tot"
+FROM mcf.mcf_cust_account_transactions
+where trns_type in (''''WITHDRAWAL'''')
+AND branch_id  = 4
+AND (to_timestamp(trns_date,''''YYYY-MM-DD HH24:MI:SS'''') between to_timestamp(''''{:fromDate}'''',''''DD-Mon-YYYY HH24:MI:SS'''')
+and to_timestamp(''''{:toDate}'''',''''DD-Mon-YYYY HH24:MI:SS''''))
+
+UNION
+SELECT 	0 "somanya",0 "nkurakan",0 "koforidua",	SUM(amount) "asesewa",
+	''''{:fromDate}''''    "from",
+	''''{:toDate}''''    "tot"
+FROM mcf.mcf_cust_account_transactions
+where trns_type in (''''WITHDRAWAL'''')
+AND branch_id  = 5
+AND (to_timestamp(trns_date,''''YYYY-MM-DD HH24:MI:SS'''') between to_timestamp(''''{:fromDate}'''',''''DD-Mon-YYYY HH24:MI:SS'''')
+and to_timestamp(''''{:toDate}'''',''''DD-Mon-YYYY HH24:MI:SS'''')))tbl1
+ Group by
+tbl1.somanya,  
+tbl1.nkurakan, 
+tbl1.koforidua,
+tbl1.asesewa,
+tbl1.from,
+tbl1.tot'', owner_module = ''Banking'', is_enabled = ''0'', last_update_by = 130, last_update_date = ''2020-11-02 09:09:59'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''266.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 266)
+-------------------------Next Msg:-------------------------

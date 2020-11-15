@@ -1,0 +1,13 @@
+@02-Nov-2020 09:10:04
+UPDATE rpt.rpt_reports SET report_name = ''Group Loan Repayment Collection Sheet'', report_desc = ''CR-Group Loan Repayment Collection Sheet'', rpt_sql_query = ''SELECT distinct mcf.get_customer_name_LastNameFirst(''''Individual'''', d.cust_id)||''''(''''||mcf.get_cust_local_idno(d.cust_id)||'''')'''' "Customer Name", 
+a.account_number "Account Number", '''''''' "Loan Amount", '''''''' "Savings Amount", '''''''' "Total", '''''''' "Signature", 
+CASE WHEN {:p_grp_id} = -1 THEN ''''All Groups'''' ELSE c.cust_name END "Group Name"/*, account_title*/
+FROM mcf.mcf_accounts a, mcf.mcf_customers b, mcf.mcf_customers_corp c, mcf.mcf_group_members d
+WHERE a.cust_id = d.cust_id
+and b.cust_id = c.cust_id
+AND c.cust_id = d.grp_cust_id 
+and b.cust_type = ''''Group''''
+and c.cust_id = COALESCE(NULLIF({:p_grp_id},-1),c.cust_id )
+AND a.account_type in (''''Savings'''',''''Current'''')
+and to_char(now(),''''YYYY-MM-DD'''') BETWEEN start_date_active and end_date_active'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:04'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Portrait'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 207)
+-------------------------Next Msg:-------------------------

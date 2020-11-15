@@ -1,0 +1,28 @@
+@02-Nov-2020 09:10:25
+UPDATE rpt.rpt_reports SET report_name = ''Items Sold Report'', report_desc = ''Items Sold Report'', rpt_sql_query = ''SELECT row_number() OVER (ORDER BY SUM(b.doc_qty) DESC, c.item_desc ASC) AS "No.  "
+        , 
+'''''''''''''''' || c.item_code "Item Code         ", 
+        
+c.item_desc   "Item Description      ", 
+        
+SUM(b.doc_qty) "QTY      ", 
+        
+d.uom_name "UOM   ", 
+        
+b.unit_selling_price "Selling Price", 
+        
+SUM(b.doc_qty * b.unit_selling_price) "Total Amount     "
+        
+FROM scm.scm_sales_invc_hdr a, sec.sec_users y, scm.scm_sales_invc_det b, inv.inv_itm_list c, inv.unit_of_measure d
+        WHERE ((a.invc_hdr_id = b.invc_hdr_id AND b.itm_id = c.item_id AND c.base_uom_id = d.uom_id) 
+AND (b.is_itm_delivered =''''1'''') AND (a.org_id = {:orgID}) AND 
+(b.created_by=y.user_id) and (a.invc_type ilike ''''{:doctype}'''')  
+     and (to_timestamp(b.creation_date,''''YYYY-MM-DD HH24:MI:SS'''') between 
+to_timestamp(''''{:strtDte}'''',''''DD-Mon-YYYY HH24:MI:SS'''') 
+AND 
+    to_timestamp(''''{:endDte}'''',''''DD-Mon-YYYY HH24:MI:SS''''))) 
+
+GROUP BY c.item_desc, b.itm_id, c.item_code, d.uom_name, b.unit_selling_price
+  
+ORDER BY SUM(b.doc_qty) DESC, c.item_desc ASC'', owner_module = ''Stores And Inventory Manager'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:24'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''NO'', cols_to_sum = ''6'', cols_to_average = '''', cols_to_no_frmt = ''6'', output_type = ''MICROSOFT EXCEL'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Standard Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 28)
+-------------------------Next Msg:-------------------------

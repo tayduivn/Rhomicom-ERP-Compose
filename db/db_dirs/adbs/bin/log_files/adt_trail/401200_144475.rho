@@ -1,0 +1,179 @@
+@02-Nov-2020 09:10:04
+UPDATE rpt.rpt_reports SET report_name = ''Annual Loan Performance - Per Credit Officer'', report_desc = ''CR-Annual Loan Performance - Per Credit Officer'', rpt_sql_query = ''SELECT row_number() over (order by 1 DESC) as "No.", TBL2.*, (TBL2.q1_recovery + TBL2.q2_recovery + TBL2.q3_recovery + TBL2.q4_recovery) Q1_TO_Q4
+FROM (SELECT tbl1.branch, tbl1.name_of_officer, 
+sum(tbl1.jan_recovery) jan_recovery, sum(tbl1.feb_recovery) feb_recovery, sum(tbl1.mar_recovery) mar_recovery, 
+(sum(tbl1.jan_recovery) + sum(tbl1.feb_recovery) + sum(tbl1.mar_recovery)) q1_recovery, 
+sum(tbl1.apr_recovery) apr_recovery, sum(tbl1.may_recovery) may_recovery, sum(tbl1.jun_recovery) jun_recovery, 
+(sum(tbl1.apr_recovery) + sum(tbl1.may_recovery) + sum(tbl1.jun_recovery)) q2_recovery,
+sum(tbl1.jul_recovery) jul_recovery, sum(tbl1.aug_recovery) aug_recovery, sum(tbl1.sep_recovery) sep_recovery, 
+(sum(tbl1.jul_recovery) + sum(tbl1.aug_recovery) + sum(tbl1.sep_recovery)) q3_recovery,
+sum(tbl1.oct_recovery) oct_recovery, sum(tbl1.nov_recovery) nov_recovery, sum(tbl1.dec_recovery) dec_recovery,
+(sum(tbl1.oct_recovery) + sum(tbl1.nov_recovery) + sum(tbl1.dec_recovery)) q4_recovery, tbl1.param_relationship_officer, tbl1.param_selected_year, tbl1.param_selected_branch
+FROM (SELECT org.get_site_code_desc(a.branch_id::integer) branch,
+CASE WHEN rcvry_officer_prsn_id = -1 THEN ''''Unkown Officer'''' ELSE prs.get_prsn_surname(rcvry_officer_prsn_id) END name_of_officer, 
+COALESCE((select round(SUM(amount),2) amount from mcf.mcf_cust_account_transactions
+where (trns_type IN (''''REPAYMENT'''',''''SETTLEMENT'''') OR (trns_type IN (''''WITHDRAWAL'''') AND sub_trns_type = ''''SETTLEMENT'''')
+OR (trns_type IN (''''WITHDRAWAL'''')  AND description like ''''TRANSFER- LOAN INSTALMENT DEDUCTED%''''))
+and amount > 0 and status IN (''''Paid'''',''''Historic'''')
+AND account_id = repayment_account_id
+AND (SUBSTR(description,POSITION(''''LR'''' in description)) = trnsctn_id
+OR SUBSTR(description,POSITION(''''14'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''15'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''16'''' in description),16) = segment1_dataload
+OR SUBSTR(description,POSITION(''''17'''' in description),16) = segment1_dataload)
+and to_timestamp(substr(trns_date,1,10),''''YYYY-MM-DD'''') BETWEEN 
+to_timestamp(''''01-Jan-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''') AND to_timestamp(''''31-Jan-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''')),0) "jan_recovery",
+COALESCE((select round(SUM(amount),2) amount from mcf.mcf_cust_account_transactions
+where (trns_type IN (''''REPAYMENT'''',''''SETTLEMENT'''') OR (trns_type IN (''''WITHDRAWAL'''') AND sub_trns_type = ''''SETTLEMENT'''')
+OR (trns_type IN (''''WITHDRAWAL'''')  AND description like ''''TRANSFER- LOAN INSTALMENT DEDUCTED%''''))
+and amount > 0 and status IN (''''Paid'''',''''Historic'''')
+AND account_id = repayment_account_id
+AND (SUBSTR(description,POSITION(''''LR'''' in description)) = trnsctn_id
+OR SUBSTR(description,POSITION(''''14'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''15'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''16'''' in description),16) = segment1_dataload
+OR SUBSTR(description,POSITION(''''17'''' in description),16) = segment1_dataload)
+and to_timestamp(substr(trns_date,1,10),''''YYYY-MM-DD'''') BETWEEN 
+to_timestamp(''''01-Feb-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''') AND to_timestamp(''''28-Feb-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''')),0) "feb_recovery",
+COALESCE((select round(SUM(amount),2) amount from mcf.mcf_cust_account_transactions
+where (trns_type IN (''''REPAYMENT'''',''''SETTLEMENT'''') OR (trns_type IN (''''WITHDRAWAL'''') AND sub_trns_type = ''''SETTLEMENT'''')
+OR (trns_type IN (''''WITHDRAWAL'''')  AND description like ''''TRANSFER- LOAN INSTALMENT DEDUCTED%''''))
+and amount > 0 and status IN (''''Paid'''',''''Historic'''')
+AND account_id = repayment_account_id
+AND (SUBSTR(description,POSITION(''''LR'''' in description)) = trnsctn_id
+OR SUBSTR(description,POSITION(''''14'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''15'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''16'''' in description),16) = segment1_dataload
+OR SUBSTR(description,POSITION(''''17'''' in description),16) = segment1_dataload)
+and to_timestamp(substr(trns_date,1,10),''''YYYY-MM-DD'''') BETWEEN 
+to_timestamp(''''01-Mar-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''') AND to_timestamp(''''31-Mar-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''')),0) "mar_recovery",
+COALESCE((select round(SUM(amount),2) amount from mcf.mcf_cust_account_transactions
+where (trns_type IN (''''REPAYMENT'''',''''SETTLEMENT'''') OR (trns_type IN (''''WITHDRAWAL'''') AND sub_trns_type = ''''SETTLEMENT'''')
+OR (trns_type IN (''''WITHDRAWAL'''')  AND description like ''''TRANSFER- LOAN INSTALMENT DEDUCTED%''''))
+and amount > 0 and status IN (''''Paid'''',''''Historic'''')
+AND account_id = repayment_account_id
+AND (SUBSTR(description,POSITION(''''LR'''' in description)) = trnsctn_id
+OR SUBSTR(description,POSITION(''''14'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''15'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''16'''' in description),16) = segment1_dataload
+OR SUBSTR(description,POSITION(''''17'''' in description),16) = segment1_dataload)
+and to_timestamp(substr(trns_date,1,10),''''YYYY-MM-DD'''') BETWEEN 
+to_timestamp(''''01-Apr-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''') AND to_timestamp(''''30-Apr-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''')),0) "apr_recovery",
+COALESCE((select round(SUM(amount),2) amount from mcf.mcf_cust_account_transactions
+where (trns_type IN (''''REPAYMENT'''',''''SETTLEMENT'''') OR (trns_type IN (''''WITHDRAWAL'''') AND sub_trns_type = ''''SETTLEMENT'''')
+OR (trns_type IN (''''WITHDRAWAL'''')  AND description like ''''TRANSFER- LOAN INSTALMENT DEDUCTED%''''))
+and amount > 0 and status IN (''''Paid'''',''''Historic'''')
+AND account_id = repayment_account_id
+AND (SUBSTR(description,POSITION(''''LR'''' in description)) = trnsctn_id
+OR SUBSTR(description,POSITION(''''14'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''15'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''16'''' in description),16) = segment1_dataload
+OR SUBSTR(description,POSITION(''''17'''' in description),16) = segment1_dataload)
+and to_timestamp(substr(trns_date,1,10),''''YYYY-MM-DD'''') BETWEEN 
+to_timestamp(''''01-May-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''') AND to_timestamp(''''31-May-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''')),0) "may_recovery",
+COALESCE((select round(SUM(amount),2) amount from mcf.mcf_cust_account_transactions
+where (trns_type IN (''''REPAYMENT'''',''''SETTLEMENT'''') OR (trns_type IN (''''WITHDRAWAL'''') AND sub_trns_type = ''''SETTLEMENT'''')
+OR (trns_type IN (''''WITHDRAWAL'''')  AND description like ''''TRANSFER- LOAN INSTALMENT DEDUCTED%''''))
+and amount > 0 and status IN (''''Paid'''',''''Historic'''')
+AND account_id = repayment_account_id
+AND (SUBSTR(description,POSITION(''''LR'''' in description)) = trnsctn_id
+OR SUBSTR(description,POSITION(''''14'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''15'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''16'''' in description),16) = segment1_dataload
+OR SUBSTR(description,POSITION(''''17'''' in description),16) = segment1_dataload)
+and to_timestamp(substr(trns_date,1,10),''''YYYY-MM-DD'''') BETWEEN 
+to_timestamp(''''01-Jun-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''') AND to_timestamp(''''30-Jun-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''')),0) "jun_recovery",
+COALESCE((select round(SUM(amount),2) amount from mcf.mcf_cust_account_transactions
+where (trns_type IN (''''REPAYMENT'''',''''SETTLEMENT'''') OR (trns_type IN (''''WITHDRAWAL'''') AND sub_trns_type = ''''SETTLEMENT'''')
+OR (trns_type IN (''''WITHDRAWAL'''')  AND description like ''''TRANSFER- LOAN INSTALMENT DEDUCTED%''''))
+and amount > 0 and status IN (''''Paid'''',''''Historic'''')
+AND account_id = repayment_account_id
+AND (SUBSTR(description,POSITION(''''LR'''' in description)) = trnsctn_id
+OR SUBSTR(description,POSITION(''''14'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''15'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''16'''' in description),16) = segment1_dataload
+OR SUBSTR(description,POSITION(''''17'''' in description),16) = segment1_dataload)
+and to_timestamp(substr(trns_date,1,10),''''YYYY-MM-DD'''') BETWEEN 
+to_timestamp(''''01-Jul-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''') AND to_timestamp(''''31-Jul-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''')),0) "jul_recovery",
+COALESCE((select round(SUM(amount),2) amount from mcf.mcf_cust_account_transactions
+where (trns_type IN (''''REPAYMENT'''',''''SETTLEMENT'''') OR (trns_type IN (''''WITHDRAWAL'''') AND sub_trns_type = ''''SETTLEMENT'''')
+OR (trns_type IN (''''WITHDRAWAL'''')  AND description like ''''TRANSFER- LOAN INSTALMENT DEDUCTED%''''))
+and amount > 0 and status IN (''''Paid'''',''''Historic'''')
+AND account_id = repayment_account_id
+AND (SUBSTR(description,POSITION(''''LR'''' in description)) = trnsctn_id
+OR SUBSTR(description,POSITION(''''14'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''15'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''16'''' in description),16) = segment1_dataload
+OR SUBSTR(description,POSITION(''''17'''' in description),16) = segment1_dataload)
+and to_timestamp(substr(trns_date,1,10),''''YYYY-MM-DD'''') BETWEEN 
+to_timestamp(''''01-Aug-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''') AND to_timestamp(''''31-Aug-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''')),0)"aug_recovery",
+COALESCE((select round(SUM(amount),2) amount from mcf.mcf_cust_account_transactions
+where (trns_type IN (''''REPAYMENT'''',''''SETTLEMENT'''') OR (trns_type IN (''''WITHDRAWAL'''') AND sub_trns_type = ''''SETTLEMENT'''')
+OR (trns_type IN (''''WITHDRAWAL'''')  AND description like ''''TRANSFER- LOAN INSTALMENT DEDUCTED%''''))
+and amount > 0 and status IN (''''Paid'''',''''Historic'''')
+AND account_id = repayment_account_id
+AND (SUBSTR(description,POSITION(''''LR'''' in description)) = trnsctn_id
+OR SUBSTR(description,POSITION(''''14'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''15'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''16'''' in description),16) = segment1_dataload
+OR SUBSTR(description,POSITION(''''17'''' in description),16) = segment1_dataload)
+and to_timestamp(substr(trns_date,1,10),''''YYYY-MM-DD'''') BETWEEN 
+to_timestamp(''''01-Sep-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''') AND to_timestamp(''''30-Sep-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''')),0) "sep_recovery",
+COALESCE((select round(SUM(amount),2) amount from mcf.mcf_cust_account_transactions
+where (trns_type IN (''''REPAYMENT'''',''''SETTLEMENT'''') OR (trns_type IN (''''WITHDRAWAL'''') AND sub_trns_type = ''''SETTLEMENT'''')
+OR (trns_type IN (''''WITHDRAWAL'''')  AND description like ''''TRANSFER- LOAN INSTALMENT DEDUCTED%''''))
+and amount > 0 and status IN (''''Paid'''',''''Historic'''')
+AND account_id = repayment_account_id
+AND (SUBSTR(description,POSITION(''''LR'''' in description)) = trnsctn_id
+OR SUBSTR(description,POSITION(''''14'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''15'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''16'''' in description),16) = segment1_dataload
+OR SUBSTR(description,POSITION(''''17'''' in description),16) = segment1_dataload)
+and to_timestamp(substr(trns_date,1,10),''''YYYY-MM-DD'''') BETWEEN 
+to_timestamp(''''01-Oct-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''') AND to_timestamp(''''31-Oct-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''')),0) "oct_recovery",
+COALESCE((select round(SUM(amount),2) amount from mcf.mcf_cust_account_transactions
+where (trns_type IN (''''REPAYMENT'''',''''SETTLEMENT'''') OR (trns_type IN (''''WITHDRAWAL'''') AND sub_trns_type = ''''SETTLEMENT'''')
+OR (trns_type IN (''''WITHDRAWAL'''')  AND description like ''''TRANSFER- LOAN INSTALMENT DEDUCTED%''''))
+and amount > 0 and status IN (''''Paid'''',''''Historic'''')
+AND account_id = repayment_account_id
+AND (SUBSTR(description,POSITION(''''LR'''' in description)) = trnsctn_id
+OR SUBSTR(description,POSITION(''''14'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''15'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''16'''' in description),16) = segment1_dataload
+OR SUBSTR(description,POSITION(''''17'''' in description),16) = segment1_dataload)
+and to_timestamp(substr(trns_date,1,10),''''YYYY-MM-DD'''') BETWEEN 
+to_timestamp(''''01-Nov-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''') AND to_timestamp(''''30-Nov-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''')),0) "nov_recovery",
+COALESCE((select round(SUM(amount),2) amount from mcf.mcf_cust_account_transactions
+where (trns_type IN (''''REPAYMENT'''',''''SETTLEMENT'''') OR (trns_type IN (''''WITHDRAWAL'''') AND sub_trns_type = ''''SETTLEMENT'''')
+OR (trns_type IN (''''WITHDRAWAL'''')  AND description like ''''TRANSFER- LOAN INSTALMENT DEDUCTED%''''))
+and amount > 0 and status IN (''''Paid'''',''''Historic'''')
+AND account_id = repayment_account_id
+AND (SUBSTR(description,POSITION(''''LR'''' in description)) = trnsctn_id
+OR SUBSTR(description,POSITION(''''14'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''15'''' in description),16) = segment1_dataload 
+OR SUBSTR(description,POSITION(''''16'''' in description),16) = segment1_dataload
+OR SUBSTR(description,POSITION(''''17'''' in description),16) = segment1_dataload)
+and to_timestamp(substr(trns_date,1,10),''''YYYY-MM-DD'''') BETWEEN 
+to_timestamp(''''01-Dec-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''') AND to_timestamp(''''31-Dec-''''||''''{:pYear}'''',''''DD-Mon-YYYY'''')),0) "dec_recovery",
+CASE WHEN {:branchID} = -1 THEN ''''All Branches'''' ELSE org.get_site_code_desc({:branchID}) END "param_selected_branch",
+CASE WHEN {:rltnshpOffcrID} = -1 THEN ''''All Credit Officers'''' ELSE prs.get_prsn_surname({:rltnshpOffcrID}) END "param_relationship_officer", {:pYear} "param_selected_year"  /*--,a.loan_rqst_id, c.disbmnt_det_id*/
+FROM mcf.mcf_loan_request a, mcf.mcf_loan_disbursement_det c, mcf.mcf_loan_disbursement_hdr d, mcf.mcf_prdt_loans f 
+WHERE c.loan_rqst_id = a.loan_rqst_id 
+ AND c.disbmnt_hdr_id = d.disbmnt_hdr_id
+ AND a.loan_product_id = f.loan_product_id
+ AND a.branch_id = COALESCE(NULLIF({:branchID},-1),a.branch_id)
+  AND rcvry_officer_prsn_id = COALESCE(NULLIF({:rltnshpOffcrID},-1), rcvry_officer_prsn_id)
+ AND repayment_type = ''''Account Deductions'''' AND is_disbursed = ''''YES'''' 
+ AND crdt_type = ''''Loan'''' 
+ AND a.status = ''''Approved'''' AND d.status = ''''Disbursed'''' AND c.principal_amount > 0
+ AND (select ACCOUNT_ID from mcf.mcf_cust_account_transactions
+where  (trns_type IN (''''REPAYMENT'''',''''SETTLEMENT'''') OR (trns_type IN (''''WITHDRAWAL'''')  AND sub_trns_type = ''''SETTLEMENT'''')
+OR (trns_type IN (''''WITHDRAWAL'''')  AND description like ''''TRANSFER- LOAN INSTALMENT DEDUCTED%''''))
+and amount > 0 and status IN (''''Paid'''',''''Historic'''')
+AND account_id = repayment_account_id
+and substr(trns_date,1,4) = ''''{:pYear}''''
+LIMIT 1) > 0
+/*AND a.loan_rqst_id in (14151,13180,12069,11172)*/
+ORDER BY 1 desc) tbl1
+GROUP BY tbl1.name_of_officer, tbl1.branch, tbl1.param_relationship_officer, tbl1.param_selected_year, tbl1.param_selected_branch) TBL2'', owner_module = ''Banking'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:04'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''216.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 216)
+-------------------------Next Msg:-------------------------

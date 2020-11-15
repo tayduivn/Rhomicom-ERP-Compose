@@ -1,0 +1,33 @@
+@02-Nov-2020 09:10:02
+UPDATE rpt.rpt_reports SET report_name = ''Customized Pay Slip (Sample 1)-Per Run'', report_desc = ''Customized Pay Slip (Sample 1)-Per Run'', rpt_sql_query = ''SELECT 
+c.local_id_no id_num, 
+trim(c.title || '''' '''' || c.first_name || '''' '''' || c.other_names || '''' '''' || c.sur_name) full_name, 
+to_char(to_timestamp(a.paymnt_date,''''YYYY-MM-DD HH24:MI:SS''''),''''Mon-YYYY'''') payment_date, 
+ c.person_id, 
+      org.get_div_name(pasn.get_prsn_divid_of_spctype(a.person_id,''''Department'''')) department_name, 
+      org.get_grade_name(pasn.get_prsn_grdid(a.person_id)) grade_nm,
+      org.get_job_name(pasn.get_prsn_jobid(a.person_id)) job_nm,
+      org.get_pos_name(pasn.get_prsn_posid(a.person_id)) pos_nm,
+      COALESCE(e.id_number,''''-'''') ssnit_num,
+      COALESCE(d.bank_name, ''''-'''') bank_nm,
+      COALESCE(d.bank_branch,''''-'''') bank_brnch,
+      COALESCE(d.account_number,''''-'''') bank_acc_num,
+      pay.get_blsitem_bals(a.person_id,org.get_payitm_id(''''Take Home Pay''''),substring(a.paymnt_date from 1 for 10)) net_pay,
+      ''''{:fromDate} 00:00:00'''' from_date,
+      ''''{:toDate} 23:59:59'''' to_date,
+      b.org_id,
+      gst.get_pssbl_val(a.crncy_id) curr,
+      a.mass_pay_id   
+FROM (pay.pay_itm_trnsctns a 
+LEFT OUTER JOIN org.org_pay_items b ON a.item_id = b.item_id)
+LEFT OUTER JOIN prs.prsn_names_nos c on a.person_id = c.person_id 
+LEFT OUTER JOIN pasn.prsn_bank_accounts d on a.person_id = d.person_id 
+LEFT OUTER JOIN prs.prsn_national_ids e on a.person_id = e.person_id and e.national_id_typ=''''SSNIT''''
+WHERE((a.pymnt_vldty_status=''''VALID'''' and a.src_py_trns_id<=0) and (trim(c.title || '''' '''' || c.sur_name || '''', '''' || c.first_name || '''' '''' || c.other_names) ilike ''''%'''') 
+and (b.org_id ={:orgID}) 
+and (a.mass_pay_id={:pay_run_id})) 
+AND c.local_id_no IN ({:IDNos})
+AND b.local_classfctn ilike ''''%Staff Payroll Item%''''
+ GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+ ORDER BY 1'', owner_module = ''Generic Module'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:02'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''233.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 233)
+-------------------------Next Msg:-------------------------

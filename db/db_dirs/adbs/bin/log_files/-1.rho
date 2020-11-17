@@ -11116,3 +11116,9 @@ last_active_time=to_char(now(), 'YYYY-MM-DD HH24:MI:SS')
 @13-Nov-2020 10:53:03
 UPDATE sec.sec_track_user_logins SET last_active_time='2020-11-13 10:40:43', logout_time='' WHERE login_number=-1
 -------------------------Next Msg:-------------------------
+@13-Nov-2020 14:32:35
+INSERT INTO gst.gen_stp_lov_names(value_list_name, value_list_desc, is_list_dynamic, sqlquery_if_dyn, defined_by, created_by, creation_date, last_update_by, last_update_date, is_enabled) VALUES ('Security Keys', 'Security Keys', '', '', 'SYS', -1, '2020-11-13 14:32:35', -1, '2020-11-13 14:32:35', '1')
+-------------------------Next Msg:-------------------------
+@13-Nov-2020 14:32:35
+INSERT INTO gst.gen_stp_lov_values(value_list_id, pssbl_value, pssbl_value_desc, created_by, creation_date, last_update_by, last_update_date, is_enabled, allowed_org_ids) VALUES (1, 'AppKey', 'ROMeRRTRREMhbnsdGeneral KeyZzfor Rhomi|com Systems Tech. !Ltd Enterpise/Organization @763542ERPorbjkSOFTWAREasdbhi68103weuikTESTfjnsdfRSTLU../', -1, '2020-11-13 14:32:35', -1, '2020-11-13 14:32:35', '1', ',')
+-------------------------Next Msg:-------------------------

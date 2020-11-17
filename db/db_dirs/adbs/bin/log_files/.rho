@@ -780,3 +780,19 @@ RHOMICOM ERROR: [2] pg_connect(): Unable to connect to PostgreSQL server: could 
 -------------------------Next Msg:-------------------------
 
 -------------------------Next Msg:-------------------------
+
+RHOMICOM ERROR: [2] pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;rho-pgdb&quot; (172.23.0.5) and accepting
+	TCP/IP connections on port 5432?<br />
+ This Rhomicom Error happened on line 719 in file /usr/share/nginx/html/app_code/cmncde/connect_pg.php
+-------------------------Next Msg:-------------------------
+
+-------------------------Next Msg:-------------------------
+
+RHOMICOM ERROR: [2] pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;rho-pgdb&quot; (172.23.0.5) and accepting
+	TCP/IP connections on port 5432?<br />
+ This Rhomicom Error happened on line 719 in file /usr/share/nginx/html/app_code/cmncde/connect_pg.php
+-------------------------Next Msg:-------------------------
+
+-------------------------Next Msg:-------------------------

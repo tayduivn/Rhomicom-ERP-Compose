@@ -313,15 +313,58 @@ COPY --from=nginx /usr/lib/nginx/modules/ /usr/lib/nginx/modules/
 COPY --from=nginx /etc/nginx /etc/nginx
 COPY --from=nginx /usr/share/nginx/html/ /usr/share/nginx/html/
 
+ENV PHPIZE_DEPS \
+  autoconf \
+  dpkg-dev dpkg \
+  file \
+  g++ \
+  gcc \
+  libc-dev \
+  make \
+  pkgconf \
+  re2c
+
+# persistent dependencies
+RUN apk add --no-cache \
+  bash \
+  sed \
+  ghostscript \
+  git \
+  python3 \
+  imagemagick
+
+RUN set -ex; \
+  \
+  apk add --no-cache --virtual .build-deps \
+  $PHPIZE_DEPS \
+  icu-dev \
+  freetype-dev \
+  imagemagick-dev \
+  libjpeg-turbo-dev \
+  libpng-dev \
+  libzip-dev
 
 #http://dl-cdn.alpinelinux.org/alpine/edge/community
 #--repository https://dl.bintray.com/php-alpine/v3.10/php-7.4/x86_64/
 RUN apk add --no-cache --update --upgrade --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
   php php-fpm php-opcache php-openssl php-curl \
-  php-cli php-common php-zip php-gd \ 
+  php-cli php-common php-zip php-gd php7-dev \ 
   php-xml php-pear php-bcmath php-json php-pdo php-mysqlnd php-pgsql \ 
   php-mbstring  php-soap php-sockets php7-pecl-redis php7-pecl-mcrypt \
-  php7-json php7-ctype php7-dom
+  php7-json php7-ctype php7-dom php7-intl php7-exif php7-mysqli php7-iconv php7-fileinfo
+
+RUN pecl install APCu-5.1.19; \
+  pecl install fileinfo; \
+  pecl install imagick-3.4.4; \
+  \
+  runDeps="$( \
+  scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
+  | tr ',' '\n' \
+  | sort -u \
+  | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+  )"; \
+  apk add --virtual .wordpress-phpexts-rundeps .mediawiki-phpext-rundeps $runDeps; \
+  apk del .build-deps
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/community" >> /etc/apk/repositories
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/main" >> /etc/apk/repositories
@@ -378,9 +421,7 @@ RUN chown -R nginx.nginx /run && \
 RUN chown -R nginx.nginx /usr/share/nginx/html && \
   chown -R nginx.nginx /opt/apache/adbs
 
-RUN rm -rf /tmp/* 
-RUN apk update
-RUN apk upgrade 
+RUN rm -rf /tmp/*  
 COPY docker-entrypoint.sh /tmp/docker-entrypoint.sh
 RUN chmod +x /tmp/docker-entrypoint.sh
 

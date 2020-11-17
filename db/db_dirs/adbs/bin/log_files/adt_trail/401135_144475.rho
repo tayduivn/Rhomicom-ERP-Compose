@@ -1,9 +1,0 @@
-@02-Nov-2020 09:02:22
-UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || ''
-
-727|726|-130|-190
-01-Oct-2020 00:00:06|02-Nov-2020 09:00:06|Total Withdrawals Summary|PDF
-
-OUTPUT FORMAT: PDF
-ORIENTATION: '', last_update_by=130, last_update_date=''2020-11-02 09:02:22'' WHERE msg_id = 156555
--------------------------Next Msg:-------------------------

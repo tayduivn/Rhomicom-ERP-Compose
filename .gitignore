@@ -3,14 +3,10 @@ db/db_dirs/adbs/bin/*.sh
 db/db_dirs/adbs/bin/*.exe
 db/db_dirs/adbs/bin/*.dll
 db/db_dirs/adbs/bin/*.bat
-db/db_dirs/adbs/bin/log_files/*.rho
-db/db_dirs/adbs/bin/log_files/adt_trail/*.rho
-db/db_dirs/adbs/bin/log_files/prcs_logs/*.rho
 db/db_dirs/adbs/DB_Backups/*.backup
 db/db_dirs/adbs/Rpts/*.pdf
 db/db_dirs/adbs/Rpts/*.xls
 db/db_dirs/adbs/Rpts/*.html*
-db/db_dirs/adbs/Logs/*.txt
 db/db_dirs/adbs/Rpts/amcharts_2100/samples/*.html*
 db/initdb/pgdb/2_sample_database.sql
 db/initdb/info_rhomicom.com

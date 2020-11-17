@@ -1,3 +1,0 @@
-@11-Nov-2020 21:12:21
-UPDATE rpt.rpt_report_runs SET rpt_rn_param_ids = ''734|735|736|737|-130|-190'', rpt_rn_param_vals = ''-1|-1|01-Oct-2020|31-Oct-2020|Deposit & Withdrawal Trend - 2020|PDF'', output_used = ''PDF'', orntn_used= '''' WHERE (rpt_run_id = 156569)
--------------------------Next Msg:-------------------------

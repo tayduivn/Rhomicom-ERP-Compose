@@ -1,9 +1,0 @@
-@02-Nov-2020 09:10:10
-UPDATE rpt.rpt_reports SET report_name = ''Cooperate Statistics'', report_desc = ''Cooperate Statistics'', rpt_sql_query = ''SELECT org.get_site_code_desc(a.location_id) branch, 
-	a.location_id mt,
-	(select count(b.person_id) from prs.prsn_names_nos b where b.gender=''''Male'''' and pasn.get_prsn_siteid	(b.person_id)=a.location_id and pasn.get_prsn_type(b.person_id) IN (''''Staff'''')) Male, 
-	(select count(c.person_id) from prs.prsn_names_nos c where c.gender=''''Female'''' and pasn.get_prsn_siteid	(c.person_id)=a.location_id and pasn.get_prsn_type(c.person_id) IN (''''Staff'''')) Female 
-from org.org_sites_locations a 
-GROUP BY 1,2 
-ORDER BY 1;'', owner_module = ''Basic Person Data'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:10'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = ''0'', cols_to_sum = ''2,3'', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''PDF'', portrait_lndscp = ''Landscape'', rpt_layout=''None'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name=''145.jrxml'', pre_rpt_sql_query='''', pst_rpt_sql_query='''' WHERE (report_id = 145)
--------------------------Next Msg:-------------------------

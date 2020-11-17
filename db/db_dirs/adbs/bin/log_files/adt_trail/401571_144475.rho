@@ -1,3 +1,0 @@
-@02-Nov-2020 09:11:11
-UPDATE rpt.rpt_report_parameters SET parameter_name = ''ID Nos E.g. ''''RH001'''', ''''RH002'''''', paramtr_rprstn_nm_in_query = ''{:IDNos}'', default_value = ''c.local_id_no'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:11:11'', lov_name_id = ''-1'', param_data_type = ''TEXT'', date_format = ''None'', lov_name = '''', shd_be_dsplyd = ''1'' WHERE (parameter_id = 154)
--------------------------Next Msg:-------------------------

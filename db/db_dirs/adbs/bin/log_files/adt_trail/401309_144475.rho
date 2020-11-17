@@ -1,5 +1,0 @@
-@02-Nov-2020 09:10:15
-UPDATE rpt.rpt_reports SET report_name = ''End of Day Process Runs'', report_desc = ''End of Day Process Runs'', rpt_sql_query = ''select mcf.mcf_run_end_of_day({:usrID}, ''''{:runMode}'''', {:orgID}, {:msgID}, ''''{:prcsType}'''');'', owner_module = ''System Administration'', is_enabled = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:10:15'', rpt_or_sys_prcs = ''SQL Report'', cols_to_group = '''', cols_to_count = '''', cols_to_sum = '''', cols_to_average = '''', cols_to_no_frmt = '''', output_type = ''HTML'', portrait_lndscp = ''Landscape'', rpt_layout=''TABULAR'', imgs_col_nos='''', csv_delimiter=''None'', process_runner=''Jasper Process Runner'', jrxml_file_name='''', pre_rpt_sql_query='''', pst_rpt_sql_query=''UPDATE mcf.mcf_bulk_trns_hdr
-SET batch_date=mcf.xx_get_start_of_day_date(1)||'''' ''''||mcf.get_crnt_time()
-WHERE is_batch_cashless=''''1'''' and status NOT IN (''''Processed'''');'' WHERE (report_id = 101)
--------------------------Next Msg:-------------------------

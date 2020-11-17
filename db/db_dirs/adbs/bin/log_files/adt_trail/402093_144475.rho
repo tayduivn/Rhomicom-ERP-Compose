@@ -1,4 +1,0 @@
-@02-Nov-2020 09:12:57
-UPDATE rpt.rpt_reports
-                            SET jrxml_file_name=''271.jrxml'', last_update_by=130, last_update_date=''2020-11-02 09:12:57'' WHERE report_id=271
--------------------------Next Msg:-------------------------

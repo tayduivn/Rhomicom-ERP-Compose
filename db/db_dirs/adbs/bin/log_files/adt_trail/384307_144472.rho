@@ -1,3 +1,0 @@
-@09-Nov-2020 12:16:33
-UPDATE accb.accb_trnsctn_batches SET avlbl_for_postng=''1'' WHERE batch_status =''0'' and batch_source !=''Manual'' and avlbl_for_postng!=''1''
--------------------------Next Msg:-------------------------

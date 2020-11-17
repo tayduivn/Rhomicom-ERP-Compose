@@ -1,9 +1,0 @@
-@02-Nov-2020 09:17:26
-UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || ''
-
-738|739|-130|-190
-4|2020|Deposit Trend - Per Year|MICROSOFT EXCEL
-
-OUTPUT FORMAT: MICROSOFT EXCEL
-ORIENTATION: '', last_update_by=130, last_update_date=''2020-11-02 09:17:26'' WHERE msg_id = 156561
--------------------------Next Msg:-------------------------

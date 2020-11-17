@@ -1,3 +1,0 @@
-@02-Nov-2020 09:12:20
-UPDATE rpt.rpt_report_parameters SET parameter_name = ''Run Mode'', paramtr_rprstn_nm_in_query = ''{:runMode}'', default_value = ''Draft'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:12:20'', lov_name_id = ''301'', param_data_type = ''TEXT'', date_format = ''None'', lov_name = ''MCF End of Day Run Modes'', shd_be_dsplyd = ''1'' WHERE (parameter_id = 639)
--------------------------Next Msg:-------------------------

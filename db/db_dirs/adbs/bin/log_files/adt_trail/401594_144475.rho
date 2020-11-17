@@ -1,3 +1,0 @@
-@02-Nov-2020 09:11:14
-UPDATE rpt.rpt_report_parameters SET parameter_name = ''Division/Group'', paramtr_rprstn_nm_in_query = ''{:dv_id}'', default_value = '''', is_required = ''0'', last_update_by = 130, last_update_date = ''2020-11-02 09:11:14'', lov_name_id = ''33'', param_data_type = ''NUMBER'', date_format = ''None'', lov_name = ''Divisions/Groups'', shd_be_dsplyd = ''1'' WHERE (parameter_id = 177)
--------------------------Next Msg:-------------------------

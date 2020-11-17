@@ -1,3 +1,0 @@
-@11-Nov-2020 21:14:21
-UPDATE rpt.rpt_report_runs SET shld_run_stop = ''1'', run_status_prct=100, run_status_txt=''Cancelled'' WHERE (rpt_run_id = 156570)
--------------------------Next Msg:-------------------------

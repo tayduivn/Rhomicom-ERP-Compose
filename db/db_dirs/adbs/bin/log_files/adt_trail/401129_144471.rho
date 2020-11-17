@@ -1,3 +1,0 @@
-@11-Nov-2020 21:11:40
-UPDATE rpt.rpt_report_runs SET rpt_rn_param_ids = ''392|393|395|-130|-190'', rpt_rn_param_vals = ''11|02-Nov-2020|02-Nov-2020|VMS Summary Bin Card Report|PDF'', output_used = ''PDF'', orntn_used= '''' WHERE (rpt_run_id = 156568)
--------------------------Next Msg:-------------------------

@@ -1,3 +1,0 @@
-@02-Nov-2020 09:12:02
-UPDATE rpt.rpt_report_parameters SET parameter_name = ''02. MFI Category:'', paramtr_rprstn_nm_in_query = ''{:p_mfi_ctgry}'', default_value = ''Tier 2'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:12:02'', lov_name_id = ''-1'', param_data_type = ''TEXT'', date_format = ''None'', lov_name = '''', shd_be_dsplyd = ''0'' WHERE (parameter_id = 501)
--------------------------Next Msg:-------------------------

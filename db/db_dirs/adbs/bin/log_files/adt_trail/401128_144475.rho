@@ -1,3 +1,0 @@
-@02-Nov-2020 09:00:34
-UPDATE rpt.rpt_report_runs SET rpt_rn_param_ids = ''686|687|688|689|690|691|692|693|694|695|-130|-190'', rpt_rn_param_vals = ''||||||||||Person Basic Data|PDF'', output_used = ''PDF'', orntn_used= '''' WHERE (rpt_run_id = 156568)
--------------------------Next Msg:-------------------------

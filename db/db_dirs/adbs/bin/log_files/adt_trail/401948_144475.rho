@@ -1,3 +1,0 @@
-@02-Nov-2020 09:12:09
-UPDATE rpt.rpt_report_parameters SET parameter_name = ''Document Title'', paramtr_rprstn_nm_in_query = ''{:documentTitle}'', default_value = '''', is_required = ''0'', last_update_by = 130, last_update_date = ''2020-11-02 09:12:09'', lov_name_id = ''-1'', param_data_type = ''TEXT'', date_format = ''None'', lov_name = '''', shd_be_dsplyd = ''0'' WHERE (parameter_id = 554)
--------------------------Next Msg:-------------------------

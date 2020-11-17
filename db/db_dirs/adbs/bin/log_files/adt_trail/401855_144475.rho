@@ -1,3 +1,0 @@
-@02-Nov-2020 09:11:53
-UPDATE rpt.rpt_report_parameters SET parameter_name = ''02. Use Net Positions:'', paramtr_rprstn_nm_in_query = ''{:p_use_net_pos}'', default_value = ''Yes'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:11:53'', lov_name_id = ''195'', param_data_type = ''TEXT'', date_format = ''None'', lov_name = ''YesNo'', shd_be_dsplyd = ''1'' WHERE (parameter_id = 447)
--------------------------Next Msg:-------------------------

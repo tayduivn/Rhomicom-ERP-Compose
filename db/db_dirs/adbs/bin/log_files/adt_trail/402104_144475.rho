@@ -1,9 +1,0 @@
-@02-Nov-2020 09:15:31
-UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || ''
-
-738|739|-130|-190
-5|2020|Deposit Trend - Per Year|HTML
-
-OUTPUT FORMAT: HTML
-ORIENTATION: '', last_update_by=130, last_update_date=''2020-11-02 09:15:31'' WHERE msg_id = 156559
--------------------------Next Msg:-------------------------

@@ -1,3 +1,0 @@
-@02-Nov-2020 09:12:10
-UPDATE rpt.rpt_report_parameters SET parameter_name = ''Loan Account'', paramtr_rprstn_nm_in_query = ''{:p_account_id}'', default_value = '''', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:12:10'', lov_name_id = ''259'', param_data_type = ''NUMBER'', date_format = ''None'', lov_name = ''MCF All Bank Loan Accounts'', shd_be_dsplyd = ''1'' WHERE (parameter_id = 558)
--------------------------Next Msg:-------------------------

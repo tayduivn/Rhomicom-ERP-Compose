@@ -1,3 +1,0 @@
-@02-Nov-2020 09:12:20
-UPDATE rpt.rpt_report_parameters SET parameter_name = ''2. Branch ID:'', paramtr_rprstn_nm_in_query = ''{:P_BRNCH_ID}'', default_value = ''-1'', is_required = ''1'', last_update_by = 130, last_update_date = ''2020-11-02 09:12:19'', lov_name_id = ''252'', param_data_type = ''NUMBER'', date_format = ''None'', lov_name = ''Sites/Locations New'', shd_be_dsplyd = ''1'' WHERE (parameter_id = 635)
--------------------------Next Msg:-------------------------

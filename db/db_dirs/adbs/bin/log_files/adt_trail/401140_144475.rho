@@ -1,3 +1,0 @@
-@02-Nov-2020 09:03:20
-UPDATE rpt.rpt_report_runs SET rpt_rn_param_ids = ''728|729|-130|-190'', rpt_rn_param_vals = ''01-Jul-2020 00:00:00|02-Nov-2020 09:03:17|Total Withdrawals For Branches|PDF'', output_used = ''PDF'', orntn_used= '''' WHERE (rpt_run_id = 156571)
--------------------------Next Msg:-------------------------

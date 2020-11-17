@@ -1,3 +1,0 @@
-@11-Nov-2020 21:13:02
-UPDATE rpt.rpt_report_runs SET shld_run_stop = ''0'' WHERE (rpt_run_id = 156570)
--------------------------Next Msg:-------------------------

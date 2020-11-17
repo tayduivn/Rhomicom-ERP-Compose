@@ -1,9 +1,0 @@
-@11-Nov-2020 21:11:40
-UPDATE rpt.rpt_run_msgs SET log_messages=log_messages || ''
-
-392|393|395|-130|-190
-11|02-Nov-2020|02-Nov-2020|VMS Summary Bin Card Report|PDF
-
-OUTPUT FORMAT: PDF
-ORIENTATION: '', last_update_by=130, last_update_date=''2020-11-11 21:11:40'' WHERE msg_id = 156553
--------------------------Next Msg:-------------------------

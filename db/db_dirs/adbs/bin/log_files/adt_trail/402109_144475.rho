@@ -1,3 +1,0 @@
-@02-Nov-2020 09:16:27
-UPDATE rpt.rpt_report_runs SET rpt_rn_param_ids = ''738|739|-130|-190'', rpt_rn_param_vals = ''5|2020|Deposit Trend - Per Year|PDF'', output_used = ''PDF'', orntn_used= '''' WHERE (rpt_run_id = 156575)
--------------------------Next Msg:-------------------------

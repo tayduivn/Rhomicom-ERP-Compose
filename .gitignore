@@ -17,13 +17,4 @@ db/initdb/info_rhomicom.com
 db/webmin
 db/pgadmin
 conf/psol/psol.tar.gz
-src/RHO_ERP_WEB/dwnlds/amcharts_2100/samples/*.html
-src/RHO_ERP_WEB/dwnlds/amcharts_2100/samples/*.pdf
-src/RHO_ERP_WEB/dwnlds/tmp/*.png
-src/RHO_ERP_WEB/dwnlds/tmp/*.jpg
-src/RHO_ERP_WEB/dwnlds/tmp/*.pdf
-src/RHO_ERP_WEB/dwnlds/tmp/*.html
-src/RHO_ERP_WEB/dwnlds/tmp/*.jrxml
-src/RHO_ERP_WEB/phpinfo.php
-src/RHO_ERP_WEB/phpsecinfo
 db/db_dirs/adbs/*.rhocnfg

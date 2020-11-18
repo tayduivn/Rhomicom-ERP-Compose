@@ -18,3 +18,4 @@ db/webmin
 db/pgadmin
 conf/psol/psol.tar.gz
 db/db_dirs/adbs/*.rhocnfg
+src/RHO_ERP_WEB

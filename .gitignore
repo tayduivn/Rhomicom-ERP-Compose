@@ -12,6 +12,7 @@ db/db_dirs/adbs/bin/log_files/*.rho
 db/db_dirs/adbs/bin/log_files/adt_trail/*.rho
 db/db_dirs/adbs/bin/log_files/prcs_logs/*.rho
 db/db_dirs/adbs/Logs/*.txt
+db/db_dirs/moodledata
 db/initdb/pgdb/2_sample_database.sql
 db/initdb/info_rhomicom.com
 db/webmin

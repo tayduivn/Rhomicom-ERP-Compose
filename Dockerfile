@@ -3,7 +3,7 @@ FROM alpine:3.8 as nginx
 LABEL Maintainer="Richard Adjei-Mensah <richarda.mensah@gmail.com>" \
   Description="Lightweight container with Nginx 1.18.0 & PHP-FPM 7.4 based on Alpine Linux (forked from trafex/alpine-nginx-php7)."
 #https://github.com/apache/incubator-pagespeed-ngx/releases/tag/v1.14.33.1-RC1
-ENV NGINX_VERSION=1.19.3 \
+ENV NGINX_VERSION=1.19.4 \
   VAR_PREFIX=/var/run \
   LOG_PREFIX=/var/log/nginx \
   NGX_PAGESPEED_VER=v1.14.33.1-RC1 \
@@ -21,7 +21,9 @@ RUN set -x  \
   && adduser -u 82 -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
   #&& echo -e '@community http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
   && echo -e '@community http://nl.alpinelinux.org/alpine/3.8/community' >> /etc/apk/repositories \
-  && apk add --no-cache --virtual \
+  && echo -e '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
+  && echo -e '@community http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
+  && apk add --no-cache --update --upgrade --virtual \
   .build-deps \
   build-base \
   findutils \
@@ -32,7 +34,7 @@ RUN set -x  \
   jemalloc-dev \
   gnupg \
   gperf \
-  icu-dev \
+  icu-libs icu-dev \
   gettext-dev \
   libjpeg-turbo-dev \
   libpng-dev \
@@ -63,7 +65,7 @@ RUN set -x  \
   nghttp2 \
   gd-dev \
   unzip \
-  && apk add --no-cache --update \
+  && apk add --no-cache --update --upgrade \
   curl \
   monit \
   bash \
@@ -285,7 +287,7 @@ RUN set -x  \
 ##########################################
 FROM alpine:edge
 LABEL Maintainer="Richard Adjei-Mensah <richarda.mensah@gmail.com>" \
-  Description="Lightweight container with Nginx 1.19.3 & PHP-FPM 7.4 based on Alpine Linux (forked from trafex/alpine-nginx-php7)."
+  Description="Lightweight container with Nginx 1.19.4 & PHP-FPM 7.4 based on Alpine Linux (forked from trafex/alpine-nginx-php7)."
 
 ENV php_conf /etc/php7/php.ini
 ENV fpm_conf /etc/php7/php-fpm.d/www.conf
@@ -329,57 +331,64 @@ RUN apk add --no-cache \
   bash \
   sed \
   ghostscript \
-  git \
+  git diffutils \
   python3 \
   imagemagick
+#
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/community" >> /etc/apk/repositories
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/main" >> /etc/apk/repositories
+RUN apk --no-cache upgrade && \ 
+  scanelf --needed --nobanner --format '%n#p' /usr/sbin/nginx /usr/lib/nginx/modules/*.so /usr/local/bin/envsubst \
+  | tr ',' '\n' \
+  | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+  | xargs apk add --no-cache --update --upgrade 
+#RUN sed -i -e 's|http://dl-cdn.alpinelinux.org/alpine/v3.8/community||g' /etc/apk/repositories
+#RUN sed -i -e 's|http://dl-cdn.alpinelinux.org/alpine/v3.8/main||g' /etc/apk/repositories
+RUN apk upgrade --available
 
+#--repository http://dl-cdn.alpinelinux.org/alpine/edge/community 
+#'icu-libs>=67.1-r1' 'icu-dev>=67.1-r1' \
 RUN set -ex; \
   \
-  apk add --no-cache --virtual .build-deps \
+  apk add --no-cache --update --upgrade --virtual .build-deps \
   $PHPIZE_DEPS \
-  icu-dev \
+  icu-libs icu-dev \
   freetype-dev \
   imagemagick-dev \
   libjpeg-turbo-dev \
   libpng-dev \
-  libzip-dev
+  libzip-dev libmemcached cyrus-sasl-dev libmemcached-dev
 
-#http://dl-cdn.alpinelinux.org/alpine/edge/community
-#--repository https://dl.bintray.com/php-alpine/v3.10/php-7.4/x86_64/
 RUN apk add --no-cache --update --upgrade --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
   php php-fpm php-opcache php-openssl php-curl \
-  php-cli php-common php-zip php-gd php7-dev \ 
+  php-cli php-common php-zip php-gd php7-static php7-dev \ 
   php-xml php-pear php-bcmath php-json php-pdo php-mysqlnd php-pgsql \ 
-  php-mbstring  php-soap php-sockets php7-pecl-redis php7-pecl-mcrypt \
-  php7-json php7-ctype php7-dom php7-intl php7-exif php7-mysqli php7-iconv php7-fileinfo
+  php-mbstring  php-soap php-sockets php7-pecl-redis php7-pecl-mcrypt php7-pecl-apcu \
+  php7-json php7-ctype php7-dom php7-exif php7-mysqli php7-iconv php7-fileinfo \
+  php7-pecl-memcache php7-pecl-memcached php7-intl
 
-RUN pecl install APCu-5.1.19; \
-  pecl install fileinfo; \
-  pecl install imagick-3.4.4; \
-  \
-  runDeps="$( \
-  scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
-  | tr ',' '\n' \
-  | sort -u \
-  | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-  )"; \
-  apk add --virtual .wordpress-phpexts-rundeps .mediawiki-phpext-rundeps $runDeps; \
-  apk del .build-deps
+# Install composer globally
+RUN apk add --no-cache 	composer
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/community" >> /etc/apk/repositories
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/main" >> /etc/apk/repositories
+ENV PATH="/usr/bin:${PATH}"
+RUN pecl channel-update pecl.php.net
+RUN pecl install memcached
+RUN pecl install APCu
+RUN pecl install imagick
+RUN pecl channel-update pecl.php.net
+
 RUN apk --no-cache upgrade && \
-  scanelf --needed --nobanner --format '%n#p' /usr/sbin/nginx /usr/lib/nginx/modules/*.so /usr/local/bin/envsubst \
+  scanelf --needed --nobanner --format '%n#p' /usr/lib/php7/modules/*.so \
   | tr ',' '\n' \
   | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-  | xargs apk add --no-cache --update --upgrade \
+  | xargs apk add --no-cache --update --upgrade --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
   && \
-  apk add --no-cache tzdata
+  apk add --no-cache tzdata && \
+  apk del .build-deps
 
 RUN addgroup -S nginx --gid 2021
 RUN adduser -u 2020 -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx
-#addgroup -S nginx && \
-#adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx && \
+
 RUN install -g nginx -o nginx -d /var/cache/ngx_pagespeed && \
   mkdir -p /var/log/nginx && \
   mkdir -p /opt/apache/adbs && \

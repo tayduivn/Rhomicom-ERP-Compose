@@ -285,7 +285,7 @@ RUN set -x  \
 ##########################################
 # Combine everything with minimal layers #
 ##########################################
-FROM alpine:edge
+FROM php:7.4.12-fpm-alpine3.12
 LABEL Maintainer="Richard Adjei-Mensah <richarda.mensah@gmail.com>" \
   Description="Lightweight container with Nginx 1.19.4 & PHP-FPM 7.4 based on Alpine Linux (forked from trafex/alpine-nginx-php7)."
 
@@ -365,16 +365,31 @@ RUN apk add --no-cache --update --upgrade --repository http://dl-cdn.alpinelinux
   php-xml php-pear php-bcmath php-json php-pdo php-mysqlnd php-pgsql \ 
   php-mbstring  php-soap php-sockets php7-pecl-redis php7-pecl-mcrypt php7-pecl-apcu \
   php7-json php7-ctype php7-dom php7-exif php7-mysqli php7-iconv php7-fileinfo \
-  php7-pecl-memcache php7-pecl-memcached php7-intl
+  php7-pecl-memcache php7-pecl-memcached 
 
-# Install composer globally
-RUN apk add --no-cache 	composer
+RUN cd /tmp && \
+wget https://www.php.net/distributions/php-7.4.12.tar.gz && \
+tar -xzvf php-7.4.12.tar.gz && \
+cd php-7.4.12/ext/intl && \
+phpize && \
+./configure && \
+make && \
+cp .libs/intl.so /usr/lib/php7/modules/ && \
+echo "extension=intl.so" >> /etc/php7/conf.d/00_intl.ini 
+
+# Install composer globally php7-intl php7-intl-7.4.12-r1
+RUN apk add --no-cache 	composer  
+#&& docker-php-ext-configure intl \
+#&& docker-php-ext-install intl
 
 ENV PATH="/usr/bin:${PATH}"
 RUN pecl channel-update pecl.php.net
+RUN pecl install redis
 RUN pecl install memcached
 RUN pecl install APCu
-RUN pecl install imagick
+RUN pecl install imagick \
+&& docker-php-ext-enable memcached \
+&& docker-php-ext-enable redis
 RUN pecl channel-update pecl.php.net
 
 RUN apk --no-cache upgrade && \

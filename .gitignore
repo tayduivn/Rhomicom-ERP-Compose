@@ -17,6 +17,6 @@ db/initdb/pgdb/2_sample_database.sql
 db/initdb/info_rhomicom.com
 db/webmin
 db/pgadmin
-conf/psol/psol.tar.gz
+conf/psol/*.tar.gz
 db/db_dirs/adbs/*.rhocnfg
 src/RHO_ERP_WEB

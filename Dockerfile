@@ -356,7 +356,7 @@ RUN set -ex; \
   freetype-dev \
   imagemagick-dev \
   libjpeg-turbo-dev \
-  libpng-dev \
+  libpng-dev libxml2-dev \
   libzip-dev libmemcached cyrus-sasl-dev libmemcached-dev
 
 RUN apk add --no-cache --update --upgrade --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
@@ -367,16 +367,43 @@ RUN apk add --no-cache --update --upgrade --repository http://dl-cdn.alpinelinux
   php7-json php7-ctype php7-dom php7-exif php7-mysqli php7-iconv php7-fileinfo \
   php7-pecl-memcache php7-pecl-memcached 
 
+#COPY conf/psol/php-7.4.12.tar.gz /tmp
 RUN cd /tmp && \
-wget https://www.php.net/distributions/php-7.4.12.tar.gz && \
-tar -xzvf php-7.4.12.tar.gz && \
-cd php-7.4.12/ext/intl && \
-phpize && \
-./configure && \
-make && \
-cp .libs/intl.so /usr/lib/php7/modules/ && \
-echo "extension=intl.so" >> /etc/php7/conf.d/00_intl.ini 
+  docker-php-ext-install dom &&\
+  docker-php-ext-install xml &&\
+  wget https://www.php.net/distributions/php-7.4.12.tar.gz && \
+  tar -xzvf php-7.4.12.tar.gz && \
+  cd php-7.4.12/ext/intl && \
+  phpize && \
+  ./configure && \
+  make && \
+  cp .libs/intl.so /usr/lib/php7/modules/ && \
+  echo "extension=intl.so" >> /etc/php7/conf.d/00_intl.ini 
 
+
+RUN cd /tmp/php-7.4.12/ext/simplexml && \
+  phpize && \
+  ./configure && \
+  make && \
+  cp .libs/simplexml.so /usr/lib/php7/modules/ && \
+  echo "extension=simplexml.so" >> /etc/php7/conf.d/00_simplexml.ini 
+RUN cd /tmp/php-7.4.12/ext/xmlrpc && \
+  phpize && \
+  ./configure && \
+  make && \
+  cp .libs/xmlrpc.so /usr/lib/php7/modules/ && \
+  echo "extension=xmlrpc.so" >> /etc/php7/conf.d/00_xmlrpc.ini 
+
+RUN cd /tmp/php-7.4.12/ext/tokenizer && \
+  phpize && \
+  ./configure && \
+  make && \
+  cp .libs/tokenizer.so /usr/lib/php7/modules/ && \
+  echo "extension=tokenizer.so" >> /etc/php7/conf.d/00_tokenizer.ini 
+
+
+RUN apk add --no-cache --update --upgrade --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
+  php7-xmlwriter php7-xmlreader
 # Install composer globally php7-intl php7-intl-7.4.12-r1
 RUN apk add --no-cache 	composer  
 #&& docker-php-ext-configure intl \
@@ -387,9 +414,14 @@ RUN pecl channel-update pecl.php.net
 RUN pecl install redis
 RUN pecl install memcached
 RUN pecl install APCu
-RUN pecl install imagick \
-&& docker-php-ext-enable memcached \
-&& docker-php-ext-enable redis
+RUN pecl install imagick 
+#RUN docker-php-ext-enable memcached \
+#  && docker-php-ext-enable redis \
+#  && docker-php-ext-enable dom \
+#  && docker-php-ext-enable xml \
+#&& docker-php-ext-enable simplexml \
+#  && docker-php-ext-enable xmlrpc \
+#  && docker-php-ext-enable tokenizer 
 RUN pecl channel-update pecl.php.net
 
 RUN apk --no-cache upgrade && \

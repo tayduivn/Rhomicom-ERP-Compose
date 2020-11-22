@@ -20,3 +20,4 @@ db/pgadmin
 conf/psol/*.tar.gz
 db/db_dirs/adbs/*.rhocnfg
 src/RHO_ERP_WEB
+cp_rho_web_to_src.bat

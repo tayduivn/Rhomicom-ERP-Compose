@@ -149,6 +149,6 @@ docker tag rho-erp-api:v1.0 rhomicom/rho-erp-api:v1.0
 docker push rhomicom/rho-erp-api:v1.0
      
 docker build -t rhomicom/rho-erp-base:v1.2 .
-docker tag rho-erp-base:v1.1 rhomicom/rho-erp-base:v1.1
+docker tag rho-erp-base:v1.1 rhomicom/rho-erp-base:v1.2
 docker push rhomicom/rho-erp-base:v1.2
-docker run -d -p 8005:8080 rhomicom/rho-erp-base:v1.1
+docker run -d -p 8005:8080 rhomicom/rho-erp-base:v1.2

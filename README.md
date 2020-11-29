@@ -114,7 +114,7 @@ Technologies/Tools Used
 # (CREDITS/ACKNOWLEDGEMENTS)
 - **Platforms:** Gitlab/Github, Docker, Alpine Linux, Nginx, ModPageSpeed
 - **Languages:** Java, PHP, javascript
-- **Frameworks:** Bootstrap, [Agency Start Bootstrap Theme](https://startbootstrap.com/themes/agency/), jQuery, Node, ExpressJS, AMCharts
+- **Frameworks:** Bootstrap, [Agency Start Bootstrap Theme](https://startbootstrap.com/themes/agency/), jQuery, Node, ExpressJS, AMCharts, yuicompressor-2.4.8.jar
 - **Database:** PostgreSQL, MySQL, Adminer
 - **IDE:** vscode, TIBCO JasperSoft Studio/Library 6.2.0
 - **Openbridge, Inc.:** https://github.com/openbridge/nginx

@@ -1,18 +1,39 @@
 #!/bin/sh
-for file in `find ../RHO_ERP_WEB/app/ -name "*.js"`
+for dir in `find ../RHO_ERP_WEB/ -type d -name "app"`
 do
-echo "Compressing $file …"
-java -jar yuicompressor-2.4.8.jar --type js -o $file $file
+  for file in `find $dir -name "*.js"`
+  do
+  echo "Compressing $file …"
+  java -jar yuicompressor-2.4.8.jar --type js -o $file $file
+  done
 done
 
-for file in `find ../RHO_ERP_WEB/cmn_scrpts/ -name "*_scripts.js"`
+for dir in `find ../RHO_ERP_WEB/ -type d -name "cmn_scrpts"`
 do
-echo "Compressing $file …"
-java -jar yuicompressor-2.4.8.jar --type js -o $file $file
+  for file in `find $dir -name "*_scripts.js"`
+  do
+  echo "Compressing $file …"
+  java -jar yuicompressor-2.4.8.jar --type js -o $file $file
+  done
+
+  for file in `find $dir -maxdepth 1 -name "*.css"`
+  do
+  echo "Compressing $file …"
+  java -jar yuicompressor-2.4.8.jar --type css -o $file $file
+  done
 done
 
-for file in `find ../RHO_ERP_WEB/cmn_scrpts/ -maxdepth 1 -name "*.css"`
+for dir in `find ../RHO_ERP_WEB/ -type d -name "js_self"`
 do
-echo "Compressing $file …"
-java -jar yuicompressor-2.4.8.jar --type css -o $file $file
+  for file in `find $dir -name "*.js"`
+  do
+  echo "Compressing $file …"
+  java -jar yuicompressor-2.4.8.jar --type js -o $file $file
+  done
+
+  for file in `find $dir -maxdepth 1 -name "*.css"`
+  do
+  echo "Compressing $file …"
+  java -jar yuicompressor-2.4.8.jar --type css -o $file $file
+  done
 done

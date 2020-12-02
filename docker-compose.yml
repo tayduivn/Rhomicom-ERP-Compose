@@ -55,6 +55,7 @@ services:
     volumes:
       - ./db/initdb/pgdb:/docker-entrypoint-initdb.d
       - ./db/db_dirs:/opt/apache
+      - ./db/conf/postgresql.conf:/var/lib/postgresql/data/pgdata/postgresql.conf
       #Uncomment 2nd Volume for persistent Data
       #NB: Not uncommenting might cause data loss when docker-compose down is run
       #- ./db/db_data/pgdb:/var/lib/postgresql/data

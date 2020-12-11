@@ -1,3 +1,4 @@
+# db/db_dirs/adbs/superAdminConfigFile.rhocnfg
 api_image/code/node_modules
 db/db_dirs/adbs/bin/*.sh
 db/db_dirs/adbs/bin/*.exe

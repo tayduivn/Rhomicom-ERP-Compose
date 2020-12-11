@@ -1,3 +1,4 @@
+db/db_dirs/adbs/*.rhocnfg
 api_image/code/node_modules
 db/db_dirs/adbs/bin/*.sh
 db/db_dirs/adbs/bin/*.exe
@@ -18,6 +19,5 @@ db/initdb/info_rhomicom.com
 db/webmin
 db/pgadmin
 conf/psol/*.tar.gz
-db/db_dirs/adbs/*.rhocnfg
 src/RHO_ERP_WEB
 cp_rho_web_to_src.bat
